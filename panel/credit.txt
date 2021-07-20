@@ -1,0 +1,2 @@
+404 error : https://codepen.io/dsenneff/full/mjZgmN
+500 error : https://codepen.io/quinlo/full/aajEyb

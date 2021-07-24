@@ -3,14 +3,16 @@
     // connection to the Dabtabase
     function conn(){
         $server = "localhost";
-        $user = "root";
+        $user = "user";
         $dbname = "desk";
-        $password = "";
+        $password = "1234";
         $conn = new mysqli($server, $user, $password, $dbname);
         ini_set("max_execution_time", 0);
 
         if($conn->connect_error){
-            die("connection to the server is lost");
+            die('database connection could not be established');
+            //include(_ERROR.'db.html')
+            
         }
         return $conn;
     }

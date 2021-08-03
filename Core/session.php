@@ -1,14 +1,13 @@
 <?php
 if (!empty($_SESSION)){
-    define('id',    $_SESSION['id']);
-    define('user',	$_SESSION['username']);
-    define('name',  $_SESSION['fname'].$_SESSION['lname']);
-    define('phone', $_SESSION['code'].$_SESSION['phone']);
-	define('org',	$_SESSION['organization']);
-	define('branch',$_SESSION['branch']);
-	define('',		$_SESSION['']);
-	define('',		$_SESSION['']);
-
+    define('ID',    $_SESSION['id']);
+    define('USER',	$_SESSION['username']);
+    define('NAME',  $_SESSION['fname'].$_SESSION['lname']);
+    define('PHONE', $_SESSION['code'].$_SESSION['phone']);
+	define('ORG',	$_SESSION['organization']);
+	define('BRANCH',$_SESSION['branch']);
+	//define('',		$_SESSION['']);
+	//define('',		$_SESSION['']);
 }
 
 ?>

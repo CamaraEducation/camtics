@@ -1,7 +1,11 @@
 <?php 
-	include(_LAYOUT.'/header.php')
+	include(_LAYOUT.'/header.php');
+	include(_CONTROL.'/ticket/ticket.php');
+
+	// finding the number of tickets by their specifity
+	$num_ticket	= $count_ticket->count_ticket(1);
+
 ?>
-<!-- //header-ends -->
 <!-- main content start -->
 <div class="main-content">
 	<!-- content -->
@@ -18,14 +22,14 @@
 						<div class="col-sm-6 pr-sm-2 statistics-grid">
 							<div class="card card_border border-primary-top p-4">
 								<i class="lnr lnr-users"> </i>
-								<h3 class="text-primary number">2</h3>
+								<h3 class="text-primary number"><?=$num_ticket['open'];?></h3>
 								<p class="stat-text">Open Tickets</p>
 							</div>
 						</div>
 						<div class="col-sm-6 pl-sm-2 statistics-grid">
 							<div class="card card_border border-primary-top p-4">
 								<i class="lnr lnr-eye"> </i>
-								<h3 class="text-secondary number">1</h3>
+								<h3 class="text-secondary number"><?=$num_ticket['active'];?></h3>
 								<p class="stat-text">Pending Tickets</p>
 							</div>
 						</div>
@@ -36,7 +40,7 @@
 						<div class="col-sm-6 pl-sm-2 statistics-grid">
 							<div class="card card_border border-primary-top p-4">
 								<i class="fa fa-check-circle"> </i>
-								<h3 class="text-danger number">12</h3>
+								<h3 class="text-danger number"><?=$num_ticket['closed'];?></h3>
 								<p class="stat-text">Closed Tickets</p>
 							</div>
 						</div>
@@ -210,4 +214,4 @@
 </div>
 <!-- main content end-->
 </section>
-<?php include(_LAYOUT.'/footer.php') ?>
+<?php include(_LAYOUT.'/footer.php'); ?>

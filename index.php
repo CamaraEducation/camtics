@@ -12,9 +12,10 @@ use Core\Route;
 include 'Core/Route.php';
 
 // Define a global basepaths
-define('BASEPATH','/');
-define('CONFIG', 'Core/conf.php');
-define('_VIEW', 'panel');
+define('BASEPATH',  '/');
+define('CONFIG',    'Core/conf.php');
+define('_CONTROL',   'control');
+define('_VIEW',     'panel');
 define('_LAYOUT',   _VIEW.'/layout');
 define('_CLIENT',   _VIEW.'/client');
 define('_ERROR',    _VIEW.'/errors');

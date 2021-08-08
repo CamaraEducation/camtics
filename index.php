@@ -14,22 +14,26 @@ include 'Core/Route.php';
 // Define a global basepaths
 define('BASEPATH',  '/');
 define('CONFIG',    'Core/conf.php');
-define('_CONTROL',   'control');
+define('SESSION',	'Core/session.php');
+define('_CONTROL',  'control');
 define('_VIEW',     'panel');
+
+// Define global basepath T2
 define('_LAYOUT',   _VIEW.'/layout');
 define('_CLIENT',   _VIEW.'/client');
 define('_ERROR',    _VIEW.'/errors');
 
-//Define global innerPath for control
+// Define global innerPath for control
 define('Branch',	_CONTROL.'/branch');
 define('Ticket',	_CONTROL.'/ticket');
 define('Auth',		_CONTROL.'/auth');
 
-//Define global innertPath for view
+// Define global innertPath for view
 define('Front',		_VIEW.'/web');
 
 //Define global preRequisities
 require_once(CONFIG);
+require_once(SESSION);
 
 // If your script lives in a subfolder you can use the following example
 // Do not forget to edit the basepath in .htaccess if you are on apache
@@ -121,14 +125,7 @@ Route::add('/authorize', function() {
 }, ['get','post']);
 
 Route::add('/mail', function(){
-	$to      = 'abdulbasitrubeiyya@gmail.com';
-	$subject = 'CAMTICS';
-	$message = 'hello there just wanted to check if everything is alright';
-	$headers = 'From: contact@actech.cc' . "\r\n" .
-							'Reply-To: contact@actech.cc' . "\r\n" .
-							'X-Mailer: PHP/' . phpversion();
-
-	mail($to, $subject, $message, $headers);
+	echo PHONE;
 });
 
 // Add a 404 not found route

@@ -3,9 +3,9 @@
     // connection to the Dabtabase
     function conn(){
         $server = "localhost";
-        $user = "user";
+        $user = "root";
         $dbname = "desk";
-        $password = "1234";
+        $password = "";
         $conn = new mysqli($server, $user, $password, $dbname);
         ini_set("max_execution_time", 0);
 
@@ -29,6 +29,5 @@
 
         return $rows;
     }
-    $config = config();
 
 ?>

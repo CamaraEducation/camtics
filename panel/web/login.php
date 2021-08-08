@@ -79,7 +79,7 @@ $config = config();
                             <input type="text" name="action" value="login" hidden>
                             <div class="form-input">
                                 <label>Username</label>
-                                <input type="user" name="" placeholder="username, email or phone" required />
+                                <input type="user" name="user" placeholder="username, email or phone" required />
                             </div>
                             <div class="form-input">
                                 <label>Password</label>

@@ -15,15 +15,17 @@ include 'Core/Route.php';
 define('BASEPATH',  '/');
 define('CONFIG',    'Core/conf.php');
 define('SESSION',	'Core/session.php');
+define('ROUTES',	'Core/routes.php');
 define('_CONTROL',  'control');
 define('_VIEW',     'panel');
 
-// Define global basepath T2
+// Define view & global layout
 define('_LAYOUT',   _VIEW.'/layout');
+define('_SUPER',	_VIEW.'/admin');
 define('_CLIENT',   _VIEW.'/client');
 define('_ERROR',    _VIEW.'/errors');
 
-// Define global innerPath for control
+// Define global controllers
 define('Branch',	_CONTROL.'/branch');
 define('Ticket',	_CONTROL.'/ticket');
 define('Auth',		_CONTROL.'/auth');
@@ -34,6 +36,7 @@ define('Front',		_VIEW.'/web');
 //Define global preRequisities
 require_once(CONFIG);
 require_once(SESSION);
+require_once(ROUTES);
 
 // If your script lives in a subfolder you can use the following example
 // Do not forget to edit the basepath in .htaccess if you are on apache
@@ -41,7 +44,8 @@ require_once(SESSION);
 
 // The startPages
 Route::add('/', function() {
-  include('panel/client/index.php');
+  $gethome =  new Home;
+  $gethome -> url_index();
 });
 
 Route::add('/index.*', function() {
@@ -100,21 +104,20 @@ Route::add('/authorize', function() {
 			case 'register':
 				include(Auth.'/register.php');
 
-				$username = $_POST['user'];
+				$username 	= $_POST['user'];
 				$email		= $_POST['email'];
 				$phone		= $_POST['phone'];
 				$password	= $_POST['pass'];
-				$branch		= $_POST['branch'];
-				
+				$branch		= $_POST['branch'];				
 				$create_user->register_user($username, $email, $phone, $password, $branch);
 			break;
 			case 'login':
 				include(Auth.'/login.php');
 
-				$username = $_POST['user'];
-				$password	= $_POST['pass'];
+				$username = strtolower($_POST['user']);
+				$password = md5($_POST['pass']);
 
-				$loger = new Login();
+				$loger = new Login;
 				$loger -> loger($username, $password);
 			break;
 			case 'reset':
@@ -124,8 +127,13 @@ Route::add('/authorize', function() {
 		}
 }, ['get','post']);
 
+Route::add('/logout', function(){
+	$logout = new Home;
+	$logout->logout();
+});
+
 Route::add('/mail', function(){
-	echo PHONE;
+	echo LOGED;
 });
 
 // Add a 404 not found route

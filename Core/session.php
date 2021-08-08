@@ -13,6 +13,20 @@ if (!empty($_SESSION)){
 	define('NIN',	 $_SESSION['nin']);
 	define('ROLE',	 $_SESSION['role']);
 	define('STATUS', $_SESSION['status']);
+	define('LOGED',  'active');
+}else{
+	define('ID',     0);
+    define('USER',	 0);
+    define('NAME',   0);
+    define('PHONE',  0);
+	define('ORG',	 0);
+	define('BRANCH', 0);
+	define('EMAIL',	 0);
+	define('PHOTO',	 0);
+	define('NIN',	 0);
+	define('ROLE',	 0);
+	define('STATUS', 0);
+	define('LOGED',  'nil');
 }
 
 ?>

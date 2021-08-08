@@ -6,7 +6,7 @@ class Session{
         $data   = mysqli_query(conn(), $data);
 
 		//iterate the attained data to create a session
-        foreach(($row = mysqli_fetch_assoc($data)) as $key=>$value){
+        foreach(mysqli_fetch_assoc($data) as $key=>$value){
 			$_SESSION[$key] = $value;
 		}
 

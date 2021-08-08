@@ -1,3 +1,7 @@
+<?php
+
+$config = config();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Placidity a Society & People Category Responsive Website Template | Login :: W3layouts</title>
+    <title>Register :: <?=$config['site']; ?></title>
     <link rel="stylesheet" href="assets/css/style-freedom.css">
 </head>
 
@@ -49,13 +53,6 @@
     <meta name="robots" content="noindex">
 
     <body>
-
-
-
-
-        </div>
-
-
         <section class="w3l-login-6">
             <div class="login-hny">
                 <div class="form-content">
@@ -63,33 +60,33 @@
                     <div class="form-right">
                         <div class="overlay">
                             <div class="grid-info-form">
-                                <h5>Placidity</h5>
-                                <h3>Nonviolence is a weapon of the strong.</h3>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est natus facere aperiam! Tenetur maiores dolore a quod pariatur ut voluptates quae saepe ea quasi laudantium, iste molestias inventore fuga assumenda.</p>
-                                <a href="single.html" class="read-more btn">Read More</a>
+                                <h5><?=$config['site']; ?></h5>
+                                <h3>You're Close More than Ever.</h3>
+                                <p>Login and let our Support Team Help you with your Problem</p>
                             </div>
                         </div>
                     </div>
                     <div class="form-left">
                         <div class="top">
-                            <a href="index.html" class="brand-logo">Placidity</a>
-                            <a href="signup.html" class="sign-in">Sign Up </a>
+                            <a href="index.html" class="brand-logo"><?=$config['site']; ?></a>
+                            <a href="/register" class="sign-in">Sign Up </a>
                         </div>
                         <div class="middle">
                             <h4>Login now</h4>
-                            <p>Welcome! Please enter your username and password to login.</p>
+                            <p>Welcome! Please enter your credentials to login.</p>
                         </div>
-                        <form action="#" method="post" class="signin-form">
+                        <form action="/authorize" method="post" class="signin-form">
+                            <input type="text" name="action" value="login" hidden>
                             <div class="form-input">
-                                <label>Email</label>
-                                <input type="email" name="" placeholder="" required />
+                                <label>Username</label>
+                                <input type="user" name="" placeholder="username, email or phone" required />
                             </div>
                             <div class="form-input">
                                 <label>Password</label>
-                                <input type="password" name="" placeholder="" required />
+                                <input type="password" name="pass" placeholder="password" required />
                             </div>
                             <label class="container">Keep Me Logged In
-						<input type="checkbox">
+						<input type="checkbox" name="concrete">
 						<span class="checkmark"></span>
 					</label>
                             <button class="btn">Login</button>

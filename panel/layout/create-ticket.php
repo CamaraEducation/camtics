@@ -10,7 +10,7 @@
 				<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="control/ticket/updateTicket.php" method="POST" >
+			<form action="create-ticket" method="POST" >
 				<div class="modal-body">
 					<div class="row">
 						<div class="col">

@@ -5,7 +5,7 @@
                     Client Url : camara.org, camara.co.tz
 -->
 <?php 
-    require_once(CONFIG);
+    $config = config();
 ?>
 <!doctype html>
 <html lang="en">

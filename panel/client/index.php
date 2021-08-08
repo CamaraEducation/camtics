@@ -3,7 +3,9 @@
 	include(_CONTROL.'/ticket/ticket.php');
 
 	// finding the number of tickets by their specifity
-	$num_ticket	= $count_ticket->count_ticket(1);
+	$num_ticket		= $count_ticket->count_ticket(1);
+	$total_ticket	= array_sum($num_ticket);
+	$config			= config();
 
 ?>
 <!-- main content start -->
@@ -39,9 +41,16 @@
 					<div class="row">
 						<div class="col-sm-6 pl-sm-2 statistics-grid">
 							<div class="card card_border border-primary-top p-4">
-								<i class="fa fa-check-circle"> </i>
+								<i class="lnr lnr-lock"> </i>
 								<h3 class="text-danger number"><?=$num_ticket['closed'];?></h3>
 								<p class="stat-text">Closed Tickets</p>
+							</div>
+						</div>
+						<div class="col-sm-6 pl-sm-2 statistics-grid">
+							<div class="card card_border border-primary-top p-4">
+								<i class="lnr lnr-envelope"> </i>
+								<h3 class="text-danger number"><?=$total_ticket;?></h3>
+								<p class="stat-text">All Tickets</p>
 							</div>
 						</div>
 					</div>

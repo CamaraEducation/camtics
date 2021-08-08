@@ -20,6 +20,17 @@ define('_LAYOUT',   _VIEW.'/layout');
 define('_CLIENT',   _VIEW.'/client');
 define('_ERROR',    _VIEW.'/errors');
 
+//Define global innerPath for control
+define('Branch',	_CONTROL.'/branch');
+define('Ticket',	_CONTROL.'/ticket');
+define('Auth',		_CONTROL.'/auth');
+
+//Define global innertPath for view
+define('Front',		_VIEW.'/web');
+
+//Define global preRequisities
+require_once(CONFIG);
+
 // If your script lives in a subfolder you can use the following example
 // Do not forget to edit the basepath in .htaccess if you are on apache
 // define('BASEPATH','/api/v1');
@@ -53,6 +64,72 @@ Route::add('/closed/ticket', function(){
   include(_CLIENT.'/ticket-closed.php');
 });
 
+Route::add('/create-ticket', function(){
+	include(Ticket.'/ticket.php');
+
+	$department = $_POST['department'];
+	$urgency    = $_POST['urgency'];
+	$subject    = $_POST['subject'];
+	$message    = $_POST['message'];
+	$file       = $_POST['file'];
+
+	$create_ticket = new Ticket();
+	$create_ticket -> create_tickets($department, $urgency, $subject, $message);
+}, ['get','post']);
+
+//define authorization routes
+Route::add('/register', function()
+{
+	include(Front.'/signup.php');
+});
+
+Route::add('/login', function()
+{
+	include(Front.'/login.php');
+});
+
+// Get and Post route example
+Route::add('/authorize', function() {
+		$action = $_POST['action'];
+
+		switch($action){
+			case 'register':
+				include(Auth.'/register.php');
+
+				$username = $_POST['user'];
+				$email		= $_POST['email'];
+				$phone		= $_POST['phone'];
+				$password	= $_POST['pass'];
+				$branch		= $_POST['branch'];
+				
+				$create_user->register_user($username, $email, $phone, $password, $branch);
+			break;
+			case 'login':
+				include(Auth.'/login.php');
+
+				$username = $_POST['user'];
+				$password	= $_POST['pass'];
+
+				$loger = new Login();
+				$loger -> loger($username, $password);
+			break;
+			case 'reset':
+				//reset set
+			default:
+				echo 'could not find suitable action';
+		}
+}, ['get','post']);
+
+Route::add('/mail', function(){
+	$to      = 'abdulbasitrubeiyya@gmail.com';
+	$subject = 'CAMTICS';
+	$message = 'hello there just wanted to check if everything is alright';
+	$headers = 'From: contact@actech.cc' . "\r\n" .
+							'Reply-To: contact@actech.cc' . "\r\n" .
+							'X-Mailer: PHP/' . phpversion();
+
+	mail($to, $subject, $message, $headers);
+});
 
 // Add a 404 not found route
 Route::pathNotFound(function($path) {

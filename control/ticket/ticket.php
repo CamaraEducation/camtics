@@ -1,13 +1,4 @@
 <?php
-define('BASEPATH',  '../../');
-define('CONFIG',    BASEPATH.'Core/conf.php');
-define('_CONTROL',  BASEPATH.'control');
-define('_VIEW',     BASEPATH.'panel');
-define('_LAYOUT',   _VIEW.'/layout');
-define('_CLIENT',   _VIEW.'/client');
-define('_ERROR',    _VIEW.'/errors');
-require_once(CONFIG);
-
 class Ticket{
     function create_tickets($department, $urgency, $subject, $content){
         $create_ticket = "INSERT INTO `ticket` (`sender`, `branch`, `department`, `urgency`, `subject`, `content`)
@@ -19,10 +10,10 @@ class Ticket{
 						window.location.pathname = \"/\"
 				</script>";
 		}else{
-			/*echo "<script type=\"text/javascript\">
+			echo "<script type=\"text/javascript\">
 						alert(\"ERROR: Ticket could not be opened. Please try again\");
 						window.location.pathname = \"/\"
-				</script>";*/
+				</script>";
 		}
     }
 

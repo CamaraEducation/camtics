@@ -1,12 +1,13 @@
 <?php
 class Login{
     function loger($user, $pass){
-        $pass   = md5($pass);
-        $user   = strtolower($user);
-        $login  = "SELECT id FROM user WHERE username='$user' OR email='$user' OR phone='$user' AND pass='$pass'";
+		
+        $login  = "SELECT id FROM user WHERE username='$user' AND pass='$pass'";
+		$loger	= mysqli_query(conn(), $login);
+		$loger	= mysqli_fetch_assoc($loger);
 
 		//If user loged create session and redirect to folder.
-        if(mysqli_query(conn(), $login)){
+        if($loger['id']>=1){
 			include(Auth.'/session.php');
 			$loged	= new Session;
 			$loged	-> set_session($user);

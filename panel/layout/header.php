@@ -212,14 +212,18 @@
                                     </a>
                                     <ul class="dropdown-menu drp-mnu" aria-labelledby="dropdownMenu3">
                                         <li class="user-info">
-                                            <h5 class="user-name">John Deo</h5>
+                                            <h5 class="user-name"><?php echo USER; ?></h5>
                                             <span class="status ml-2">Available</span>
                                         </li>
-                                        <li> <a href="#"><i class="lnr lnr-user"></i>My Profile</a> </li>
-                                        <li> <a href="#"><i class="lnr lnr-users"></i>1k Followers</a> </li>
-                                        <li> <a href="#"><i class="lnr lnr-cog"></i>Setting</a> </li>
-                                        <li> <a href="#"><i class="lnr lnr-heart"></i>100 Likes</a> </li>
-                                        <li class="logout"> <a href="logout"><i class="fa fa-power-off"></i> Logout</a> </li>
+                                        <li> 
+                                            <a href="/profile"> <i class="lnr lnr-user"> </i>My Profile</a> 
+                                        </li>
+                                        <li> 
+                                            <a href="/setting"><i class="lnr lnr-cog"></i>Setting</a> 
+                                        </li>
+                                        <li class="logout"> 
+                                            <a href="/logout"><i class="fa fa-power-off"></i> Logout</a> 
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>

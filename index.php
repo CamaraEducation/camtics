@@ -11,11 +11,13 @@ use Core\Route;
 // Include router class
 include 'Core/Route.php';
 
-// Define a global basepaths
+// Define global & core basepaths
 define('BASEPATH',  '/');
 define('CONFIG',    'Core/conf.php');
 define('SESSION',	'Core/session.php');
 define('ROUTES',	'Core/routes.php');
+
+// Define global innerpathes
 define('_CONTROL',  'control');
 define('_VIEW',     'panel');
 
@@ -133,7 +135,12 @@ Route::add('/logout', function(){
 });
 
 Route::add('/mail', function(){
-	echo LOGED;
+	include(Ticket.'/ticket.php');
+	$fetch_open_ticket = new ClientTicket;?>
+<pre>
+	<?php print_r($fetch_open_ticket->open_ticket(1)); ?>
+</pre>
+	<?php
 });
 
 // Add a 404 not found route

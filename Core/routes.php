@@ -15,7 +15,7 @@ class Home{
                 include(_CLIENT.'/index.php');
                 break;
             case 1:
-                echo "admin page";
+                include(_SUPER.'/index.php');
                 break;
             case 2:
                 echo "Branch Administrator";

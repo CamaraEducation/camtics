@@ -28,9 +28,10 @@ define('_CLIENT',   _VIEW.'/client');
 define('_ERROR',    _VIEW.'/errors');
 
 // Define global controllers
-define('Branch',	_CONTROL.'/branch');
-define('Ticket',	_CONTROL.'/ticket');
-define('Auth',		_CONTROL.'/auth');
+define('Auth',		 _CONTROL.'/auth');
+define('Branch',	 _CONTROL.'/branch');
+define('Department', _CONTROL.'/department');
+define('Ticket',	 _CONTROL.'/ticket');
 
 // Define global innertPath for view
 define('Front',		_VIEW.'/web');
@@ -61,17 +62,37 @@ Route::add('/all/ticket', function(){
 
 Route::add('/open/ticket', function(){
   //if conditions with sessions
+  include(Ticket.'/ticket.php');
+  include(Department.'/department.php');
   include(_CLIENT.'/ticket-open.php');
 });
 
 Route::add('/pending/ticket', function(){
-  //if conditions with sessions
+  include(Ticket.'/ticket.php');
+  include(Department.'/department.php');
   include(_CLIENT.'/ticket-pending.php');
 });
 
 Route::add('/closed/ticket', function(){
-  //if conditions with sessions
+  include(Ticket.'/ticket.php');
+  include(Department.'/department.php');
   include(_CLIENT.'/ticket-closed.php');
+});
+
+// Reopen a closed Ticket Route
+Route::add('/open/ticket.*', function(){
+	include(Ticket.'/ticket.php');
+	$ticket = substr(($_SERVER['REQUEST_URI']), 13);
+	$reopen_ticket = new UpdateTicket;
+	$reopen_ticket -> reopen($ticket);
+});
+
+// Close an Open Ticket Route
+Route::add('/close/ticket.*', function(){
+	include(Ticket.'/ticket.php');
+	$ticket = substr(($_SERVER['REQUEST_URI']), 14);
+	$close_ticket = new UpdateTicket;
+	$close_ticket -> close($ticket);
 });
 
 Route::add('/create-ticket', function(){
@@ -138,7 +159,12 @@ Route::add('/mail', function(){
 	include(Ticket.'/ticket.php');
 	$fetch_open_ticket = new ClientTicket;?>
 <pre>
-	<?php print_r($fetch_open_ticket->open_ticket(1)); ?>
+	<?php //print_r($fetch_open_ticket->open_ticket(1)); 
+		$open_ticket = $fetch_open_ticket->open_ticket(6);
+		foreach($open_ticket as $ticket){
+			print_r($ticket);
+		}
+	?>
 </pre>
 	<?php
 });

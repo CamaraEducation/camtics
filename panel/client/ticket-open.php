@@ -10,23 +10,34 @@
 				<thead class="thead-light table-striped table-hover">
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">category</th>
-						<th scope="col">subject</th>
-						<th scope="col">agent</th>
-						<th scope="col">action</th>
+						<th scope="col">CATEGORY</th>
+						<th scope="col">AGENT</th>
+						<th scope="col">SUBJECT</th>
+						<th scope="col">CONTENTS</th>
+						<th scope="col">ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-						<td>
-							<i class="fas fa-eye text-primary"></i> &nbsp;
-							<i class="fas fa-lock text-danger"></i> &nbsp;
-						</td>
-					</tr>
+					<?php
+						$no=1;
+						$fetch_open_ticket = new ClientTicket;
+						$open_ticket = $fetch_open_ticket->open_ticket(ID);
+						foreach($open_ticket as $ticket){ //$no=+1; ?>
+							<tr>
+								<td><?=$no++?></td>
+								<td><?=$fetch_department->specific_department($ticket['department'])?></td>
+								<td><?=$ticket['agent']?></td>
+								<td><?=$ticket['subject']?></td>
+								<td><?=$ticket['message']?></td>
+								<td>
+								<?php if($ticket['id']){ ?>	
+									<a title="view the ticket" href="/open/ticket.<?=$ticket['id']?>"><i class="fas fa-eye text-primary"></i></a> &nbsp;
+									<a title="close the ticket" href="/close/ticket.<?=$ticket['id']?>"><i class="fas fa-lock text-danger"></i></a> &nbsp;
+								<?php }else{echo 'NA';} ?>
+								</td>
+							</tr> <?php
+						} 
+					?>
 				</tbody>
 			</table>
 		</section>

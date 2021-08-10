@@ -2,12 +2,12 @@
 class Ticket{
     function create_tickets($department, $urgency, $subject, $content){
         $create_ticket = "INSERT INTO `ticket` (`sender`, `branch`, `department`, `urgency`, `subject`, `content`)
-                          VALUES ('1', '1', '$department', '$urgency', '$subject', '$content')";
+                          VALUES ('6', '1', '$department', '$urgency', '$subject', '$content')";
         
         if(mysqli_query(conn(), $create_ticket)){
 			echo "<script type=\"text/javascript\">
 						alert(\"SUCCESS: Ticket has been succesfully opened.\");
-						window.location.pathname = \"/\"
+						window.location.pathname = \"/open/ticket\"
 				</script>";
 		}else{
 			echo "<script type=\"text/javascript\">
@@ -52,9 +52,38 @@ class UpdateTicket extends Ticket{
 
     }
 
-    function status(){
-        
+    function reopen($id){
+        $reopen_ticket = "UPDATE ticket SET status='active' WHERE id='$id'";
+
+        if(mysqli_query(conn(), $reopen_ticket)){
+            echo "<script type=\"text/javascript\">
+						alert(\"SUCCESS: Ticket has been succesfully Activated.\");
+						window.location.pathname = \"/open/ticket\"
+				  </script>";
+        }else{
+            echo "<script type=\"text/javascript\">
+						alert(\"ERROR: Ticket could not re-opened.\");
+						window.location.pathname = \"/closed/ticket\"
+				  </script>";
+        }
     }
+    
+    function close($id){
+        $close_ticket = "UPDATE ticket SET status='closed' WHERE id='$id'";
+
+        if(mysqli_query(conn(), $close_ticket)){
+            echo "<script type=\"text/javascript\">
+						alert(\"SUCCESS: Ticket has been succesfully Closed.\");
+						window.location.pathname = \"/open/ticket\"
+				  </script>";
+        }else{
+            echo "<script type=\"text/javascript\">
+						alert(\"ERROR: unxpected Error has occered.\");
+						window.location.pathname = \"/closed/ticket\"
+				  </script>";
+        }
+    }
+    
 
     function content(){
 
@@ -79,14 +108,65 @@ class ClientTicket extends Ticket{
     }
 
     function open_ticket($user){
-        $open_ticket = "SELECT * FROM ticket WHERE sender='$user'";
+        $open_ticket = "SELECT id, department, agent, subject, SUBSTRING(content, 1, 25) as message, time FROM ticket WHERE sender='$user' AND status='open'";
         $open_ticket = mysqli_query(conn(), $open_ticket);
 		$num_tickets = mysqli_num_rows($open_ticket);
 		
+        //oversee the implementation of from end
 		if($num_tickets>0){
 			return $open_ticket = mysqli_fetch_all($open_ticket, MYSQLI_ASSOC);
 		}else{
-			//
+			return $open_ticket = array('1'=> 
+            array(
+                'id'        => 'NA',
+                'department'=> 'NA',
+                'agent'     => 'NA',
+                'subject'   => 'NA',
+                'message'   => 'NA',
+                'time'      => 'NA'
+            ));
+		}
+    }
+
+    function closed_ticket($user){
+        $open_ticket = "SELECT id, department, agent, subject, SUBSTRING(content, 1, 25) as message, time FROM ticket WHERE sender='$user' AND status='closed'";
+        $open_ticket = mysqli_query(conn(), $open_ticket);
+		$num_tickets = mysqli_num_rows($open_ticket);
+		
+        //oversee the implementation of from end
+		if($num_tickets>0){
+			return $open_ticket = mysqli_fetch_all($open_ticket, MYSQLI_ASSOC);
+		}else{
+			return $open_ticket = array('1'=> 
+            array(
+                'id'        => 'NA',
+                'department'=> 'NA',
+                'agent'     => 'NA',
+                'subject'   => 'NA',
+                'message'   => 'NA',
+                'time'      => 'NA'
+            ));
+		}
+    }
+
+    function active_ticket($user){
+        $open_ticket = "SELECT id, department, agent, subject, SUBSTRING(content, 1, 25) as message, time FROM ticket WHERE sender='$user' AND status='active'";
+        $open_ticket = mysqli_query(conn(), $open_ticket);
+		$num_tickets = mysqli_num_rows($open_ticket);
+		
+        //oversee the implementation of from end
+		if($num_tickets>0){
+			return $open_ticket = mysqli_fetch_all($open_ticket, MYSQLI_ASSOC);
+		}else{
+			return $open_ticket = array('1'=> 
+            array(
+                'id'        => 'NA',
+                'department'=> 'NA',
+                'agent'     => 'NA',
+                'subject'   => 'NA',
+                'message'   => 'NA',
+                'time'      => 'NA'
+            ));
 		}
     }
 }

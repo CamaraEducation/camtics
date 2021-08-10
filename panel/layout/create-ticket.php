@@ -1,4 +1,5 @@
-<?php include(_CONTROL.'/department.php'); ?>
+<?php //include(Department.'/department.php');
+$department = new Department ?>
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -46,7 +47,7 @@
 					</div><br>
 					<div class="row">
 						<div class="col">
-							<input type="file" name="attachment" class="form-control" placeholder="Attachment">
+							<input type="file" name="file" class="form-control" placeholder="Attachment">
 						</div>
 					</div>
 				</div>

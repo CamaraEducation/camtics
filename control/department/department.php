@@ -22,17 +22,25 @@ class Department{
 
         //return $this->$get_client_department = $rows;
         return $rows;
-
     }
 
     //fetch all department relevant to the branch
     function branch_department(){
         //
     }
+
+    //fetch specific department
+    function specific_department($id){
+        $specific_department = "SELECT name FROM department WHERE id='$id'";
+        $specific_department = mysqli_query(conn(), $specific_department);
+        $department = mysqli_fetch_assoc($specific_department);
+
+        return $department['name'];
+    }
 }
 
-$department = new Department();
-
+$department = new Department;
+$fetch_department = new Department;
 
 //print_r($client_department);
 //var_dump($department->client_department());

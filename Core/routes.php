@@ -12,6 +12,7 @@ class Home{
     function url_dashboard(){
         switch(ROLE){
             case 0:
+                include(Department.'/department.php');
                 include(_CLIENT.'/index.php');
                 break;
             case 1:
@@ -39,4 +40,45 @@ class Home{
         $this->url_index();
     }
 }
+
+class NavigateTicket extends Home{
+    function url_openTicket(){
+        switch(ROLE){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                $this->url_index();
+        }
+
+    }
+}
+
+/*
+switch(ROLE){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                $this->url_index();
+        }
+*/
 ?>

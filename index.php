@@ -14,6 +14,7 @@ include 'Core/Route.php';
 // Define global & core basepaths
 define('BASEPATH',  '/');
 define('CONFIG',    'Core/conf.php');
+define('REQUIRED',	'Core/required.php');
 define('SESSION',	'Core/session.php');
 define('ROUTES',	'Core/routes.php');
 
@@ -21,11 +22,15 @@ define('ROUTES',	'Core/routes.php');
 define('_CONTROL',  'control');
 define('_VIEW',     'panel');
 
-// Define view & global layout
+// Define views & global layout
 define('_LAYOUT',   _VIEW.'/layout');
-define('_SUPER',	_VIEW.'/admin');
-define('_CLIENT',   _VIEW.'/client');
-define('_ERROR',    _VIEW.'/errors');
+define('_SUPER',	_VIEW.'/admin');		// admins layout	   - 1
+define('_CLIENT',   _VIEW.'/client');		// client layout	   - 0
+define('_ERROR',    _VIEW.'/errors');		// errors layout
+define('_BRANCH',	_VIEW.'/branch');		// branch layout	   - 2
+define('_DEPT', 	_VIEW.'/department');	// department layout   - 3
+define('_STAFF',	_VIEW.'/agent');		// staff layout		   - 4
+define('_ORGZ',		_VIEW.'/oranization');  // organization layour - 5
 
 // Define global controllers
 define('Auth',		 _CONTROL.'/auth');
@@ -37,9 +42,7 @@ define('Ticket',	 _CONTROL.'/ticket');
 define('Front',		_VIEW.'/web');
 
 //Define global preRequisities
-require_once(CONFIG);
-require_once(SESSION);
-require_once(ROUTES);
+require_once(REQUIRED);
 
 // If your script lives in a subfolder you can use the following example
 // Do not forget to edit the basepath in .htaccess if you are on apache
@@ -56,32 +59,26 @@ Route::add('/index.*', function() {
 });
 
 Route::add('/all/ticket', function(){
-  //if conditions with sessions
   include(_CLIENT.'/ticket-all.php');
 });
 
 Route::add('/open/ticket', function(){
-  //if conditions with sessions
-  include(Ticket.'/ticket.php');
-  include(Department.'/department.php');
-  include(_CLIENT.'/ticket-open.php');
+  $get_open_ticket = new NavigateTicket;
+  $get_open_ticket ->url_openTicket();
 });
 
 Route::add('/pending/ticket', function(){
-  include(Ticket.'/ticket.php');
-  include(Department.'/department.php');
-  include(_CLIENT.'/ticket-pending.php');
+	$get_active_ticket = new NavigateTicket;
+	$get_active_ticket ->url_activeTicket();
 });
 
 Route::add('/closed/ticket', function(){
-  include(Ticket.'/ticket.php');
-  include(Department.'/department.php');
-  include(_CLIENT.'/ticket-closed.php');
+	$get_closed_ticket = new NavigateTicket;
+	$get_closed_ticket ->url_closedTicket();
 });
 
 // Reopen a closed Ticket Route
 Route::add('/open/ticket.*', function(){
-	include(Ticket.'/ticket.php');
 	$ticket = substr(($_SERVER['REQUEST_URI']), 13);
 	$reopen_ticket = new UpdateTicket;
 	$reopen_ticket -> reopen($ticket);
@@ -89,15 +86,12 @@ Route::add('/open/ticket.*', function(){
 
 // Close an Open Ticket Route
 Route::add('/close/ticket.*', function(){
-	include(Ticket.'/ticket.php');
 	$ticket = substr(($_SERVER['REQUEST_URI']), 14);
 	$close_ticket = new UpdateTicket;
 	$close_ticket -> close($ticket);
 });
 
 Route::add('/create-ticket', function(){
-	include(Ticket.'/ticket.php');
-
 	$department = $_POST['department'];
 	$urgency    = $_POST['urgency'];
 	$subject    = $_POST['subject'];
@@ -105,7 +99,7 @@ Route::add('/create-ticket', function(){
 	$file       = $_POST['file'];
 
 	$create_ticket = new Ticket();
-	$create_ticket -> create_tickets($department, $urgency, $subject, $message);
+	$create_ticket -> create_tickets(ID, BRANCH, $department, $urgency, $subject, $message);
 }, ['get','post']);
 
 //define authorization routes
@@ -155,18 +149,17 @@ Route::add('/logout', function(){
 	$logout->logout();
 });
 
-Route::add('/mail', function(){
-	include(Ticket.'/ticket.php');
-	$fetch_open_ticket = new ClientTicket;?>
-<pre>
-	<?php //print_r($fetch_open_ticket->open_ticket(1)); 
-		$open_ticket = $fetch_open_ticket->open_ticket(6);
-		foreach($open_ticket as $ticket){
-			print_r($ticket);
-		}
-	?>
-</pre>
-	<?php
+//Department management and navigation
+Route::add('/list/department', function(){
+	include(_SUPER.'/department-list.php');
+});
+
+Route::add('/smpp', function(){
+	include('panel/starter.php');
+});
+
+Route::add('/test', function(){
+	echo getenv('APP_NAME');
 });
 
 // Add a 404 not found route

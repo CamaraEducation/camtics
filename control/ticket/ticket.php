@@ -1,8 +1,8 @@
 <?php
 class Ticket{
-    function create_tickets($department, $urgency, $subject, $content){
+    function create_tickets($sender, $branch, $department, $urgency, $subject, $content){
         $create_ticket = "INSERT INTO `ticket` (`sender`, `branch`, `department`, `urgency`, `subject`, `content`)
-                          VALUES ('6', '1', '$department', '$urgency', '$subject', '$content')";
+                          VALUES ('$sender', '$branch', '$department', '$urgency', '$subject', '$content')";
         
         if(mysqli_query(conn(), $create_ticket)){
 			echo "<script type=\"text/javascript\">
@@ -31,6 +31,74 @@ class Ticket{
 
     function all_tickets(){
 
+    }
+
+    function open_tickets(){
+        $open_ticket = "SELECT  t.id, b.country AS branch, d.name as department, t.subject, t.content as message, DATEDIFF(CURRENT_TIMESTAMP, t.`update`) AS `update` FROM ticket t, branch b, department d WHERE STATUS='open' AND b.id=t.branch AND d.id=t.department GROUP BY t.id";
+        $open_ticket = mysqli_query(conn(), $open_ticket);
+		$num_tickets = mysqli_num_rows($open_ticket);
+		
+        //oversee the implementation of from end
+		if($num_tickets>0){
+			return $open_ticket = mysqli_fetch_all($open_ticket, MYSQLI_ASSOC);
+		}else{
+			return $open_ticket = array('1'=> 
+            array(
+                'id'        => 'NA',
+                'branch'=> 'NA',
+                'department'     => 'NA',
+                'subject'   => 'NA',
+                'message'   => 'NA',
+                'update'      => 'NA',
+                'time'      => 'NA'
+            ));
+		}
+    }
+
+    //fetch all active/pending tickets
+    function active_tickets(){
+        $open_ticket = "SELECT  t.id, b.country AS branch, d.name as department, t.subject, t.content as message, DATEDIFF(CURRENT_TIMESTAMP, t.`update`) AS `update` FROM ticket t, branch b, department d WHERE STATUS='active' AND b.id=t.branch AND d.id=t.department GROUP BY t.id";
+        $open_ticket = mysqli_query(conn(), $open_ticket);
+		$num_tickets = mysqli_num_rows($open_ticket);
+		
+        //oversee the implementation of from end
+		if($num_tickets>0){
+			return $open_ticket = mysqli_fetch_all($open_ticket, MYSQLI_ASSOC);
+		}else{
+			return $open_ticket = array('1'=> 
+            array(
+                'id'        => 'NA',
+                'branch'=> 'NA',
+                'department'     => 'NA',
+                'subject'   => 'NA',
+                'message'   => 'NA',
+                'update'      => 'NA',
+                'time'      => 'NA'
+            ));
+		}
+    }
+
+    //fetch all closed tickets
+    function closed_tickets(){
+        $open_ticket = "SELECT  t.id, b.country AS branch, d.name as department, t.subject, t.content as message, DATEDIFF(CURRENT_TIMESTAMP, t.`update`) AS `update` FROM ticket t, branch b, department d WHERE STATUS='closed' AND b.id=t.branch AND d.id=t.department GROUP BY t.id";
+        $open_ticket = mysqli_query(conn(), $open_ticket);
+		$num_tickets = mysqli_num_rows($open_ticket);
+		
+        //oversee the implementation of from end
+		if($num_tickets>0){
+			return $open_ticket = mysqli_fetch_all($open_ticket, MYSQLI_ASSOC);
+		}else{
+			return $open_ticket = array('1'=> 
+            array(
+                'id'        => 'NA',
+                'branch'=> 'NA',
+                'department'     => 'NA',
+                'subject'   => 'NA',
+                'message'   => 'NA',
+                'update'      => 'NA',
+                'time'      => 'NA'
+            ));
+		}
     }
 
     function count_tickets(){
@@ -74,12 +142,12 @@ class UpdateTicket extends Ticket{
         if(mysqli_query(conn(), $close_ticket)){
             echo "<script type=\"text/javascript\">
 						alert(\"SUCCESS: Ticket has been succesfully Closed.\");
-						window.location.pathname = \"/open/ticket\"
+						window.location.pathname = \"/pending/ticket\"
 				  </script>";
         }else{
             echo "<script type=\"text/javascript\">
 						alert(\"ERROR: unxpected Error has occered.\");
-						window.location.pathname = \"/closed/ticket\"
+						window.location.pathname = \"/open/ticket\"
 				  </script>";
         }
     }

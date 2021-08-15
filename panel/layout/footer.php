@@ -1,6 +1,6 @@
 <!--footer section start-->
 <footer class="dashboard">
-	<p>&copy 2020 Collective. All Rights Reserved | Camara Education</p>
+	<p>&copy <?=date('Y')?>. All Rights Reserved | Camara Education</p>
 </footer>
 <!--footer section end-->
 <!-- move top -->

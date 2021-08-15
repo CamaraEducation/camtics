@@ -1,4 +1,4 @@
-<?php //include(Department.'/department.php');
+<?php 
 $department = new Department ?>
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"

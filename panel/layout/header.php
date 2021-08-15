@@ -72,6 +72,21 @@
                             </li>
                         </ul>
                     </li>
+                    <?php
+                        switch(ROLE){
+                            case 1:
+                                include('admin.php');
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                break;
+                            default:
+                                //
+                        }
+                    ?>
                     <li>
                         <a href="index.html"  data-toggle="modal" data-target="#exampleModalCenter">
                             <i class="fas fa-plus-circle"></i><span> Create Ticket</span></a>

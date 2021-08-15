@@ -20,6 +20,7 @@
 				<tbody>
 					<?php
 						$no=1;
+						$fetch_department = new Department;
 						$fetch_open_ticket = new ClientTicket;
 						$open_ticket = $fetch_open_ticket->open_ticket(ID);
 						foreach($open_ticket as $ticket){ //$no=+1; ?>

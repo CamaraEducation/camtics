@@ -1,8 +1,8 @@
 <?php 
 	include(_LAYOUT.'/header.php');
-	include(_CONTROL.'/ticket/ticket.php');
 
 	// finding the number of tickets by their specifity
+	$count_ticket   = new ClientTicket();
 	$num_ticket		= $count_ticket->count_ticket(ID);
 	$total_ticket	= array_sum($num_ticket);
 	$config			= config();

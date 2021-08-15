@@ -1,7 +1,7 @@
 <?php
 class Home{
     function url_index(){
-        if(LOGED=='nil'){
+        if(LOGED!=='active'){
             include(Front.'/login.php');
         }else{
             $this->url_dashboard();
@@ -11,8 +11,7 @@ class Home{
     //Define the dashboard location for appropriate user
     function url_dashboard(){
         switch(ROLE){
-            case 0:
-                include(Department.'/department.php');
+            case 6:                
                 include(_CLIENT.'/index.php');
                 break;
             case 1:
@@ -31,22 +30,26 @@ class Home{
                 echo "Head of Organization";
                 break;
             default:
-                $this->url_index();
+                $this->logout();
         }
     }
 
     function logout(){
         session_destroy();
-        $this->url_index();
+        include(Front.'/login.php');
     }
 }
 
+//route definition for Ticket related routes
 class NavigateTicket extends Home{
+    //route to access open tickets
     function url_openTicket(){
         switch(ROLE){
-            case 0:
+            case 6:
+                include(_CLIENT.'/ticket-open.php');
                 break;
             case 1:
+                include(_SUPER.'/ticket-open.php');
                 break;
             case 2:
                 break;
@@ -57,10 +60,57 @@ class NavigateTicket extends Home{
             case 5:
                 break;
             default:
-                $this->url_index();
+                $this->logout();
         }
-
     }
+
+    //route to  access active/pending tickets
+    function url_activeTicket(){
+        switch(ROLE){
+            case 6:
+                include(_CLIENT.'/ticket-pending.php');
+                break;
+            case 1:
+                include(_SUPER.'/ticket-pending.php');
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                $this->logout();
+        }
+    }
+
+    //route to  access closed tickets
+    function url_closedTicket(){
+        switch(ROLE){
+            case 6:
+                include(_CLIENT.'/ticket-closed.php');
+                break;
+            case 1:
+                include(_SUPER.'/ticket-closed.php');
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                $this->logout();
+        }
+    }
+}
+
+function getter(){
+    return $extn = pathinfo($_SERVER['REQUEST_URI']);
 }
 
 /*

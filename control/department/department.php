@@ -10,8 +10,35 @@ class Department{
         //
     }
 
+    //fetch all departments
+    function fetch_departments(){
+        $fetch_departments  = "
+            SELECT d.id,
+                d.name,
+                d.description,
+                b.country AS `branch`,
+                (SELECT Count(id)
+                    FROM   ticket
+                    WHERE  status = 'open'
+                        AND `department` = d.id) AS `open`,
+                (SELECT Count(id)
+                    FROM   ticket
+                    WHERE  status = 'active'
+                        AND `department` = d.id) AS `active`,
+                (SELECT Count(id)
+                    FROM   ticket
+                    WHERE  status = 'closed'
+                        AND `department` = d.id) AS `closed`
+            FROM   department d,
+                branch b
+            WHERE  b.id = d.branch ";
+        $fetch_departments  = mysqli_query(conn(), $fetch_departments);
+        $departments    = mysqli_fetch_all($fetch_departments, MYSQLI_ASSOC);
+
+        return $departments;
+    }
+
     //fetch relevant department for a client
-    # TODO : USING SESSION AS THE ARGUMENTS
     function client_department(){
         $client_department = "SELECT id, name FROM department";
         $client_department = mysqli_query(conn(), $client_department);
@@ -20,7 +47,6 @@ class Department{
             $rows[$row['id']] = $row['name'];
         }
 
-        //return $this->$get_client_department = $rows;
         return $rows;
     }
 
@@ -40,7 +66,6 @@ class Department{
 }
 
 $department = new Department;
-$fetch_department = new Department;
 
 //print_r($client_department);
 //var_dump($department->client_department());

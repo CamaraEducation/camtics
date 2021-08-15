@@ -1,8 +1,8 @@
 <?php 
 	include(_LAYOUT.'/header.php');
-	include(_CONTROL.'/ticket/ticket.php');
 
 	// finding the number of tickets by their specifity
+	$count_tickets 	= new Ticket;
 	$num_ticket		= $count_tickets->count_tickets();
 	$total_ticket	= array_sum($num_ticket);
 	$config			= config();
@@ -13,7 +13,7 @@
 	<!-- content -->
 	<div class="container-fluid content-top-gap">
 		<div class="welcome-msg pt-3 pb-4">
-			<h1>Hi <span class="text-primary">John</span>, Welcome back at <?=$config['site'];?></h1>
+			<h1>Hi <span class="text-primary"><?=USER;?></span>, Welcome back at <?=$config['site'];?></h1>
 			<p>Very detailed & featured admin.</p>
 		</div>
 		<!-- statistics data -->
@@ -49,7 +49,7 @@
 						<div class="col-sm-6 pl-sm-2 statistics-grid">
 							<div class="card card_border border-primary-top p-4">
 								<i class="lnr lnr-envelope"> </i>
-								<h3 class="text-danger number"><?=$total_ticket;?></h3>
+								<h3 class="text-blue number"><?=$total_ticket;?></h3>
 								<p class="stat-text">All Tickets</p>
 							</div>
 						</div>

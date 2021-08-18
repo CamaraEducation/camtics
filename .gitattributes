@@ -2,3 +2,4 @@ assets/* linguist-vendored
 *.css linguist-detectable=false
 *.js linguist-detectable=false
 error.js linguist-detectable=true
+custom.css linguist-detectable=true

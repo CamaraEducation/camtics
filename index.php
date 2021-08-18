@@ -154,12 +154,47 @@ Route::add('/list/department', function(){
 	include(_SUPER.'/department-list.php');
 });
 
+Route::add('/add/department', function(){
+	include(_SUPER.'/department-create.php');
+});
+
+Route::add('/create/department', function(){
+	include(Department.'/create.php');
+}, ['get','post']);
+
+//Branch management and navigation
+Route::add('/list/branch', function(){
+	include(_SUPER.'/branch-list.php');
+});
+
+Route::add('/add/branch', function(){
+	include(_SUPER.'/branch-create.php');
+});
+
+Route::add('/create/branch', function(){
+	include(Branch.'/create.php');
+}, ['get','post']);
+
+
+//------------APIs and Webhooks----------------//
+Route::add('/imap', function(){
+	include(_CONTROL.'/imap/imap.php');
+});
+
+
 Route::add('/smpp', function(){
 	include('panel/starter.php');
 });
 
 Route::add('/test', function(){
-	echo getenv('APP_NAME');
+	$countries = file_get_contents('https://restcountries.eu/rest/v2/regionalbloc/au');
+	$countries = json_decode($countries, true);
+
+	foreach($countries as $country){ ?><pre>
+		<?php print_r($country); ?>
+									</pre> <?php
+	}
+	
 });
 
 // Add a 404 not found route

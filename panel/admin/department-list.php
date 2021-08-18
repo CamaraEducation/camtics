@@ -4,7 +4,7 @@
 <div class="main-content">
 	<!-- content -->
 	<div class="container-fluid content-top-gap">
-		<section class="back-light">
+		<section class="bg-light">
 		<table class="table">
 			<thead class="thead-light table-striped table-hover">
 				<tr>
@@ -33,7 +33,7 @@
 							<td class="bg-warning text-center"><?=$department['open']?></td>
 							<td class="bg-primary text-center"><?=$department['active']?></td>
 							<td class="bg-secondary text-center"><?=$department['closed']?></td>
-							<td class="bg-light text-center">
+							<td class="text-center">
 								<a href="/manage/department.<?=$department['id']?>" title="manage department">
 									<i class="fa fa-cog"></i> &nbsp;
 								</a>

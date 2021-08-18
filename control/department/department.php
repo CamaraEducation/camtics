@@ -2,8 +2,13 @@
 require_once(CONFIG);
 //require_once('../Core/conf.php');
 class Department{
-    function create_department(){
-        //
+    function create_department($name, $branch, $descript){
+        $create_Department = "INSERT INTO department VALUES(DEFAULT, '$name', '$branch', '$descript')";
+        if(mysqli_query(conn(), $create_Department)){
+            header('Location: /list/department');
+        }else{
+            echo "something is wrong";
+        }
     }
 
     function update_department(){

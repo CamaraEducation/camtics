@@ -1,7 +1,46 @@
-.back-light{
-    background: white;
+.bg-light {
+    background-color: #f8f9fa!important;
+    padding: 10px 8px 10px 8px;
+    border-radius: 20px;
+    height: 77vh;
 }
 
 .text-center{
     text-align: center;
+}
+
+h1, h2, h3 h4, h5, h6 {
+    margin: 25px !important;
+    color: #82bc00;
+}
+
+.form{
+    max-width: 720px;
+    min-height: 60vh;
+    margin: auto !important;
+    padding: 30px;
+    background: rgba( 255, 255, 255, 0.20 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 5.0px );
+    -webkit-backdrop-filter: blur( 5.0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.space{
+    padding-top: 40px;
+}
+
+.center{
+    margin: auto !important;
+}
+
+table{
+    border-radius: 20px;
+}
+
+@media (max-width: 580px){
+    .search-box {
+        display: none;
+    }
 }

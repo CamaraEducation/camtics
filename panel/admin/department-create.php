@@ -6,44 +6,47 @@
 <div class="main-content">
 	<!-- content -->
 	<div class="container-fluid content-top-gap">
-        <section class="bg-light">
-        <form action="create-ticket" method="POST" >
-				<div class="modal-body">
+        <section class="bg-light border-primary-top">
+        	<form action="/create/department" method="POST" >
+				<div class="form">
 					<div class="row">
 						<div class="col">
-							<div class="col">
-                                <input type="text" name="subject" class="form-control" placeholder="Department's Name" required>
+							<div>
+								<label>Department</label>
+                                <input type="text" name="name" class="form-control" placeholder="Name" required>
                             </div>
 						</div>
 						<div class="col">
-							<select type="text" name="urgency" class="form-control" title="select urgency" required>
-								<option value="" hidden>urgency</option>
-								<option value="3">Normal</option>
-								<option value="2">High</option>
-								<option value="1">Very High</option>
-							</select>
+							<div>
+								<label>Branch</label>
+								<select type="text" name="branch" class="form-control" title="select Branch" required>
+									<option value="" hidden>Branch</option>
+									<?php 
+										$fetch_branch = new Branch;
+										$fetched_branch = $fetch_branch->fetch_branches();
+										foreach($fetched_branch as $branch){ ?>
+											<option value="<?=$branch['id']?>"><?=$branch['country']?></option><?php
+										}
+									?>
+								</select>
+							</div>
 						</div>
 					</div><br>
 					<div class="row">
 						<div class="col">
-							<input type="text" name="subject" class="form-control" placeholder="Ticket Subject" required>
-						</div>
-					</div><br>
-					<div class="row">
-						<div class="col">
-							<textarea type="text" name="message" class="form-control" placeholder="Enter Ticket Details" minlegth="160" required></textarea>
-						</div>
-					</div><br>
-					<div class="row">
-						<div class="col">
-							<input type="file" name="file" class="form-control" placeholder="Attachment">
+							<div>
+								<label>Description</label>
+								<textarea type="text" name="description" class="form-control" placeholder="Department's Description" minlegth="160" required></textarea>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-success">Submit Ticket</button>
-				</div>
+					<div class="space">
+						<center>
+							<button type="reset" class="btn btn-danger" data-dismiss="modal">Reset</button>
+							<button type="submit" class="btn btn-success">Create</button>
+						</center>
+					</div>
+				</div>				
 			</form>
 
         </section>	

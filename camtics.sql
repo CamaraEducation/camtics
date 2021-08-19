@@ -52,17 +52,31 @@ DROP TABLE IF EXISTS `branch`;
 CREATE TABLE IF NOT EXISTS `branch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `code` int(3) NOT NULL,
+  `code` int(3) DEFAULT NULL,
   `phone` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `pass` varchar(100) NOT NULL,
-  `imap` text NOT NULL,
-  `website` varchar(50) NOT NULL,
-  `location` text NOT NULL,
+  `pass` varchar(100) DEFAULT NULL,
+  `imap` text,
+  `website` varchar(50) DEFAULT NULL,
+  `location` text,
   `country` text NOT NULL,
-  `smtp` int(11) NOT NULL,
+  `smtp` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table desk.chats
+DROP TABLE IF EXISTS `chats`;
+CREATE TABLE IF NOT EXISTS `chats` (
+  `chat_message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `to_user_id` int(11) NOT NULL,
+  `from_user_id` int(11) NOT NULL,
+  `chat_message` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(1) NOT NULL,
+  PRIMARY KEY (`chat_message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -85,7 +99,19 @@ CREATE TABLE IF NOT EXISTS `department` (
   `branch` int(11) NOT NULL DEFAULT '0',
   `description` varchar(160) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table desk.login_details
+DROP TABLE IF EXISTS `login_details`;
+CREATE TABLE IF NOT EXISTS `login_details` (
+  `login_details_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `last_activity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_type` enum('no','yes') NOT NULL,
+  PRIMARY KEY (`login_details_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 

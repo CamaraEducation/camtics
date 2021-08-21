@@ -7,6 +7,7 @@
 // control requirements
     require_once(Ticket.'/ticket.php');
     require_once(Department.'/department.php');
-    require_once(Branch.'/branch.php')
+    require_once(Branch.'/branch.php');
+    require_once(Chat.'/ticket.php');
 
 ?>

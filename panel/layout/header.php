@@ -14,8 +14,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title><?=$config['site'];?> ::<?php echo str_replace("/"," ", $_SERVER['REQUEST_URI'])?></title>
+        <link rel="icon" href="/assets/img/logo.png" type="image/x-icon">
         <!-- font awesome -->
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+        <!-- ajax stylesheet -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- CSS stylesheets -->
         <link rel="stylesheet" href="/assets/css/style-starter.css">
         <link rel="stylesheet" href="/assets/css/custom.css">
@@ -77,9 +81,12 @@
                             case 1:
                                 include('admin.php');
                                 break;
+                            case 2:
+                                break;
                             case 3:
                                 break;
                             case 4:
+                                include('agent.php');
                                 break;
                             case 5:
                                 break;
@@ -219,7 +226,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu3" aria-haspopup="true"
                                         aria-expanded="false">
                                         <div class="profile_img">
-                                            <img src="/assets/images/profileimg.jpg" class="rounded-circle" alt="" />
+                                            <img src="<?=PHOTO?>" class="rounded-circle" alt="" />
                                             <div class="user-active">
                                                 <span></span>
                                             </div>
@@ -227,7 +234,7 @@
                                     </a>
                                     <ul class="dropdown-menu drp-mnu" aria-labelledby="dropdownMenu3">
                                         <li class="user-info">
-                                            <h5 class="user-name"><?php echo USER; ?></h5>
+                                            <h5 class="user-name"><?=USER?></h5>
                                             <span class="status ml-2">Available</span>
                                         </li>
                                         <li> 

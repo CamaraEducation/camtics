@@ -1,4 +1,5 @@
 <?php
+    ini_set('error_reporting', E_ALL ^ E_WARNING);
 
     // connection to the Dabtabase
     function conn(){

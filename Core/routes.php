@@ -21,10 +21,10 @@ class Home{
                 echo "Branch Administrator";
                 break;
             case 3:
-                echo "Head of Department";
+                include(_DEPT.'/index.php');
                 break;
             case 4:
-                echo "Department Staff";
+                include(_STAFF.'/index.php');
                 break;
             case 5:
                 echo "Head of Organization";
@@ -54,8 +54,10 @@ class NavigateTicket extends Home{
             case 2:
                 break;
             case 3:
+                include(_DEPT.'/ticket-open.php');
                 break;
             case 4:
+                include(_STAFF.'/ticket-open.php');
                 break;
             case 5:
                 break;
@@ -76,8 +78,10 @@ class NavigateTicket extends Home{
             case 2:
                 break;
             case 3:
+                include(_DEPT.'/ticket-pending.php');
                 break;
             case 4:
+                include(_STAFF.'/ticket-pending.php');
                 break;
             case 5:
                 break;
@@ -89,22 +93,25 @@ class NavigateTicket extends Home{
     //route to  access closed tickets
     function url_closedTicket(){
         switch(ROLE){
-            case 6:
-                include(_CLIENT.'/ticket-closed.php');
-                break;
-            case 1:
-                include(_SUPER.'/ticket-closed.php');
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            default:
-                $this->logout();
+            case 6: include(_CLIENT.'/ticket-closed.php');  break;
+            case 1: include(_SUPER.'/ticket-closed.php');   break;
+            case 2: break;
+            case 3: include(_DEPT.'/ticket-closed.php'); break;
+            case 4: include(_STAFF.'/ticket-closed.php'); break;
+            case 5: break;
+            default: $this->logout();
+        }
+    }
+
+    function url_viewTicket(){
+        switch(ROLE){
+            case 6: include(_CLIENT.'/ticket-view.php');    break;
+            case 1: include(_SUPER.'/ticket-view.php');     break;
+            case 2: break;
+            case 3: include(_DEPT.'/ticket-view.php');      break;
+            case 4: include(_STAFF.'/ticket-view.php');     break;
+            case 5: break;
+            default: $this->logout();
         }
     }
 }

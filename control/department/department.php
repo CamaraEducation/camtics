@@ -2,6 +2,17 @@
 require_once(CONFIG);
 //require_once('../Core/conf.php');
 class Department{
+    //fetch users own department
+    function my_department(){        
+        $user = ID;
+        $user_department = "SELECT department FROM user WHERE id='$user'";
+        $user_department = mysqli_query(conn(), $user_department);
+        $user_department = mysqli_fetch_assoc($user_department);
+        $user_department = $user_department['department'];
+
+        return $user_department;
+    }
+
     function create_department($name, $branch, $descript){
         $create_Department = "INSERT INTO department VALUES(DEFAULT, '$name', '$branch', '$descript')";
         if(mysqli_query(conn(), $create_Department)){

@@ -1,4 +1,8 @@
 <?php
+/************************************************************************
+ *                      Tickets management | General                    *
+ *                                                                      *
+ ************************************************************************/
 class Ticket{
     function create_tickets($sender, $branch, $department, $urgency, $subject, $content){
         $create_ticket = "INSERT INTO `ticket` (`sender`, `branch`, `department`, `urgency`, `subject`, `content`)
@@ -17,8 +21,19 @@ class Ticket{
 		}
     }
 
-    function specif_ticket(){
-
+    function specif_ticket($ticket){
+        $specific_ticket = "
+            SELECT 
+                t.id, t.subject, t.content, t.urgency,
+                u.id AS userid, u.username, u.photo, 
+                b.`name` AS `branch`, 
+                o.`name` AS `organization`,
+                t.`status`, DATEDIFF(CURRENT_TIMESTAMP, t.`update`) AS `update`, t.`time`
+            FROM `ticket` t, `user` u, `branch` b, `organization` o
+            WHERE t.id='4' AND u.`id`=t.`sender` AND b.`id`=t.`branch` AND o.`id`=t.`organization`";
+        $specific_ticket = mysqli_query(conn(), $specific_ticket);
+        $specific_ticket = mysqli_fetch_all($specific_ticket, MYSQLI_ASSOC);
+        return $specific_ticket;
     }
 
     function department_tickets(){
@@ -115,6 +130,10 @@ class Ticket{
 }
 
 
+/************************************************************************
+ *                      Ticket alteration class                         *
+ *                                                                      *
+ ************************************************************************/
 class UpdateTicket extends Ticket{
     function escalate(){
 
@@ -162,6 +181,11 @@ class UpdateTicket extends Ticket{
     }
 }
 
+
+/************************************************************************
+ *                      Tickets management for Client                   *
+ *                                                                      *
+ ************************************************************************/
 class ClientTicket extends Ticket{
     function count_ticket($user){
         $count_ticket = "SELECT status as name, COUNT(id) as value FROM ticket WHERE sender='$user' GROUP BY status;";
@@ -239,7 +263,8 @@ class ClientTicket extends Ticket{
     }
 }
 
-$count_ticket   = new ClientTicket();
-$count_tickets  = new Ticket;
+
+include('department.php');
+include('agent.php');
 
 ?>

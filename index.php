@@ -25,7 +25,7 @@ define('_VIEW',     'panel');
 // Define views & global layout
 define('_LAYOUT',   _VIEW.'/layout');
 define('_SUPER',	_VIEW.'/admin');		// admins layout	   - 1
-define('_CLIENT',   _VIEW.'/client');		// client layout	   - 0
+define('_CLIENT',   _VIEW.'/client');		// client layout	   - 6
 define('_ERROR',    _VIEW.'/errors');		// errors layout
 define('_BRANCH',	_VIEW.'/branch');		// branch layout	   - 2
 define('_DEPT', 	_VIEW.'/department');	// department layout   - 3
@@ -35,6 +35,7 @@ define('_ORGZ',		_VIEW.'/oranization');  // organization layour - 5
 // Define global controllers
 define('Auth',		 _CONTROL.'/auth');
 define('Branch',	 _CONTROL.'/branch');
+define('Chat', 		 _CONTROL.'/chat');
 define('Department', _CONTROL.'/department');
 define('Ticket',	 _CONTROL.'/ticket');
 
@@ -58,6 +59,10 @@ Route::add('/index.*', function() {
   include('panel/client/index.php');
 });
 
+
+/************************************************
+ * 	   EVERYTHING THAT HAS TO DO WITH TICKET	*
+ ************************************************/
 Route::add('/all/ticket', function(){
   include(_CLIENT.'/ticket-all.php');
 });
@@ -76,6 +81,18 @@ Route::add('/closed/ticket', function(){
 	$get_closed_ticket = new NavigateTicket;
 	$get_closed_ticket ->url_closedTicket();
 });
+
+//view a specific ticket
+Route::add('/view/ticket.*', function(){
+	$view_this_ticket = new NavigateTicket;
+	$view_this_ticket ->url_viewTicket();
+});
+
+Route::add('/reply/ticket.*', function(){
+	$reply_ticket = new Conversation;
+	$reply_ticket ->send(ID, $_POST['ticket'], $_POST['message']);
+	//mysqli_close(conn());
+}, ['get','post']);
 
 // Reopen a closed Ticket Route
 Route::add('/open/ticket.*', function(){
@@ -102,7 +119,10 @@ Route::add('/create-ticket', function(){
 	$create_ticket -> create_tickets(ID, BRANCH, $department, $urgency, $subject, $message);
 }, ['get','post']);
 
-//define authorization routes
+
+/************************************************
+ * EVERYTHING THAT HAS TO DO WITH AUTHORIZATION	*
+ ************************************************/
 Route::add('/register', function()
 {
 	include(Front.'/signup.php');
@@ -112,6 +132,7 @@ Route::add('/login', function()
 {
 	include(Front.'/login.php');
 });
+
 
 // Get and Post route example
 Route::add('/authorize', function() {
@@ -149,7 +170,10 @@ Route::add('/logout', function(){
 	$logout->logout();
 });
 
-//Department management and navigation
+
+/************************************************
+ *  EVERYTHING THAT HAS TO DO WITH DEPARTMENTS	*
+ ************************************************/
 Route::add('/list/department', function(){
 	include(_SUPER.'/department-list.php');
 });
@@ -187,14 +211,15 @@ Route::add('/smpp', function(){
 });
 
 Route::add('/test', function(){
-	$countries = file_get_contents('https://restcountries.eu/rest/v2/regionalbloc/au');
-	$countries = json_decode($countries, true);
-
-	foreach($countries as $country){ ?><pre>
-		<?php print_r($country); ?>
-									</pre> <?php
-	}
-	
+	$tickets = new Conversation;
+	$tickets = $tickets ->chat(4);
+	?> <pre><?php
+		foreach($tickets as $_ticket){
+			print_r($_ticket);
+		}
+		
+		?>
+	</pre><?php
 });
 
 // Add a 404 not found route

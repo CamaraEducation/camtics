@@ -7,7 +7,7 @@ class Login{
 		$loger	= mysqli_fetch_assoc($loger);
 
 		//If user loged create session and redirect to folder.
-        if($loger['id']>=1){
+        if(!empty($loger['id'])){
 			include(Auth.'/session.php');
 			$loged	= new Session;
 			$loged	-> set_session($user);

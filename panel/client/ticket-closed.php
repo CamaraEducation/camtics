@@ -5,7 +5,7 @@
 <div class="main-content">
 	<!-- content -->
 	<div class="container-fluid content-top-gap">
-		<section class="back-light">
+		<section class="bg-light">
 			<table class="table">
 				<thead class="thead-light table-striped table-hover">
 					<tr>
@@ -31,8 +31,8 @@
 								<td><?=$ticket['subject']?></td>
 								<td><?=$ticket['message']?></td>
 								<td>
-								<?php if($ticket['id']){ ?>	
-									<a title="view the ticket" href="/open/ticket.<?=$ticket['id']?>"><i class="fas fa-eye text-primary"></i></a> &nbsp;
+								<?php if($ticket['id']>0){ ?>	
+									<a title="view the ticket" href="/view/ticket.<?=$ticket['id']?>"><i class="fas fa-eye text-primary"></i></a> &nbsp;
 									<a title="reopen the ticket" href="/close/ticket.<?=$ticket['id']?>"><i class="fas fa-unlock text-success"></i></a> &nbsp;
 								<?php }else{echo 'NA';} ?>
 								</td>

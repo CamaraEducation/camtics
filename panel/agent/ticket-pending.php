@@ -29,7 +29,7 @@
 								<td><?=$ticket['branch']?></td>
 								<td><?=$ticket['department']?></td>
 								<td><?=$ticket['subject']?></td>
-								<td><?=$ticket['message']?></td>
+								<td><?=strip_tags($ticket['message'])?></td>
 								<td><?=$ticket['update']?> days</td>
 								<td>
 								<?php if($ticket['id']>0){ ?>	

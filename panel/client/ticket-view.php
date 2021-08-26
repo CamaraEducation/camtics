@@ -14,7 +14,9 @@
     //fetch ticket details
     foreach($user_ticket as $_ticket){
         $ticket  = $_ticket;
-    }    
+    }
+
+    
 ?>
 <!-- //header-ends -->
 <!-- main content start -->
@@ -34,12 +36,14 @@
                         <span class="text-bold">Update :</span> 
                         <span class="text-secondary"><?=$ticket['update']?> days</span>
                     </h6>
+                    
+                    <span id="dots"></span>
+                    <span id="more" style="display: none;">
                     <h6>
                         <span class="text-bold">Subject :</span> 
                         <span class="text-secondary"><?=$ticket['subject']?></span>
                     </h6>
-                    <span id="dots"></span>
-                    <span id="more" style="display: none;">
+                    
                         <h6>
                             <span class="text-bold">Message :</span> 
                             <span class="text-secondary"><?=$ticket['content']?></span>
@@ -69,19 +73,16 @@
 				<i class="fa fa-share my-float"></i>
 			</a>
 			<ul class="ul">
-				<li class="li" title="transfer ticket"><a class="a" href="#">
-					<i class="fa fa-upload my-float"></i>
-				</a></li>
-				<li class="li" title="assign ticket"><a class="a" href="#">
-					<i class="fa fa-user my-float"></i>
-				</a></li>
                 <?php
-                    if($ticket['status']=='active'){?>
+                    if($ticket['status']=='active'){ ?>
                         <li class="li" title="Reply"><a class="a" data-toggle="modal" data-target="#replyTicketModal" href="#">
                             <i class="fa fa-pencil my-float"></i>
+                        </a></li>
+                        <li class="li" title="close"><a class="a" href="/close/ticket.<?=$ticket_id?>">
+                            <i class="fa fa-lock my-float"></i>
                         </a></li> <?php
                     }else{ ?>
-						<li class="li" title="active"><a class="a" href="/open/ticket.<?=$ticket_id?>">
+                        <li class="li" title="active"><a class="a" href="/open/ticket.<?=$ticket_id?>">
                             <i class="fa fa-key my-float"></i>
                         </a></li> <?php
                     }
@@ -95,6 +96,10 @@
                 showChats('<?=$ticket_id?>');
             }
             refreshChat();
+            
+            setTimeout(function() {
+	            $( "#success" ).hide();
+            }, 2000);
         </script>
         
 		<!-- modals -->		

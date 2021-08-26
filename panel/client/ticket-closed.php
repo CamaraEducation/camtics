@@ -29,11 +29,11 @@
 								<td><?=$fetch_department->specific_department($ticket['department'])?></td>
 								<td><?=$ticket['agent']?></td>
 								<td><?=$ticket['subject']?></td>
-								<td><?=$ticket['message']?></td>
+								<td><?=strip_tags($ticket['message'])?></td>
 								<td>
 								<?php if($ticket['id']>0){ ?>	
 									<a title="view the ticket" href="/view/ticket.<?=$ticket['id']?>"><i class="fas fa-eye text-primary"></i></a> &nbsp;
-									<a title="reopen the ticket" href="/close/ticket.<?=$ticket['id']?>"><i class="fas fa-unlock text-success"></i></a> &nbsp;
+									<a title="reopen the ticket" href="/open/ticket.<?=$ticket['id']?>"><i class="fas fa-unlock text-success"></i></a> &nbsp;
 								<?php }else{echo 'NA';} ?>
 								</td>
 							</tr> <?php

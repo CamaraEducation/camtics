@@ -1,5 +1,14 @@
 @import url("floatingbutts.css");
 
+h1, h2, h3 h4, h5, h6 {
+    margin: 5px !important;
+    color: #82bc00;
+}
+
+table{
+    border-radius: 20px;
+}
+
 .bg-light {
     background-color: #f8f9fa!important;
     padding: 10px 8px 10px 8px;
@@ -21,21 +30,12 @@
     margin: auto !important;
 }
 
-h1, h2, h3 h4, h5, h6 {
-    margin: 5px !important;
-    color: #82bc00;
-}
-
-table{
-    border-radius: 20px;
-}
-
 .overflow{
     overflow-y: auto;
 }
 
 .h-30{
-    height: 30vh;
+    height: 52vh;
 }
 
 .form{
@@ -60,7 +60,7 @@ table{
 }
 
 .glass{
-    padding: 30px;
+    padding: 5px;
     background: rgba( 255, 255, 255, 0.20 );
     box-shadow: 0 8px 8px 0 rgba(184, 238, 191, 0.37);
     backdrop-filter: blur( 5.0px );
@@ -98,6 +98,20 @@ table{
 {
     margin: 0;
     color: #777777;
+}
+
+.bg-chat{
+    padding: 8px;
+}
+
+.chat-left{
+    background: rgb(164, 236, 92);
+    border-radius: 0px 10px 10px 10px;
+}
+
+.chat-right{
+    background: rgb(0, 151, 252);
+    border-radius: 10px 0px 10px 10px;
 }
 
 .panel .slidedown .glyphicon, .chat .glyphicon

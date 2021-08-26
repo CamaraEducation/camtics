@@ -1,14 +1,16 @@
 <?php
 class Conversation{
     function send($user, $ticket, $message){
-
+        $message = str_replace('\"', '"', $message);
         $message = mysqli_real_escape_string(conn(), $message);
-        //print_r($message);
 
         if (ROLE<5){$init=1;}else{$init=2;}
         $reply = "INSERT INTO conversation (`init`, `ticket`, `message`, `user`) VALUES('$init','$ticket','$message','$user')";
-        mysqli_query(conn(), $reply);
-        echo json_encode(array("statusCode"=>200));
+        if(mysqli_query(conn(), $reply)){
+            $update_ticket = new Ticket;
+            $update_ticket ->update_ticket($ticket);
+            echo json_encode(array("statusCode"=>200));
+        };
     }
 
     function chat($ticket){

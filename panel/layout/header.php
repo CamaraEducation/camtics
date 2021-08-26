@@ -17,8 +17,9 @@
         <link rel="icon" href="/assets/img/logo.png" type="image/x-icon">
         <!-- font awesome -->
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+        <!-- QuillJs stylesheet -->
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">        
         <!-- ajax stylesheet -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- CSS stylesheets -->
         <link rel="stylesheet" href="/assets/css/style-starter.css">
@@ -83,7 +84,7 @@
                                 break;
                             case 2:
                                 break;
-                            case 3:
+                            case 3:include('department.php');
                                 break;
                             case 4:
                                 include('agent.php');

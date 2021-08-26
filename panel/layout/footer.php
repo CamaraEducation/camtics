@@ -30,13 +30,6 @@
 <!-- /move top -->
 <script src="/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/assets/js/jquery-1.10.2.min.js"></script>
-<!-- chart js -->
-<script src="/assets/js/Chart.min.js"></script>
-<script src="/assets/js/utils.js"></script>
-<!-- //chart js -->
-<!-- Different scripts of charts.  Ex.Barchart, Linechart -->
-<script src="/assets/js/bar.js"></script>
-<script src="/assets/js/linechart.js"></script>
 <!-- //Different scripts of charts.  Ex.Barchart, Linechart -->
 <script src="/assets/js/jquery.nicescroll.js"></script>
 <script src="/assets/js/scripts.js"></script>

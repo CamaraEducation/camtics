@@ -4,24 +4,23 @@
  *                                                                      *
  ************************************************************************/
 class Ticket{
-    function create_tickets($sender, $branch, $department, $urgency, $subject, $content){
-        $create_ticket = "INSERT INTO `ticket` (`sender`, `branch`, `department`, `urgency`, `subject`, `content`)
-                          VALUES ('$sender', '$branch', '$department', '$urgency', '$subject', '$content')";
-        
+    function create_tickets($sender, $branch, $org, $department, $urgency, $subject, $message){
+
+        $message = str_replace('\"', '"', $message);
+        $subject = mysqli_real_escape_string(conn(), $subject);
+        $message = mysqli_real_escape_string(conn(), $message);
+
+        $create_ticket = "INSERT INTO `ticket` (`sender`, `branch`, organization, `department`, `urgency`, `subject`, `content`)
+                          VALUES ('$sender', '$branch', '$org', '$department', '$urgency', '$subject', '$message')";
+                          
         if(mysqli_query(conn(), $create_ticket)){
-			echo "<script type=\"text/javascript\">
-						alert(\"SUCCESS: Ticket has been succesfully opened.\");
-						window.location.pathname = \"/open/ticket\"
-				</script>";
+			echo json_encode(array("statusCode"=>200));
 		}else{
-			echo "<script type=\"text/javascript\">
-						alert(\"ERROR: Ticket could not be opened. Please try again\");
-						window.location.pathname = \"/\"
-				</script>";
+			echo json_encode(array("statusCode"=>201));
 		}
     }
 
-    function specif_ticket($ticket){
+    function specific_ticket($ticket){
         $specific_ticket = "
             SELECT 
                 t.id, t.subject, t.content, t.urgency,
@@ -30,13 +29,25 @@ class Ticket{
                 o.`name` AS `organization`,
                 t.`status`, DATEDIFF(CURRENT_TIMESTAMP, t.`update`) AS `update`, t.`time`
             FROM `ticket` t, `user` u, `branch` b, `organization` o
-            WHERE t.id='4' AND u.`id`=t.`sender` AND b.`id`=t.`branch` AND o.`id`=t.`organization`";
+            WHERE t.id='$ticket' AND u.`id`=t.`sender` AND b.`id`=t.`branch` AND o.`id`=t.`organization`";
         $specific_ticket = mysqli_query(conn(), $specific_ticket);
         $specific_ticket = mysqli_fetch_all($specific_ticket, MYSQLI_ASSOC);
         return $specific_ticket;
     }
 
+    //count ticket for specific ticket
     function department_tickets(){
+        $department   = new Department;
+        $department   = $department->my_department();
+        $count_ticket = "SELECT status as name, COUNT(id) as value FROM ticket WHERE department='$department' GROUP BY status;";
+        $count_ticket = mysqli_query(conn(), $count_ticket);
+        $rows         = array('open'=>0, 'active'=>0, 'closed'=>0);
+
+        while($row = mysqli_fetch_assoc($count_ticket)){
+            $rows[$row['name']] = $row['value'];
+        }
+
+        return $rows;
 
     }
 
@@ -53,7 +64,7 @@ class Ticket{
         $open_ticket = mysqli_query(conn(), $open_ticket);
 		$num_tickets = mysqli_num_rows($open_ticket);
 		
-        //oversee the implementation of from end
+        //oversee the implementation of front end
 		if($num_tickets>0){
 			return $open_ticket = mysqli_fetch_all($open_ticket, MYSQLI_ASSOC);
 		}else{
@@ -127,57 +138,10 @@ class Ticket{
 
         return $rows;
     }
-}
 
-
-/************************************************************************
- *                      Ticket alteration class                         *
- *                                                                      *
- ************************************************************************/
-class UpdateTicket extends Ticket{
-    function escalate(){
-
-    }
-
-    function reopen($id){
-        $reopen_ticket = "UPDATE ticket SET status='active' WHERE id='$id'";
-
-        if(mysqli_query(conn(), $reopen_ticket)){
-            echo "<script type=\"text/javascript\">
-						alert(\"SUCCESS: Ticket has been succesfully Activated.\");
-						window.location.pathname = \"/open/ticket\"
-				  </script>";
-        }else{
-            echo "<script type=\"text/javascript\">
-						alert(\"ERROR: Ticket could not re-opened.\");
-						window.location.pathname = \"/closed/ticket\"
-				  </script>";
-        }
-    }
-    
-    function close($id){
-        $close_ticket = "UPDATE ticket SET status='closed' WHERE id='$id'";
-
-        if(mysqli_query(conn(), $close_ticket)){
-            echo "<script type=\"text/javascript\">
-						alert(\"SUCCESS: Ticket has been succesfully Closed.\");
-						window.location.pathname = \"/pending/ticket\"
-				  </script>";
-        }else{
-            echo "<script type=\"text/javascript\">
-						alert(\"ERROR: unxpected Error has occered.\");
-						window.location.pathname = \"/open/ticket\"
-				  </script>";
-        }
-    }
-    
-
-    function content(){
-
-    }
-
-    function assign(){
-
+    function update_ticket($ticket){
+        $update_ticket = "UPDATE ticket SET `update`=NOW() WHERE id='$ticket'";
+        mysqli_query(conn(), $update_ticket);        
     }
 }
 
@@ -266,5 +230,6 @@ class ClientTicket extends Ticket{
 
 include('department.php');
 include('agent.php');
+include('update.php');
 
 ?>

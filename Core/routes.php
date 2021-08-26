@@ -114,6 +114,40 @@ class NavigateTicket extends Home{
             default: $this->logout();
         }
     }
+
+    function url_activateTicket(){
+        if(ROLE>0){
+            $ticket = substr(($_SERVER['REQUEST_URI']), 13);
+            $reopen_ticket = new UpdateTicket;
+            $reopen_ticket -> reopen($ticket);
+        }else{
+            $this->logout();
+        }
+    }
+
+    function url_closeTicket(){
+        if(ROLE>0){
+            $ticket = substr(($_SERVER['REQUEST_URI']), 14);
+            $close_ticket = new UpdateTicket;
+            $close_ticket -> close($ticket);
+        }else{
+            $this->logout();
+        }
+    }
+
+    function url_createTicket(){
+        if(ROLE>0){
+            $department = $_POST['department'];
+            $urgency    = $_POST['urgency'];
+            $subject    = $_POST['subject'];
+            $message    = $_POST['message'];
+        
+            $create_ticket = new Ticket();
+            $create_ticket -> create_tickets(ID, BRANCH, ORG, $department, $urgency, $subject, $message);
+        }else{
+            $this->logout();
+        }
+    }
 }
 
 function getter(){

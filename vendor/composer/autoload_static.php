@@ -4,8 +4,22 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2c574020ab587c3c15f9c7e145115d1d
+class ComposerStaticInit91d2ea16b90581397114d271b15ce41b
 {
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'PhpImap\\' => 8,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'PhpImap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-imap/php-imap/src/PhpImap',
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -13,7 +27,9 @@ class ComposerStaticInit2c574020ab587c3c15f9c7e145115d1d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit2c574020ab587c3c15f9c7e145115d1d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit91d2ea16b90581397114d271b15ce41b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit91d2ea16b90581397114d271b15ce41b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit91d2ea16b90581397114d271b15ce41b::$classMap;
 
         }, null, ClassLoader::class);
     }

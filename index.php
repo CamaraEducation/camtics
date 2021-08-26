@@ -5,10 +5,10 @@
  ********************************************************************************************/
 
 
-// Use this namespace
+// Define global namespaces
 use Core\Route;
 
-// Include router class
+// include global requisities
 include 'Core/Route.php';
 
 // Define global & core basepaths
@@ -61,11 +61,8 @@ Route::add('/index.*', function() {
 
 
 /************************************************
- * 	   EVERYTHING THAT HAS TO DO WITH TICKET	*
+ * 	   EVERYTHING THAT HAS TO DO WITH TICKETS	*
  ************************************************/
-Route::add('/all/ticket', function(){
-  include(_CLIENT.'/ticket-all.php');
-});
 
 Route::add('/open/ticket', function(){
   $get_open_ticket = new NavigateTicket;
@@ -91,21 +88,23 @@ Route::add('/view/ticket.*', function(){
 Route::add('/reply/ticket.*', function(){
 	$reply_ticket = new Conversation;
 	$reply_ticket ->send(ID, $_POST['ticket'], $_POST['message']);
-	//mysqli_close(conn());
 }, ['get','post']);
 
 // Reopen a closed Ticket Route
 Route::add('/open/ticket.*', function(){
-	$ticket = substr(($_SERVER['REQUEST_URI']), 13);
-	$reopen_ticket = new UpdateTicket;
-	$reopen_ticket -> reopen($ticket);
+	$activate_ticket = new NavigateTicket;
+	$activate_ticket ->url_activateTicket();
 });
 
 // Close an Open Ticket Route
 Route::add('/close/ticket.*', function(){
-	$ticket = substr(($_SERVER['REQUEST_URI']), 14);
-	$close_ticket = new UpdateTicket;
-	$close_ticket -> close($ticket);
+	$close_ticket = new NavigateTicket;
+	$close_ticket ->url_closeTicket();
+});
+
+Route::add('/assign/ticket.*', function(){
+	$close_ticket = new NavigateTicket;
+	$close_ticket ->url_closeTicket();
 });
 
 Route::add('/create-ticket', function(){
@@ -113,10 +112,9 @@ Route::add('/create-ticket', function(){
 	$urgency    = $_POST['urgency'];
 	$subject    = $_POST['subject'];
 	$message    = $_POST['message'];
-	$file       = $_POST['file'];
 
 	$create_ticket = new Ticket();
-	$create_ticket -> create_tickets(ID, BRANCH, $department, $urgency, $subject, $message);
+	$create_ticket -> create_tickets(ID, BRANCH, ORG, $department, $urgency, $subject, $message);
 }, ['get','post']);
 
 
@@ -201,13 +199,17 @@ Route::add('/create/branch', function(){
 
 
 //------------APIs and Webhooks----------------//
+Route::add('/api/chat/ticket.*', function(){
+	include(_LAYOUT.'/chat-ticket.php');
+});
+
 Route::add('/imap', function(){
 	include(_CONTROL.'/imap/imap.php');
 });
 
 
 Route::add('/smpp', function(){
-	include('panel/starter.php');
+	include('test.php');
 });
 
 Route::add('/test', function(){
@@ -216,9 +218,8 @@ Route::add('/test', function(){
 	?> <pre><?php
 		foreach($tickets as $_ticket){
 			print_r($_ticket);
-		}
-		
-		?>
+		}		
+	?>
 	</pre><?php
 });
 
@@ -242,11 +243,10 @@ Route::methodNotAllowed(function($path, $method) {
 
 // Return all known routes
 Route::add('/known-routes', function() {
-  
   $routes = Route::getAll();
   echo '<ul>';
   foreach($routes as $route) {
-    echo '<li>'.$route['expression'].' ('.$route['method'].')</li>';
+    echo '<li>'.$route['expression'].' ('.print_r($route['method']).')</li>';
   }
   echo '</ul>';
 });

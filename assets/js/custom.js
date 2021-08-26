@@ -27,3 +27,15 @@ function floatingButtons(){
         });
     });
 }
+
+function showChats(ticket) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","/api/chat/ticket."+ticket,true);
+    xmlhttp.send();
+    setTimeout(repeatAjax,3000); //After completion of request, time to redo it after a second
+}

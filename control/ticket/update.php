@@ -25,8 +25,13 @@ class UpdateTicket extends Ticket{
 
     }
 
-    function assign(){
-
+    public static function assign($agent, $ticket){
+        $assign_ticket = "UPDATE ticket SET agent='$agent' WHERE id='$ticket'";
+        if(mysqli_query(conn(), $assign_ticket)){
+			echo json_encode(array("statusCode"=>200));
+		}else{
+			echo json_encode(array("statusCode"=>201));
+		}
     }
 }
 ?>

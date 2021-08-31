@@ -128,7 +128,7 @@ class Ticket{
     }
 
     function count_tickets(){
-        $count_ticket = "SELECT status as name, COUNT(id) as value FROM ticket GROUP BY status;";
+        $count_ticket = "SELECT status as name, COUNT(id) as value FROM ticket GROUP BY status";
         $count_ticket = mysqli_query(conn(), $count_ticket);
         $rows         = array('open'=>0, 'active'=>0, 'closed'=>0);
 

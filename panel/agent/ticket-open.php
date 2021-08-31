@@ -20,8 +20,8 @@
 					<?php
 						$no=1;
 						$fetch_open_ticket = new StaffTicket;
-						$open_ticket = $fetch_open_ticket->ass_open_tickets(ID);
-						foreach($open_ticket as $ticket){ //$no=+1; ?>
+						$fetch_open_ticket = $fetch_open_ticket->ass_open_tickets(ID);
+						foreach($fetch_open_ticket as $ticket){ ?>
 							<tr>
 								<td><?=$no++?></td>
 								<td><?=$ticket['subject']?></td>

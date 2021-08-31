@@ -72,9 +72,11 @@
 				<li class="li" title="transfer ticket"><a class="a" href="#">
 					<i class="fa fa-upload my-float"></i>
 				</a></li>
-				<li class="li" title="assign ticket"><a class="a" href="#">
-					<i class="fa fa-user my-float"></i>
-				</a></li>
+				<li class="li" title="assign ticket">
+                    <a class="a" href="#" data-toggle="modal" data-target="#assignTicketCenter">
+                        <i class="fa fa-user my-float"></i>
+                    </a>
+                </li>
                 <?php
                     if($ticket['status']=='active'){?>
                         <li class="li" title="Reply"><a class="a" data-toggle="modal" data-target="#replyTicketModal" href="#">
@@ -98,9 +100,10 @@
         </script>
         
 		<!-- modals -->		
-		<?php 
+		<?php
 			include(_LAYOUT.'/create-ticket.php'); 
 			include(_LAYOUT.'/reply-ticket.php');
+            include(_DEPT.'/ticket-assign.php');
 		?>
 		<!-- //modals -->
 	</div>

@@ -38,6 +38,7 @@ define('Branch',	 _CONTROL.'/branch');
 define('Chat', 		 _CONTROL.'/chat');
 define('Department', _CONTROL.'/department');
 define('Ticket',	 _CONTROL.'/ticket');
+define('User',		 _CONTROL.'/user');
 
 // Define global innertPath for view
 define('Front',		_VIEW.'/web');
@@ -102,10 +103,10 @@ Route::add('/close/ticket.*', function(){
 	$close_ticket ->url_closeTicket();
 });
 
-Route::add('/assign/ticket.*', function(){
-	$close_ticket = new NavigateTicket;
-	$close_ticket ->url_closeTicket();
-});
+Route::add('/assign/ticket', function(){
+	$assign_ticket = new NavigateTicket;
+	$assign_ticket ->url_assignTicket();
+}, ['get','post']);
 
 Route::add('/create-ticket', function(){
 	$department = $_POST['department'];
@@ -213,14 +214,12 @@ Route::add('/smpp', function(){
 });
 
 Route::add('/test', function(){
-	$tickets = new Conversation;
-	$tickets = $tickets ->chat(4);
-	?> <pre><?php
-		foreach($tickets as $_ticket){
-			print_r($_ticket);
-		}		
-	?>
-	</pre><?php
+	$department_user = new Staff;
+    $department_user = $department_user -> department_staff(BRANCH, Department::my_department());
+    foreach($department_user as $staff){
+        echo $staff['username']."<br>";
+    }
+	//print_r($department_user);
 });
 
 // Add a 404 not found route

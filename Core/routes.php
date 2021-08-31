@@ -148,6 +148,14 @@ class NavigateTicket extends Home{
             $this->logout();
         }
     }
+
+    function url_assignTicket(){
+        if(ROLE>0 and ROLE<5){
+            UpdateTicket::assign($_POST['user'],$_POST['ticket']);
+        }else{
+            $this->logout();
+        }
+    }
 }
 
 function getter(){
@@ -155,6 +163,11 @@ function getter(){
 }
 
 /*
+if(ROLE>0){
+
+}else{
+
+}
 switch(ROLE){
             case 0:
                 break;

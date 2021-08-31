@@ -9,5 +9,6 @@
     require_once(Department.'/department.php');
     require_once(Branch.'/branch.php');
     require_once(Chat.'/ticket.php');
+    require_once(User.'/staff.php');
 
 ?>

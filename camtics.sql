@@ -13,31 +13,10 @@
 
 
 -- Dumping database structure for desk
-DROP DATABASE IF EXISTS `desk`;
 CREATE DATABASE IF NOT EXISTS `desk` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `desk`;
 
--- Dumping structure for table desk.agent
-DROP TABLE IF EXISTS `agent`;
-CREATE TABLE IF NOT EXISTS `agent` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fname` varchar(30) NOT NULL,
-  `mname` varchar(30) NOT NULL,
-  `lname` varchar(30) NOT NULL,
-  `phone` int(15) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `role` int(11) NOT NULL,
-  `department` int(11) NOT NULL,
-  `branch` int(11) NOT NULL,
-  `photo` int(11) NOT NULL,
-  `logs` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Data exporting was unselected.
-
 -- Dumping structure for table desk.attachment
-DROP TABLE IF EXISTS `attachment`;
 CREATE TABLE IF NOT EXISTS `attachment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket` int(11) NOT NULL,
@@ -48,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `attachment` (
 -- Data exporting was unselected.
 
 -- Dumping structure for table desk.branch
-DROP TABLE IF EXISTS `branch`;
 CREATE TABLE IF NOT EXISTS `branch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -67,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `branch` (
 -- Data exporting was unselected.
 
 -- Dumping structure for table desk.chats
-DROP TABLE IF EXISTS `chats`;
 CREATE TABLE IF NOT EXISTS `chats` (
   `chat_message_id` int(11) NOT NULL AUTO_INCREMENT,
   `to_user_id` int(11) NOT NULL,
@@ -81,7 +58,6 @@ CREATE TABLE IF NOT EXISTS `chats` (
 -- Data exporting was unselected.
 
 -- Dumping structure for table desk.configs
-DROP TABLE IF EXISTS `configs`;
 CREATE TABLE IF NOT EXISTS `configs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -91,8 +67,20 @@ CREATE TABLE IF NOT EXISTS `configs` (
 
 -- Data exporting was unselected.
 
+-- Dumping structure for table desk.conversation
+CREATE TABLE IF NOT EXISTS `conversation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `init` int(11) DEFAULT '0',
+  `ticket` int(11) DEFAULT '0',
+  `message` longtext,
+  `user` int(11) DEFAULT NULL,
+  `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table desk.department
-DROP TABLE IF EXISTS `department`;
 CREATE TABLE IF NOT EXISTS `department` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
@@ -103,74 +91,68 @@ CREATE TABLE IF NOT EXISTS `department` (
 
 -- Data exporting was unselected.
 
--- Dumping structure for table desk.login_details
-DROP TABLE IF EXISTS `login_details`;
-CREATE TABLE IF NOT EXISTS `login_details` (
-  `login_details_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `last_activity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_type` enum('no','yes') NOT NULL,
-  PRIMARY KEY (`login_details_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Data exporting was unselected.
-
 -- Dumping structure for table desk.organization
-DROP TABLE IF EXISTS `organization`;
 CREATE TABLE IF NOT EXISTS `organization` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(1000) NOT NULL,
-  `short` varchar(30) NOT NULL,
+  `name` varchar(1000) DEFAULT NULL,
+  `category` varchar(30) DEFAULT NULL,
+  `ownership` varchar(30) DEFAULT NULL,
+  `project` varchar(30) DEFAULT NULL,
+  `location` varchar(30) DEFAULT NULL,
+  `latitude` varchar(30) DEFAULT NULL,
+  `longitude` varchar(30) DEFAULT NULL,
+  `contact` varchar(30) DEFAULT NULL,
+  `phone` int(15) DEFAULT '0',
+  `branch` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=536 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
 -- Dumping structure for table desk.ticket
-DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE IF NOT EXISTS `ticket` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sender` int(11) NOT NULL,
   `branch` int(11) NOT NULL,
+  `organization` int(11) NOT NULL,
   `department` int(11) NOT NULL,
   `agent` int(11) DEFAULT NULL,
   `urgency` int(11) NOT NULL,
   `subject` varchar(100) NOT NULL,
-  `content` varchar(500) NOT NULL,
+  `content` longtext NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'open',
   `attachment` int(11) NOT NULL DEFAULT '0',
   `update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
 -- Dumping structure for table desk.user
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fname` varchar(30) NOT NULL,
-  `mname` varchar(30) NOT NULL,
-  `lname` varchar(30) NOT NULL,
+  `fname` varchar(30) DEFAULT '',
+  `mname` varchar(30) DEFAULT '',
+  `lname` varchar(30) DEFAULT '',
   `username` varchar(30) NOT NULL,
   `phone` varchar(50) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL,
-  `photo` text NOT NULL,
+  `photo` varchar(50) NOT NULL DEFAULT '/assets/img/avatar.png',
   `branch` int(11) DEFAULT NULL,
   `department` int(11) NOT NULL DEFAULT '0',
   `organization` int(11) NOT NULL,
   `pass` varchar(100) NOT NULL,
   `hash` int(11) NOT NULL,
   `nin` int(20) NOT NULL,
-  `role` int(1) NOT NULL DEFAULT '0',
+  `role` int(1) NOT NULL DEFAULT '6',
   `status` int(1) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `phone` (`phone`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 

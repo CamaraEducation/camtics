@@ -1,4 +1,4 @@
-<li>
+<!--li>
     <a href="/my/chat">
         <i class="fas fa-comment-alt"></i>
         <span>Chat</span> 
@@ -15,4 +15,4 @@
         <i class="fas fa-code-branch"></i>
         <span>Branch</span> 
     </a> 
-</li>
+</li-->

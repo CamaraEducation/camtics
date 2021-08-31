@@ -3,7 +3,7 @@ require_once(CONFIG);
 //require_once('../Core/conf.php');
 class Department{
     //fetch users own department
-    function my_department(){        
+    public static function  my_department(){        
         $user = ID;
         $user_department = "SELECT department FROM user WHERE id='$user'";
         $user_department = mysqli_query(conn(), $user_department);

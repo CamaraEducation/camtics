@@ -2,10 +2,10 @@
 class Register{
 
     //user registretion functions
-    function register_user($username, $email, $phone, $password, $branch){
+    function register_user($username, $email, $phone, $password, $branch, $organization){
         $password = md5($password);
         $username = strtolower($username);
-        $create_user = "INSERT INTO user (username, phone, email, branch, pass) VALUES ('$username', '$phone', '$email', '$branch', '$password')";
+        $create_user = "INSERT INTO user (username, phone, email, organization, branch, pass) VALUES ('$username', '$phone', '$email', '$organization', '$branch', '$password')";
 
         if(mysqli_query(conn(), $create_user)){
 			echo "<script type=\"text/javascript\">

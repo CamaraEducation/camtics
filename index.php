@@ -37,6 +37,8 @@ define('Auth',		 _CONTROL.'/auth');
 define('Branch',	 _CONTROL.'/branch');
 define('Chat', 		 _CONTROL.'/chat');
 define('Department', _CONTROL.'/department');
+define('Mail',		 _CONTROL.'/mail');
+define('Notifier',	 _CONTROL.'/notification');
 define('Ticket',	 _CONTROL.'/ticket');
 define('User',		 _CONTROL.'/user');
 

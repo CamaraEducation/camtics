@@ -122,7 +122,7 @@
                         </form>
                     </div>
                     <div class="user-dropdown-details d-flex">
-                        <div class="profile_details_left">
+                        <!-- div class="profile_details_left">
                             <ul class="nofitications-dropdown">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
@@ -220,7 +220,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
+                        </div -->
                         <div class="profile_details">
                             <ul>
                                 <li class="dropdown profile_details_drop">

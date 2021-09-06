@@ -11,18 +11,17 @@ class UpdateTicket extends Ticket{
     function reopen($id){
         $reopen_ticket = "UPDATE ticket SET status='active' WHERE id='$id'";
         mysqli_query(conn(), $reopen_ticket);
+        Ticket::update_ticket($id);
+        Notification::ticket_status('ACTIVATED', $id);
         header('Location: /pending/ticket ');
     }
     
     function close($id){
         $close_ticket = "UPDATE ticket SET status='closed' WHERE id='$id'"; 
         mysqli_query(conn(), $close_ticket);
+        Ticket::update_ticket($id);
+        Notification::ticket_status('CLOSED', $id);
         header('Location: /closed/ticket ');
-    }
-    
-
-    function content(){
-
     }
 
     public static function assign($agent, $ticket){

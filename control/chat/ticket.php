@@ -7,9 +7,11 @@ class Conversation{
         if (ROLE<5){$init=1;}else{$init=2;}
         $reply = "INSERT INTO conversation (`init`, `ticket`, `message`, `user`) VALUES('$init','$ticket','$message','$user')";
         if(mysqli_query(conn(), $reply)){
-            $update_ticket = new Ticket;
-            $update_ticket ->update_ticket($ticket);
+            Ticket::update_ticket($ticket);
+            Notification::new_reply($ticket);
             echo json_encode(array("statusCode"=>200));
+        }else{
+            echo json_encode(array("statusCode"=>201));
         };
     }
 
@@ -26,23 +28,5 @@ class Conversation{
 
         return $message;
     }
-
-    /*function chat_determiner($init, $date, $time){
-        $class = "right";
-        $align = "right";
-        if($init>1){
-            $class = "chat-body";
-            $align = "left";
-        }
-
-        if($date>0){
-            $time = $date;
-        }else{
-            $time = $time;
-        }
-
-        $style = array('class'=>$class, 'time'=>$time, 'align'=>$align);
-        return $style;
-    }*/
 }
 ?>

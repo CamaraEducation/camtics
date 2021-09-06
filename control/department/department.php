@@ -55,8 +55,8 @@ class Department{
     }
 
     //fetch relevant department for a client
-    function client_department(){
-        $client_department = "SELECT id, name FROM department";
+    function client_department($branch){
+        $client_department = "SELECT id, name FROM department WHERE `branch`=0 OR `branch`='$branch'";
         $client_department = mysqli_query(conn(), $client_department);
 
         while($row = mysqli_fetch_assoc($client_department)){
@@ -64,11 +64,6 @@ class Department{
         }
 
         return $rows;
-    }
-
-    //fetch all department relevant to the branch
-    function branch_department(){
-        //
     }
 
     //fetch specific department
@@ -80,9 +75,4 @@ class Department{
         return $department['name'];
     }
 }
-
-$department = new Department;
-
-//print_r($client_department);
-//var_dump($department->client_department());
 ?>

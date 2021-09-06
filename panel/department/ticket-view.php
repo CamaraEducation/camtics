@@ -83,7 +83,7 @@
                             <i class="fa fa-pencil my-float"></i>
                         </a></li> <?php
                     }else{ ?>
-						<li class="li" title="active"><a class="a" href="/open/ticket.<?=$ticket_id?>">
+						<li class="li" title="activate the ticket"><a class="a" href="/open/ticket.<?=$ticket_id?>">
                             <i class="fa fa-key my-float"></i>
                         </a></li> <?php
                     }

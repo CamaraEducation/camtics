@@ -56,5 +56,4 @@ class Branch{
     }
 }
 
-$fetch_branches = new Branch();
 ?>

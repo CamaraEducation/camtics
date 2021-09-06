@@ -12,5 +12,6 @@
     require_once(User.'/staff.php');
     require_once(Mail.'/smtp.php');
     require_once(Notifier.'/notification.php');
+    require_once(Organiztn.'/Organization.php');
 
 ?>

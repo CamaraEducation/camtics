@@ -39,6 +39,7 @@ define('Chat', 		 _CONTROL.'/chat');
 define('Department', _CONTROL.'/department');
 define('Mail',		 _CONTROL.'/mail');
 define('Notifier',	 _CONTROL.'/notification');
+define('Organiztn',	 _CONTROL.'/organization');
 define('Ticket',	 _CONTROL.'/ticket');
 define('User',		 _CONTROL.'/user');
 
@@ -142,13 +143,15 @@ Route::add('/authorize', function() {
 		switch($action){
 			case 'register':
 				include(Auth.'/register.php');
-
-				$username 	= $_POST['user'];
-				$email		= $_POST['email'];
-				$phone		= $_POST['phone'];
-				$password	= $_POST['pass'];
-				$branch		= $_POST['branch'];				
-				$create_user->register_user($username, $email, $phone, $password, $branch);
+				
+				$username 		= strtolower($_POST['user']);
+				$email			= $_POST['email'];
+				$phone			= $_POST['phone'];
+				$password		= $_POST['pass'];
+				$branch			= $_POST['branch'];	
+				$organization 	= $_POST['organization'];
+				$organization	= Organization::find_org_id($organization);			
+				$create_user->register_user($username, $email, $phone, $password, $branch, $organization);
 			break;
 			case 'login':
 				include(Auth.'/login.php');
@@ -202,6 +205,10 @@ Route::add('/create/branch', function(){
 
 
 //------------APIs and Webhooks----------------//
+Route::add('/search/oranization', function(){
+	Organization::search();
+}, ['get', 'post']);
+
 Route::add('/api/chat/ticket.*', function(){
 	include(_LAYOUT.'/chat-ticket.php');
 });
@@ -216,12 +223,19 @@ Route::add('/smpp', function(){
 });
 
 Route::add('/test', function(){
-	$department_user = new Staff;
-    $department_user = $department_user -> department_staff(BRANCH, Department::my_department());
-    foreach($department_user as $staff){
-        echo $staff['username']."<br>";
-    }
-	//print_r($department_user);
+	$sql = "SELECT * FROM organization WHERE name LIKE 'a%'";
+    $sql = mysqli_query(conn(), $sql);
+    $sql = mysqli_fetch_all($sql, MYSQLI_ASSOC);
+
+	echo "<pre>";
+	if(!empty($sql)){
+		foreach($sql as $org){
+			print_r($org);
+		}
+	}else{
+		echo "nothing found";
+	}
+	echo "</pre>";
 });
 
 // Add a 404 not found route

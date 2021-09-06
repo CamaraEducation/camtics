@@ -23,7 +23,7 @@ $department = new Department ?>
 							<select type="text" name="department" class="form-control" title="select department" id="department" required>
 								<option value="" hidden>select department</option>
 								<?php
-									$client_department = $department->client_department();
+									$client_department = $department->client_department(BRANCH);
 									foreach($client_department as $id => $value){?>
 										<option value="<?=$id?>"><?=$value?></option>
 										<?php

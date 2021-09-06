@@ -1,5 +1,5 @@
 <?php
-include(Branch.'/branch.php');
+$fetch_branches = new Branch();
 $config = config();
 
 ?>
@@ -81,16 +81,23 @@ $config = config();
                             </div>
                             <div class="form-input">
                                 <label>Country<label>
-                                <select name="branch" class="form-control form-select" title="select country" >
+                                <select name="branch" class="form-control form-select" gloss="select country" required>
                                     <option value="" hidden>Select Country</option>
                                     <?php
                                         $branches = $fetch_branches->fetch_branches();
-                                        foreach($branches as $branch){?>
-                                            <option value="<?=$branch['id'];?>"><?=$branch['country'];?></option>
-                                            <?php
+                                        foreach($branches as $branch){
+                                            if($branch['id']!=0){ ?>
+                                                <option value="<?=$branch['id'];?>"><?=$branch['country'];?></option>
+                                                <?php
+                                            }
                                         }
                                     ?> 
                                 </select>
+                            </div>
+                            <div class="search-box form-input">
+                                <label>Organization</label>
+                                <input type="text" name="organization" list="organization" autocomplete="off" placeholder="Search organization..." required>
+                                <datalist id="organization" class="result"></datalist>
                             </div>
                             <div class="form-input">
                                 <label>Email</label>
@@ -98,7 +105,7 @@ $config = config();
                             </div>
                             <div class="form-input">
                                 <label>phone</label>
-                                <input type="number" name="phone" placeholder="eg. 255682 XXXXXX" class="form-control" required />
+                                <input type="number" name="phone" placeholder="eg. 255682XXXXXX" class="form-control" required />
                             </div>
                             <div class="form-input">
                                 <label>Password</label>
@@ -112,3 +119,29 @@ $config = config();
                 </div>
             </div>
         </section>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.search-box input[type="text"]').on("keyup input", function(){
+                    /* Get input value on change */
+                    var inputVal = $(this).val();
+                    var resultDropdown = $(this).siblings(".result");
+                    if(inputVal.length){
+                        $.get("/search/oranization", {term: inputVal}).done(function(data){
+                            // Display the returned data in browser
+                            resultDropdown.html(data);
+                        });
+                    } else{
+                        resultDropdown.empty();
+                    }
+                });
+                
+                // Set search input value on click of result item
+                $(document).on("click", ".result p", function(){
+                    $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+                    $(this).parent(".result").empty();
+                });
+            });
+        </script>
+    </body>
+</html>

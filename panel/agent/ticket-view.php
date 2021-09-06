@@ -4,7 +4,7 @@
 
     //Innitiate the Ticket instance
     $user_ticket = new Ticket;
-    $user_ticket = $user_ticket->specif_ticket($ticket_id);
+    $user_ticket = $user_ticket->specific_ticket($ticket_id);
 
     //Initiate the conversation instance
     $style		 = new Conversation;
@@ -14,9 +14,7 @@
     //fetch ticket details
     foreach($user_ticket as $_ticket){
         $ticket  = $_ticket;
-    }
-
-    
+    }    
 ?>
 <!-- //header-ends -->
 <!-- main content start -->
@@ -40,12 +38,12 @@
                         <span class="text-bold">Subject :</span> 
                         <span class="text-secondary"><?=$ticket['subject']?></span>
                     </h6>
-                    <h6>
-                        <span class="text-bold">Message :</span> 
-                        <span class="text-secondary"><?=$ticket['content']?></span>
-                    </h6>
                     <span id="dots"></span>
                     <span id="more" style="display: none;">
+                        <h6>
+                            <span class="text-bold">Message :</span> 
+                            <span class="text-secondary"><?=$ticket['content']?></span>
+                        </h6>
                         <h6><span class="text-bold">Branch :</span> <span class="text-secondary"><?=$ticket['branch']?></span></h6>
                         <h6><span class="text-bold">organization :</span> <span class="text-secondary"><?=$ticket['organization']?></span></h6>
                         <h6><span class="text-bold">Status :</span> <span class="text-secondary"><?=$ticket['status']?></span></h6>
@@ -65,38 +63,26 @@
             <!-- ticket conversation -->
             
             <div class="space"></div>
-            <!-- message sent success --
-            <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-            </div>
-            <!-- message sent success --
-            <div class='row glass lg-width''>
-                <div class="col">
-                    <form id="conversation" name="form1" method="POST">
-                    <div class="input-group">
-                        <input id="ticket" name="ticket" value="< ?=substr(($_SERVER['REQUEST_URI']), 13);?>" hidden>
-                        <input name="message" id="message" type="text" class="form-control input-sm" placeholder="Type your message here..." required>
-                        <span class="input-group-btn"> &nbsp;
-                            <button class="btn btn-primary btn-sm" id="butsave">Send</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
 
 			<!-- floating buttons -->
 			<a href="#" class="float" id="menu-share">
 				<i class="fa fa-share my-float"></i>
 			</a>
 			<ul class="ul">
-				<li class="li" title="transfer ticket"><a class="a" href="#">
-					<i class="fa fa-upload my-float"></i>
-				</a></li>
-				<li class="li" title="assign ticket"><a class="a" href="#">
-					<i class="fa fa-user my-float"></i>
-				</a></li>
-				<li class="li" title="Reply"><a class="a" data-toggle="modal" data-target="#replyTicketModal" href="#">
-					<i class="fa fa-pencil my-float"></i>
-				</a></li>
+                <?php
+                    if($ticket['status']=='active'){?>
+                        <li class="li" title="Reply"><a class="a" data-toggle="modal" data-target="#replyTicketModal" href="#">
+                            <i class="fa fa-pencil my-float"></i>
+                        </a></li>
+                        <li class="li" title="close the ticket"><a class="a" href="/close/ticket.<?=$ticket_id?>">
+                            <i class="fa fa-lock my-float"></i>
+                        </a></li> <?php
+                    }else{ ?>
+						<li class="li" title="activate the ticket"><a class="a" href="/open/ticket.<?=$ticket_id?>">
+                            <i class="fa fa-key my-float"></i>
+                        </a></li> <?php
+                    }
+                ?>
 			</ul>
 			
 		</section>
@@ -105,14 +91,14 @@
             function refreshChat(){
                 showChats('<?=$ticket_id?>');
             }
-
             refreshChat();
         </script>
         
 		<!-- modals -->		
-		<?php 
+		<?php
 			include(_LAYOUT.'/create-ticket.php'); 
 			include(_LAYOUT.'/reply-ticket.php');
+            include(_DEPT.'/ticket-assign.php');
 		?>
 		<!-- //modals -->
 	</div>

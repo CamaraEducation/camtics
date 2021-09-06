@@ -10,31 +10,26 @@
 				<thead class="thead-light table-striped table-hover">
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">BRANCH</th>
-						<th scope="col">DEPARTMENT</th>
 						<th scope="col">SUBJECT</th>
 						<th scope="col">CONTENTS</th>
-						<th scope="col">CLOSED</th>
+						<th scope="col">UPDATE</th>
 						<th scope="col">ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
 						$no=1;
-						$fetch_closed_Tickets = new StafFTicket;
-						$closed_tickets = $fetch_closed_Tickets->closed_tickets();
-						foreach($closed_tickets as $ticket){ //$no=+1; ?>
+						$fetch_open_ticket = new StaffTicket;
+						$fetch_open_ticket = $fetch_open_ticket->ass_closed_tickets(ID);
+						foreach($fetch_open_ticket as $ticket){ ?>
 							<tr>
 								<td><?=$no++?></td>
-								<td><?=$ticket['branch']?></td>
-								<td><?=$ticket['department']?></td>
 								<td><?=$ticket['subject']?></td>
 								<td><?=strip_tags($ticket['message'])?></td>
 								<td><?=$ticket['update']?> days</td>
 								<td>
 								<?php if($ticket['id']>0){ ?>	
 									<a title="view the ticket" href="/view/ticket.<?=$ticket['id']?>"><i class="fas fa-eye text-primary"></i></a> &nbsp;
-									<a title="reopen the ticket" href="/open/ticket.<?=$ticket['id']?>"><i class="fas fa-unlock text-success"></i></a> &nbsp;
 								<?php }else{echo 'NA';} ?>
 								</td>
 							</tr> <?php

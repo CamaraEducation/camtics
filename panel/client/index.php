@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		<!-- //statistics data -->
-		<!-- chatting -->
+		<!-- chatting --
 		<div class="data-tables">
 			<div class="row">
 				<div class="col-lg-12 chart-grid mb-4">

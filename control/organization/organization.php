@@ -18,5 +18,13 @@ class Organization{
             }
         }
     }
+
+    public static function find_org_id($name){
+        $name = mysqli_real_escape_string(conn(), $name);
+        $sql  = "SELECT id FROM organization WHERE name LIKE '%$name%'";
+        $sql  = mysqli_query(conn(), $sql);
+        $sql  = mysqli_fetch_assoc($sql);
+        return $org  = $sql['id'];
+    }
 }
 ?>

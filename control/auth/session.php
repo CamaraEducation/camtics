@@ -1,6 +1,6 @@
 <?php
 class Session{
-    function set_session($user){
+    public static function set_session($user){
 		$user   = strtolower($user);
         $data   = "SELECT id, fname, lname, username, phone, email, photo, branch, organization, nin, role, status FROM user WHERE username='$user'";
         $data   = mysqli_query(conn(), $data);

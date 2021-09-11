@@ -5,7 +5,6 @@
  ************************************************************************/
 class Ticket{
     function create_tickets($sender, $branch, $org, $department, $urgency, $subject, $message){
-
         $message = str_replace('\"', '"', $message);
         $subject = mysqli_real_escape_string(conn(), $subject);
         $message = mysqli_real_escape_string(conn(), $message);
@@ -136,9 +135,6 @@ class Ticket{
         mysqli_query(conn(), $update_ticket);        
     }
 }
-
-
-
 
 include('client.php');
 include('department.php');

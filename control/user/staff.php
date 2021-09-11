@@ -1,12 +1,12 @@
 <?php
     class Staff{
-        function all_staff(){
+        public static function all_staff(){
             $fetch_staff    = "SELECT * FROM USER WHERE ROLE<5";
             $fetch_staff    = mysqli_query(conn(), $fetch_staff);
             $fetch_staff    = mysqli_fetch_all($fetch_staff, MYSQLI_ASSOC);
         }
 
-		function branch_staff($branch){
+		public static function branch_staff($branch){
 			$branch_staff	= "SELECT * FROM USER WHERE role<5 AND branch='$branch'";
 			$branch_staff	= mysqli_query(conn(), $branch_staff);
 			$branch_staff	= mysqli_fetch_all($branch_staff, MYSQLI_ASSOC);

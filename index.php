@@ -121,6 +121,12 @@ Route::add('/create-ticket', function(){
 	$create_ticket -> create_tickets(ID, BRANCH, ORG, $department, $urgency, $subject, $message);
 }, ['get','post']);
 
+/************************************************
+ * 		EVERYTHING THAT HAS TO DO WITH USERS	*
+ ************************************************/
+Route::add('/list/user', function(){
+	print_r(User::list_user());
+});
 
 /************************************************
  * EVERYTHING THAT HAS TO DO WITH AUTHORIZATION	*

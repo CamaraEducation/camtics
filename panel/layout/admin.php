@@ -41,7 +41,6 @@
         <span>Users</span>
     </a>
     <ul class="sub-menu-list">
-        <li>
             <a href="/list/user">
                 <i class="fa fa-circle text-primary"></i>
                 Manage 

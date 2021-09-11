@@ -34,7 +34,7 @@ class Home{
         }
     }
 
-    function logout(){
+    public static function logout(){
         session_destroy();
         include(Front.'/login.php');
     }
@@ -155,6 +155,27 @@ class NavigateTicket extends Home{
         }else{
             $this->logout();
         }
+    }
+}
+
+class NavigateUser extends Home{
+    public static function url_listUser(){
+        switch(ROLE){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                Home::logout();
+        }        
     }
 }
 

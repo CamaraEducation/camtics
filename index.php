@@ -31,6 +31,7 @@ define('_BRANCH',	_VIEW.'/branch');		// branch layout	   - 2
 define('_DEPT', 	_VIEW.'/department');	// department layout   - 3
 define('_STAFF',	_VIEW.'/agent');		// staff layout		   - 4
 define('_ORGZ',		_VIEW.'/oranization');  // organization layour - 5
+define('_PROFILE',	_VIEW.'/profile');
 
 // Define global controllers
 define('Auth',		 _CONTROL.'/auth');
@@ -126,6 +127,10 @@ Route::add('/create-ticket', function(){
  ************************************************/
 Route::add('/list/user', function(){
 	print_r(User::list_user());
+});
+
+Route::add('/profile', function(){
+	NavigateUser::url_account();
 });
 
 /************************************************

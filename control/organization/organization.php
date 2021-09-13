@@ -24,7 +24,24 @@ class Organization{
         $sql  = "SELECT id FROM organization WHERE name LIKE '%$name%'";
         $sql  = mysqli_query(conn(), $sql);
         $sql  = mysqli_fetch_assoc($sql);
-        return $org  = $sql['id'];
+        $org  = $sql['id'];
+        return $org;
+    }
+
+    public static function user_org($id){
+        if($id==''){
+            $org = "SELECT name FROM organization WHERE id='$id'";
+            $org = mysqli_query(conn(), $org);
+            $org = mysqli_fetch_assoc($org);
+            $org = $org['name'];
+        }else{
+            $id = BRANCH;
+            $org = "SELECT name FROM branch WHERE id='$id'";
+            $org = mysqli_query(conn(), $org);
+            $org = mysqli_fetch_assoc($org);
+            $org = $org['name'];
+        }
+        return $org;
     }
 }
 ?>

@@ -177,6 +177,14 @@ class NavigateUser extends Home{
                 Home::logout();
         }        
     }
+
+    public static function url_account(){
+        if(ROLE>0 and ROLE<5){
+            include(_PROFILE.'/account.php');
+        }else{
+            Home::logout();
+        }
+    }
 }
 
 function getter(){

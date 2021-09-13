@@ -18,8 +18,8 @@ class Profile{
 		}
     }
 
-    public static function change_picture($id){
-        $sql = "UPDATE user SET photo='' WHERE id='$id'";
+    public static function change_picture($id, $path){
+        $sql = "UPDATE user SET photo='' WHERE id='$id', photo='$path'";
         if(mysqli_query(conn(), $sql)){
             Session::set_session(ID);
         	echo json_encode(array("statusCode"=>200));

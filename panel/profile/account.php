@@ -1,7 +1,6 @@
 <?php 
 	include(_LAYOUT.'/header.php')
 ?>
-<!-- //header-ends -->
 <!-- main content start -->
 <div class="main-content">
 	<!-- content -->
@@ -49,8 +48,6 @@
             </div>
 
 		</section>
-		<!-- modals -->
-		<!-- //modals -->
 	</div>
 	<!-- //content -->
 </div>

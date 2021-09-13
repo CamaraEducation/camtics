@@ -4,6 +4,8 @@ session_start();
 if (!empty($_SESSION)){
     define('ID',     $_SESSION['id']);
     define('USER',	 $_SESSION['username']);
+	define('FNAME',  $_SESSION['fname']);
+	define('LNAME',  $_SESSION['lname']);
     define('NAME',   $_SESSION['fname'].$_SESSION['lname']);
     define('PHONE',  $_SESSION['phone']);
 	define('ORG',	 $_SESSION['organization']);

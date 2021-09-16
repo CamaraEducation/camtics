@@ -1,7 +1,5 @@
 <?php 
-	include(_LAYOUT.'/header.php');
-	$user_department = new Department;
-	$user_department = $user_department ->my_department();
+	include(_LAYOUT.'/header.php')
 ?>
 <!-- main content start -->
 <div class="main-content">
@@ -12,6 +10,9 @@
 				<thead class="thead-light table-striped table-hover">
 					<tr>
 						<th scope="col">#</th>
+						<th scope="col">SENDER</th>
+						<th scope="col">ORGANIZATION</th>
+						<th scope="col">DEPARTMENT</th>
 						<th scope="col">SUBJECT</th>
 						<th scope="col">CONTENTS</th>
 						<th scope="col">UPDATE</th>
@@ -21,13 +22,15 @@
 				<tbody>
 					<?php
 						$no=1;
-						$fetch_open_ticket = new DepartmentTicket;
-						$open_ticket = $fetch_open_ticket->department_open_tickets($user_department);
-						foreach($open_ticket as $ticket){ ?>
-							<tr>
+						$open_ticket = BranchTicket::fetch_all('open', BRANCH);
+						foreach($open_ticket as $ticket){ //$no=+1; ?>
+							<tr class=''>
 								<td><?=$no++?></td>
+								<td><?=$ticket['sender']?></td>
+								<td><?=$ticket['organization']?></td>
+								<td><?=$ticket['department']?></td>
 								<td><?=$ticket['subject']?></td>
-								<td><?=strip_tags($ticket['message'])?></td>
+								<td><?=strip_tags($ticket['content'])?></td>
 								<td><?=$ticket['update']?> days</td>
 								<td>
 								<?php if($ticket['id']>0){ ?>	
@@ -41,9 +44,6 @@
 				</tbody>
 			</table>
 		</section>
-		<!-- modals -->		
-			<?php include (_LAYOUT.'/create-ticket.php'); ?>
-		<!-- //modals -->
 	</div>
 	<!-- //content -->
 </div>

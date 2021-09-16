@@ -1,7 +1,5 @@
 <?php 
-	include(_LAYOUT.'/header.php');
-	$user_department = new Department;
-	$user_department = $user_department ->my_department();
+	include(_LAYOUT.'/header.php')
 ?>
 <!-- main content start -->
 <div class="main-content">
@@ -12,6 +10,10 @@
 				<thead class="thead-light table-striped table-hover">
 					<tr>
 						<th scope="col">#</th>
+						<th scope="col">SENDER</th>
+						<th scope="col">ORGANIZATION</th>
+						<th scope="col">DEPARTMENT</th>
+						<th scope="col">AGENT</th>
 						<th scope="col">SUBJECT</th>
 						<th scope="col">CONTENTS</th>
 						<th scope="col">UPDATE</th>
@@ -21,18 +23,21 @@
 				<tbody>
 					<?php
 						$no=1;
-						$fetch_open_ticket = new DepartmentTicket;
-						$open_ticket = $fetch_open_ticket->department_closed_tickets($user_department);
-						foreach($open_ticket as $ticket){ ?>
+						$closed_ticket = BranchTicket::fetch_all('closed', BRANCH);
+						foreach($closed_ticket as $ticket){ ?>
 							<tr>
 								<td><?=$no++?></td>
+								<td><?=$ticket['sender']?></td>
+								<td><?=$ticket['organization']?></td>
+								<td><?=$ticket['department']?></td>
+								<td><?=$ticket['agent']?></td>
 								<td><?=$ticket['subject']?></td>
-								<td><?=strip_tags($ticket['message'])?></td>
+								<td><?=strip_tags($ticket['content'])?></td>
 								<td><?=$ticket['update']?> days</td>
 								<td>
 								<?php if($ticket['id']>0){ ?>	
 									<a title="view the ticket" href="/view/ticket.<?=$ticket['id']?>"><i class="fas fa-eye text-primary"></i></a> &nbsp;
-									<a title="reopen the ticket" href="/open/ticket.<?=$ticket['id']?>"><i class="fas fa-unlock text-success"></i></a> &nbsp;
+									<a title="close the ticket" href="/close/ticket.<?=$ticket['id']?>"><i class="fas fa-lock text-danger"></i></a> &nbsp;
 								<?php }else{echo 'NA';} ?>
 								</td>
 							</tr> <?php
@@ -41,9 +46,6 @@
 				</tbody>
 			</table>
 		</section>
-		<!-- modals -->		
-			<?php include (_LAYOUT.'/create-ticket.php'); ?>
-		<!-- //modals -->
 	</div>
 	<!-- //content -->
 </div>

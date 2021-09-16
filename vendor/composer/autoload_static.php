@@ -11,12 +11,20 @@ class ComposerStaticInit91d2ea16b90581397114d271b15ce41b
         array (
             'PhpImap\\' => 8,
         ),
+        'D' => 
+        array (
+            'Ddeboer\\Imap\\' => 13,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'PhpImap\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-imap/php-imap/src/PhpImap',
+        ),
+        'Ddeboer\\Imap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ddeboer/imap/src',
         ),
     );
 

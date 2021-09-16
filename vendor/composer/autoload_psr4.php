@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'PhpImap\\' => array($vendorDir . '/php-imap/php-imap/src/PhpImap'),
+    'Ddeboer\\Imap\\' => array($vendorDir . '/ddeboer/imap/src'),
 );

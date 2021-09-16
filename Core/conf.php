@@ -11,9 +11,7 @@
         ini_set("max_execution_time", 0);
 
         if($conn->connect_error){
-            die('database connection could not be established');
-            //include(_ERROR.'db.html')
-            
+            die('database connection could not be established');            
         }
         return $conn;
     }

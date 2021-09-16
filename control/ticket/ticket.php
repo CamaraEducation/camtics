@@ -136,9 +136,10 @@ class Ticket{
     }
 }
 
-include('client.php');
-include('department.php');
-include('agent.php');
-include('update.php');
+include 'agent.php';
+include 'branch.php';
+include 'client.php';
+include 'department.php';
+include 'update.php';
 
 ?>

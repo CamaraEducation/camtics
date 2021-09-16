@@ -70,24 +70,20 @@ Route::add('/index.*', function() {
  ************************************************/
 
 Route::add('/open/ticket', function(){
-  $get_open_ticket = new NavigateTicket;
-  $get_open_ticket ->url_openTicket();
+	NavigateTicket::url_openTicket();
 });
 
 Route::add('/pending/ticket', function(){
-	$get_active_ticket = new NavigateTicket;
-	$get_active_ticket ->url_activeTicket();
+	NavigateTicket::url_activeTicket();
 });
 
 Route::add('/closed/ticket', function(){
-	$get_closed_ticket = new NavigateTicket;
-	$get_closed_ticket ->url_closedTicket();
+	NavigateTicket::url_closedTicket();
 });
 
 //view a specific ticket
 Route::add('/view/ticket.*', function(){
-	$view_this_ticket = new NavigateTicket;
-	$view_this_ticket ->url_viewTicket();
+	NavigateTicket::url_viewTicket();
 });
 
 Route::add('/reply/ticket.*', function(){
@@ -97,19 +93,16 @@ Route::add('/reply/ticket.*', function(){
 
 // Reopen a closed Ticket Route
 Route::add('/open/ticket.*', function(){
-	$activate_ticket = new NavigateTicket;
-	$activate_ticket ->url_activateTicket();
+	NavigateTicket::url_activateTicket();
 });
 
 // Close an Open Ticket Route
 Route::add('/close/ticket.*', function(){
-	$close_ticket = new NavigateTicket;
-	$close_ticket ->url_closeTicket();
+	NavigateTicket::url_closeTicket();
 });
 
 Route::add('/assign/ticket', function(){
-	$assign_ticket = new NavigateTicket;
-	$assign_ticket ->url_assignTicket();
+	NavigateTicket::url_assignTicket();
 }, ['get','post']);
 
 Route::add('/create-ticket', function(){
@@ -152,9 +145,7 @@ Route::add('/authorize', function() {
 		$action = $_POST['action'];
 
 		switch($action){
-			case 'register':
-				include(Auth.'/register.php');
-				
+			case 'register': include(Auth.'/register.php');	
 				$username 		= strtolower($_POST['user']);
 				$email			= $_POST['email'];
 				$phone			= $_POST['phone'];
@@ -164,25 +155,22 @@ Route::add('/authorize', function() {
 				$organization	= Organization::find_org_id($organization);			
 				$create_user->register_user($username, $email, $phone, $password, $branch, $organization);
 			break;
-			case 'login':
-				include(Auth.'/login.php');
 
+			case 'login': include(Auth.'/login.php');
 				$username = strtolower($_POST['user']);
 				$password = md5($_POST['pass']);
-
 				$loger = new Login;
 				$loger -> loger($username, $password);
 			break;
 			case 'reset':
 				//reset set
 			default:
-				echo 'could not find suitable action';
+				echo 'method used is not allowed';
 		}
 }, ['get','post']);
 
 Route::add('/logout', function(){
-	$logout = new Home;
-	$logout->logout();
+	Home::logout();
 });
 
 
@@ -190,7 +178,7 @@ Route::add('/logout', function(){
  *  EVERYTHING THAT HAS TO DO WITH DEPARTMENTS	*
  ************************************************/
 Route::add('/list/department', function(){
-	include(_SUPER.'/department-list.php');
+	NavigateDepartment::url_listDepartment();
 });
 
 Route::add('/add/department', function(){
@@ -234,19 +222,8 @@ Route::add('/smpp', function(){
 });
 
 Route::add('/test', function(){
-	$sql = "SELECT * FROM organization WHERE name LIKE 'a%'";
-    $sql = mysqli_query(conn(), $sql);
-    $sql = mysqli_fetch_all($sql, MYSQLI_ASSOC);
-
 	echo "<pre>";
-	if(!empty($sql)){
-		foreach($sql as $org){
-			print_r($org);
-		}
-	}else{
-		echo "nothing found";
-	}
-	echo "</pre>";
+	print_r(BranchTicket::fetch_all('active', BRANCH));
 });
 
 // Add a 404 not found route
@@ -272,7 +249,7 @@ Route::add('/known-routes', function() {
   $routes = Route::getAll();
   echo '<ul>';
   foreach($routes as $route) {
-    echo '<li>'.$route['expression'].' ('.print_r($route['method']).')</li>';
+	echo '<li>'.$route['expression'].' ('.print_r($route['method']).')</li>';
   }
   echo '</ul>';
 });

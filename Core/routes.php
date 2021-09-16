@@ -1,10 +1,10 @@
 <?php
 class Home{
-	function url_index(){
+	public static function url_index(){
 		if(LOGED!=='active'){
 			include(Front.'/login.php');
 		}else{
-			$this->url_dashboard();
+			Home::url_dashboard();
 		}
 	}
 
@@ -35,7 +35,7 @@ class NavigateTicket extends Home{
 		switch(ROLE){
 			case 6: include(_CLIENT	.'/ticket-open.php'); break;
 			case 1: include(_SUPER	.'/ticket-open.php'); break;
-			case 2: include(_SUPER	.'/ticket-open.php'); break;
+			case 2: include(_BRANCH	.'/ticket-open.php'); break;
 			case 3: include(_DEPT	.'/ticket-open.php'); break;
 			case 4: include(_STAFF	.'/ticket-open.php'); break;
 			case 5:
@@ -73,11 +73,11 @@ class NavigateTicket extends Home{
 
 	public static function url_viewTicket(){
 		switch(ROLE){
-			case 6: include(_CLIENT.'/ticket-view.php');    break;
-			case 1: include(_SUPER.'/ticket-view.php');     break;
-			case 2: break;
-			case 3: include(_DEPT.'/ticket-view.php');      break;
-			case 4: include(_STAFF.'/ticket-view.php');     break;
+			case 6: include(_CLIENT	.'/ticket-view.php'); break;
+			case 1: include(_SUPER	.'/ticket-view.php'); break;
+			case 2: include(_BRANCH	.'/ticket-view.php'); break;
+			case 3: include(_DEPT	.'/ticket-view.php'); break;
+			case 4: include(_STAFF	.'/ticket-view.php'); break;
 			case 5: break;
 			default: Home::logout();
 		}
@@ -151,6 +151,16 @@ class NavigateUser extends Home{
 			include(_PROFILE.'/account.php');
 		}else{
 			Home::logout();
+		}
+	}
+}
+
+class NavigateDepartment extends Home{
+	public static function url_listDepartment(){
+		switch(ROLE){
+			case 1: include(_SUPER	.'/department-list.php'); break;
+			case 2: include(_BRANCH	.'/department-list.php'); break;
+			default : Home::logout();
 		}
 	}
 }

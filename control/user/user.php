@@ -18,4 +18,6 @@ class User{
         return $users;
     }
 }
+
+include 'staff.php';
 ?>

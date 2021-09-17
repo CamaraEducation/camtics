@@ -177,14 +177,22 @@ Route::add('/logout', function(){
 
 
 /************************************************
- *  EVERYTHING THAT HAS TO DO WITH DEPARTMENTS	*
+ *			DEPARTMENTS AND BRANCHES			*
  ************************************************/
+Route::add('/branch/setting', function(){
+	NavigateDepartment::url_listDepartment();
+});
+
+Route::add('/branch/([0-9]*)/setting', function($id) {
+	echo $id.' is a great number!';
+  });
+
 Route::add('/list/department', function(){
 	NavigateDepartment::url_listDepartment();
 });
 
 Route::add('/add/department', function(){
-	include(_SUPER.'/department-create.php');
+	NavigateDepartment::url_addDepartmet();
 });
 
 Route::add('/create/department', function(){
@@ -202,8 +210,14 @@ Route::add('/add/branch', function(){
 
 Route::add('/create/branch', function(){
 	include(Branch.'/create.php');
-}, ['get','post']);
+}, 'post');
 
+/************************************
+ *		MAILS AND NOTIFICATION		*
+ ************************************/
+Route::add('/incoming/mails', function(){
+	NavigateMail::url_incomingMails();
+});
 
 //------------APIs and Webhooks----------------//
 Route::add('/search/oranization', function(){
@@ -214,18 +228,13 @@ Route::add('/api/chat/ticket.*', function(){
 	include(_LAYOUT.'/chat-ticket.php');
 });
 
-Route::add('/imap', function(){
-	include(_CONTROL.'/imap/imap.php');
-});
-
-
 Route::add('/smpp', function(){
 	include('test.php');
 });
 
 Route::add('/test', function(){
 	echo '<pre>';
-	print_r(ImapClient::auth());
+	print_r(ImapClient::get_message());
 });
 
 // Add a 404 not found route

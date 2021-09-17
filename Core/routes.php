@@ -2,7 +2,7 @@
 class Home{
 	public static function url_index(){
 		if(LOGED!=='active'){
-			include(Front.'/login.php');
+			include Front.'/login.php';
 		}else{
 			Home::url_dashboard();
 		}
@@ -11,11 +11,11 @@ class Home{
 	//Define the dashboard location for appropriate user
 	public static function url_dashboard(){
 		switch(ROLE){
-			case 6: include(_CLIENT	.'/index.php'); break;
-			case 1: include(_SUPER	.'/index.php'); break;
-			case 2: include(_BRANCH	.'/index.php'); break;
-			case 3: include(_DEPT	.'/index.php'); break;
-			case 4: include(_STAFF	.'/index.php'); break;
+			case 6: include _CLIENT	.'/index.php'; break;
+			case 1: include _SUPER	.'/index.php'; break;
+			case 2: include _BRANCH	.'/index.php'; break;
+			case 3: include _DEPT	.'/index.php'; break;
+			case 4: include _STAFF	.'/index.php'; break;
 			case 5:
 				echo "Head of Organization"; break;
 			default: Home::logout();
@@ -24,7 +24,7 @@ class Home{
 
 	public static function logout(){
 		session_destroy();
-		include(Front.'/login.php');
+		include Front.'/login.php';
 	}
 }
 
@@ -33,11 +33,11 @@ class NavigateTicket extends Home{
 	//route to access open tickets
 	public static function url_openTicket(){
 		switch(ROLE){
-			case 6: include(_CLIENT	.'/ticket-open.php'); break;
-			case 1: include(_SUPER	.'/ticket-open.php'); break;
-			case 2: include(_BRANCH	.'/ticket-open.php'); break;
-			case 3: include(_DEPT	.'/ticket-open.php'); break;
-			case 4: include(_STAFF	.'/ticket-open.php'); break;
+			case 6: include _CLIENT	.'/ticket-open.php'; break;
+			case 1: include _SUPER	.'/ticket-open.php'; break;
+			case 2: include _BRANCH	.'/ticket-open.php'; break;
+			case 3: include _DEPT	.'/ticket-open.php'; break;
+			case 4: include _STAFF	.'/ticket-open.php'; break;
 			case 5:
 				break;
 			default: Home::logout();
@@ -47,11 +47,11 @@ class NavigateTicket extends Home{
 	//route to  access active/pending tickets
 	public static function url_activeTicket(){
 		switch(ROLE){
-			case 6: include(_CLIENT	.'/ticket-pending.php'); break;
-			case 1: include(_SUPER	.'/ticket-pending.php'); break;
-			case 2: include(_BRANCH	.'/ticket-pending.php'); break;
-			case 3: include(_DEPT	.'/ticket-pending.php'); break;
-			case 4: include(_STAFF	.'/ticket-pending.php'); break;
+			case 6: include _CLIENT	.'/ticket-pending.php'; break;
+			case 1: include _SUPER	.'/ticket-pending.php'; break;
+			case 2: include _BRANCH	.'/ticket-pending.php'; break;
+			case 3: include _DEPT	.'/ticket-pending.php'; break;
+			case 4: include _STAFF	.'/ticket-pending.php'; break;
 			case 5:
 				break;
 			default: Home::logout();
@@ -61,11 +61,11 @@ class NavigateTicket extends Home{
 	//route to  access closed tickets
 	public static function url_closedTicket(){
 		switch(ROLE){
-			case 6: include(_CLIENT .'/ticket-closed.php'); break;
-			case 1: include(_SUPER  .'/ticket-closed.php'); break;
-			case 2: include(_BRANCH .'/ticket-closed.php'); break;
-			case 3: include(_DEPT   .'/ticket-closed.php'); break;
-			case 4: include(_STAFF  .'/ticket-closed.php'); break;
+			case 6: include _CLIENT .'/ticket-closed.php'; break;
+			case 1: include _SUPER  .'/ticket-closed.php'; break;
+			case 2: include _BRANCH .'/ticket-closed.php'; break;
+			case 3: include _DEPT   .'/ticket-closed.php'; break;
+			case 4: include _STAFF  .'/ticket-closed.php'; break;
 			case 5: break;
 			default: Home::logout();
 		}
@@ -73,11 +73,11 @@ class NavigateTicket extends Home{
 
 	public static function url_viewTicket(){
 		switch(ROLE){
-			case 6: include(_CLIENT	.'/ticket-view.php'); break;
-			case 1: include(_SUPER	.'/ticket-view.php'); break;
-			case 2: include(_BRANCH	.'/ticket-view.php'); break;
-			case 3: include(_DEPT	.'/ticket-view.php'); break;
-			case 4: include(_STAFF	.'/ticket-view.php'); break;
+			case 6: include _CLIENT	.'/ticket-view.php'; break;
+			case 1: include _SUPER	.'/ticket-view.php'; break;
+			case 2: include _BRANCH	.'/ticket-view.php'; break;
+			case 3: include _DEPT	.'/ticket-view.php'; break;
+			case 4: include _STAFF	.'/ticket-view.php'; break;
 			case 5: break;
 			default: Home::logout();
 		}
@@ -129,15 +129,15 @@ class NavigateTicket extends Home{
 class NavigateUser extends Home{
 	public static function url_listUser(){
 		switch(ROLE){
-			case 1: include(_SUPER	.'/users-list.php'); break;
-			case 2: include(_BRANCH	.'/users-list.php'); break;
+			case 1: include _SUPER	.'/users-list.php'; break;
+			case 2: include _BRANCH	.'/users-list.php'; break;
 			default : Home::logout();
 		}        
 	}
 
 	public static function url_account(){
 		if(ROLE>0 and ROLE<5){
-			include(_PROFILE.'/account.php');
+			include _PROFILE.'/account.php';
 		}else{
 			Home::logout();
 		}
@@ -147,8 +147,36 @@ class NavigateUser extends Home{
 class NavigateDepartment extends Home{
 	public static function url_listDepartment(){
 		switch(ROLE){
-			case 1: include(_SUPER	.'/department-list.php'); break;
-			case 2: include(_BRANCH	.'/department-list.php'); break;
+			case 1: include _SUPER	.'/department-list.php'; break;
+			case 2: include _BRANCH	.'/department-list.php'; break;
+			default : Home::logout();
+		}
+	}
+
+	public static function url_addDepartmet(){
+		switch(ROLE){
+			case 1: include _SUPER	.'/department-create.php'; break;
+			case 2: include _BRANCH	.'/department-create.php'; break;
+			default : Home::logout();
+		}
+	}
+}
+
+class NavigateMail extends Home{
+	public static function url_incomingMails(){
+		switch(ROLE){
+			case 1: break;
+			case 2: include _BRANCH	.'/email-list.php'; break;
+			default : Home::logout();
+		}
+	}
+}
+
+class NavigateBranch extends Home{
+	public static function url_branchSetting(){
+		switch(ROLE){
+			case 1: include _SUPER	.'/branch-conf.php'; break;
+			case 2: include _BRANCH	.'/branch-conf.php'; break;
 			default : Home::logout();
 		}
 	}

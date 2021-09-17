@@ -7,9 +7,11 @@
 
 // Define global namespaces
 use Core\Route;
+use PhpImap\Imap;
 
 // include global requisities
 include 'Core/Route.php';
+include 'vendor/autoload.php';
 
 // Define global & core basepaths
 define('BASEPATH',  '/');
@@ -119,7 +121,7 @@ Route::add('/create-ticket', function(){
  * 		EVERYTHING THAT HAS TO DO WITH USERS	*
  ************************************************/
 Route::add('/list/user', function(){
-	print_r(User::list_user());
+	NavigateUser::url_listUser();
 });
 
 Route::add('/profile', function(){
@@ -222,8 +224,8 @@ Route::add('/smpp', function(){
 });
 
 Route::add('/test', function(){
-	echo "<pre>";
-	print_r(BranchTicket::fetch_all('active', BRANCH));
+	echo '<pre>';
+	print_r(ImapClient::auth());
 });
 
 // Add a 404 not found route

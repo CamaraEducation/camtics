@@ -7,18 +7,28 @@ class ImapClient{
 		$server = new Server($host);
 		$branch = Branch::fetch_branch();
 		$connection = $server->authenticate($branch['email'], $branch['ePass']);	
-		$mailbox = $connection->getMailbox('INBOX');
-		$messages = $mailbox->getMessages();
-	
-		foreach ($messages as $message) {
-			$headers = $message->getHeaders();
-		}
-		
+
 		return $connection;
 	}
 
-	public static function get_header(){
-		
+	public static function get_message($box = 'INBOX'){
+		$connection = ImapClient::auth();
+		$mailbox = $connection->getMailbox($box);
+		$messages = $mailbox->getMessages();
+		$no = 0;
+
+		foreach($messages as $message){
+			$mail[$no]['date'] = $message->getHeaders()->get('date');
+			$mail[$no]['subject'] = $message->getHeaders()->get('subject');
+			$mail[$no]['ccaddress'] = $message->getHeaders()->get('ccaddress');
+			$from = $message->getHeaders()->get('sender');
+			$from = (array) $from['0'];
+			$mail[$no]['from'] = $from['personal'] .', '. $from['mailbox'] .'@'. $from['host'];
+			$mail[$no]['body'] = $message->getBodyHtml();
+			$no++;
+		}
+
+		return $mail;
 	}
 }
 ?>

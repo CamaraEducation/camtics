@@ -129,20 +129,9 @@ class NavigateTicket extends Home{
 class NavigateUser extends Home{
 	public static function url_listUser(){
 		switch(ROLE){
-			case 0:
-				break;
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				break;
-			default:
-				Home::logout();
+			case 1: include(_SUPER	.'/users-list.php'); break;
+			case 2: include(_BRANCH	.'/users-list.php'); break;
+			default : Home::logout();
 		}        
 	}
 
@@ -175,21 +164,15 @@ if(ROLE>0){
 }else{
 
 }
-switch(ROLE){
-			case 0:
-				break;
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				break;
-			default:
-				$this->url_index();
-		}
+		switch(ROLE){
+			case 0: break;
+			case 1: break;
+			case 2: break;
+			case 3: break;
+			case 4: break;
+			case 5: break;
+			default :
+				Home::logout();
+		}  
 */
 ?>

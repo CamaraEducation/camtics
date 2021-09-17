@@ -42,13 +42,13 @@
     </a>
     <ul class="sub-menu-list">
         <li>
-            <a href="/received/mail">
+            <a href="/incoming/mails">
                 <i class="fa fa-circle text-primary"></i>
                 Incoming
             </a> 
         </li>
         <li>
-            <a href="/send/mail">
+            <a href="/outgoing/mails">
                 <i class="fa fa-plus-circle text-secondary"></i>
                 Outgoing 
             </a>
@@ -61,27 +61,27 @@
     </a>
     <ul class="sub-menu-list">
         <li>
-            <a href="/received/mail">
+            <a href="/individual/sms">
                 <i class="fa fa-user text-primary"></i>
                 Individual
             </a> 
         </li>
         <li>
-            <a href="/received/mail">
+            <a href="/bulky/sms">
                 <i class="fa fa-users text-primary"></i>
                 Bulky
             </a> 
         </li>
         <li>
-            <a href="/send/mail">
+            <a href="/sms/history">
                 <i class="fa fa-plus-circle text-secondary"></i>
-                History 
+                Records 
             </a>
         </li>
     </ul>
 </li>
 <li>
-    <a href="/setting">
+    <a href="/branch/setting">
         <i class="fas fa-cogs"></i>
         <span>Configurations</span> 
     </a> 

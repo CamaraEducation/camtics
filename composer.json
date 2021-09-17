@@ -1,5 +1,6 @@
 {
     "require": {
-        "php-imap/php-imap": "^4.1"
+        "php-imap/php-imap": "^4.1",
+        "ddeboer/imap": "^1.12"
     }
 }

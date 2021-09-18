@@ -37,5 +37,6 @@ function showChats(ticket) {
     };
     xmlhttp.open("GET","/api/chat/ticket."+ticket,true);
     xmlhttp.send();
-    setTimeout(repeatAjax,3000); //After completion of request, time to redo it after a second
 }
+
+/*//setTimeout(repeatAjax,3000); //After completion of request, time to redo it after a second*/

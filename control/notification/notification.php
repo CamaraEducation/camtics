@@ -3,9 +3,9 @@ class Notification{
     public static function new_reply($ticket){
 		$config = config();
 		if(ROLE>4){
-			$agent = "SELECT t.id, u.username FROM ticket t, `user` u WHERE t.id='$ticket' AND u.id=t.sender";
+			$agent = "SELECT t.id, u.username, u.email FROM ticket t, `user` u WHERE t.id='$ticket' AND u.id=t.agent";
 		}else{
-			$agent = "SELECT t.id, u.username FROM ticket t, `user` u WHERE t.id='$ticket' AND u.id=t.agent";
+			$agent = "SELECT t.id, u.username, u.email FROM ticket t, `user` u WHERE t.id='$ticket' AND u.id=t.sender";
 		}
 		$agent = mysqli_query(conn(), $agent);
 		$rows  = mysqli_num_rows($agent);

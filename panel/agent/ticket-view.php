@@ -1,20 +1,14 @@
 <?php 
 	include(_LAYOUT.'/header.php');
-    $ticket_id   = substr(($_SERVER['REQUEST_URI']), 13);
+	$ticket_id   = substr(($_SERVER['REQUEST_URI']), 13);
 
-    //Innitiate the Ticket instance
-    $user_ticket = new Ticket;
-    $user_ticket = $user_ticket->specific_ticket($ticket_id);
+	//Innitiate the Ticket instance
+	$ticket = Ticket::specific_ticket($ticket_id);
 
-    //Initiate the conversation instance
-    $style		 = new Conversation;
-    $messages    = new Conversation;
-    $messages    = $messages->chat($ticket_id);
-
-    //fetch ticket details
-    foreach($user_ticket as $_ticket){
-        $ticket  = $_ticket;
-    }    
+	//Initiate the conversation instance
+	$style		 = new Conversation;
+	$messages    = new Conversation;
+	$messages    = $messages->chat($ticket_id); 
 ?>
 <!-- //header-ends -->
 <!-- main content start -->
@@ -78,7 +72,7 @@
                             <i class="fa fa-lock my-float"></i>
                         </a></li> <?php
                     }else{ ?>
-						<li class="li" title="activate the ticket"><a class="a" href="/open/ticket.<?=$ticket_id?>">
+						<li class="li" title="activate the ticket"><a class="a" href="/open/ticket/<?=$ticket_id?>">
                             <i class="fa fa-key my-float"></i>
                         </a></li> <?php
                     }

@@ -13,21 +13,4 @@ class Session{
         return $_SESSION;
 	}
 }
-
-/*
-// building array of variables
-$content = http_build_query(array(
-            'username' => 'value',
-            'password' => 'value'
-            ));
-// creating the context change POST to GET if that is relevant 
-$context = stream_context_create(array(
-            'http' => array(
-                'method' => 'POST',
-                'content' => $content, )));
-
-$result = file_get_contents('http://www.example.com/page.php', null, $context);
-//dumping the reuslt
-var_dump($result);
-*/
 ?>

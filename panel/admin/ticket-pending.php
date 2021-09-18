@@ -33,8 +33,8 @@
 								<td><?=$ticket['update']?> days</td>
 								<td>
 								<?php if($ticket['id']>0){ ?>	
-									<a title="view the ticket" href="/view/ticket.<?=$ticket['id']?>"><i class="fas fa-eye text-primary"></i></a> &nbsp;
-									<a title="close the ticket" href="/close/ticket.<?=$ticket['id']?>"><i class="fas fa-lock text-danger"></i></a> &nbsp;
+									<a title="view the ticket" href="/view/ticket/<?=$ticket['id']?>"><i class="fas fa-eye text-primary"></i></a> &nbsp;
+									<a title="close the ticket" href="/close/ticket/<?=$ticket['id']?>"><i class="fas fa-lock text-danger"></i></a> &nbsp;
 								<?php }else{echo 'NA';} ?>
 								</td>
 							</tr> <?php

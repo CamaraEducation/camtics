@@ -97,6 +97,9 @@
                 showChats('<?=$ticket_id?>');
             }
             refreshChat();
+			setInterval(function(){
+				refreshChat() // this will run after every 5 seconds
+			}, 3000);
         </script>
         
 		<!-- modals -->		

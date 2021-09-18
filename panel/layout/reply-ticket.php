@@ -15,10 +15,6 @@
 			</div>
 			<form id="conversation" name="form1" method="POST" onsubmit="return getContent()">
 				<div class="modal-body">
-					<!-- message sent success -->
-					<div class="alert alert-success alert-dismissible" id="success" style="display:none;">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
-					</div>
 					<div id="editor"></div>					
 					<div class="input-group">
 						<input id="message" name="message" type="text" class="form-control input-sm" placeholder="Type your message here..." hidden required>
@@ -26,7 +22,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="refreshChat()">Close</button>
-					<button type="submit" id="butsave" class="btn btn-primary">Reply</button>
+					<button type="submit" id="butsave" data-dismiss="modal" class="btn btn-primary">Reply</button>
 				</div>
 			</form>
 		</div>
@@ -35,18 +31,6 @@
 <!-- Initialize Quill editor -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
-	/*
-
-  var quill = new Quill('#editor-container', {
-    modules: {
-      syntax: true,
-      toolbar: '#toolbar-container'
-    },
-    placeholder: 'Compose an epic...',
-    theme: 'snow'
-  });
-	
-	*/
 	var quill = new Quill('#editor', {
 		theme: 'snow',
 		placeholder: 'write the message here ...',
@@ -84,11 +68,7 @@
 	                            $("#butsave").removeAttr("disabled");
 	                            $('#conversation').find('input:text').val('');
 								$(".ql-editor").empty();
-                                $("#success").show();
-	                            $('#success').html('message sent!');
-	                            setTimeout(function() {
-	                                $( "#success" ).hide();
-	                            }, 2000);
+                                $('#replyTicketModal').modal('hide');
 	                        } else if (dataResult.statusCode == 201) {
 	                            alert("Error occured !");
 	                        }

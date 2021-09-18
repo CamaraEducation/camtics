@@ -157,6 +157,14 @@ label{
     background-size: cover;
 }
 
+.border-secondary-top {
+    border-top: 2px solid var(--secondary);
+}
+
+.text-tertiary{
+    color: var(--para-color)
+}
+
 /* devices with resolution less than 580px */
 @media (max-width: 580px){
     .search-box {

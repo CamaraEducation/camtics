@@ -1,9 +1,3 @@
-<!--
-					Author     : Abdulbasit Rubeiyya
-					Author URL : httpS://actech.cc
-					Client     : Camara Education
-					Client Url : camara.org, camara.co.tz
--->
 <?php 
 	$config = config();
 ?>
@@ -14,6 +8,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title><?=$config['site'];?> ::<?php echo str_replace("/"," ", $_SERVER['REQUEST_URI'])?></title>
+		<meta name="description" content="camara education ticketing and customer support system">
+		<meta name="keywords" content="camara, education">
+		<meta name="robots" content="index, follow">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="language" content="English">
+		<meta name="revisit-after" content="10 days">
+		<meta name="author" content="Abdulbasit Rubeiyya">
 		<link rel="icon" href="/assets/img/logo.png" type="image/x-icon">
 		<!-- font awesome -->
 		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">

@@ -84,28 +84,32 @@ Route::add('/closed/ticket', function(){
 });
 
 //view a specific ticket
-Route::add('/view/ticket.*', function(){
+Route::add('/view/ticket/([0-9]*)', function(){
 	NavigateTicket::url_viewTicket();
 });
 
-Route::add('/reply/ticket.*', function(){
+Route::add('/reply/ticket/([0-9]*)', function(){
 	$reply_ticket = new Conversation;
 	$reply_ticket ->send(ID, $_POST['ticket'], $_POST['message']);
 }, ['get','post']);
 
 // Reopen a closed Ticket Route
-Route::add('/open/ticket.*', function(){
+Route::add('/open/ticket/([0-9]*)', function(){
 	NavigateTicket::url_activateTicket();
 });
 
 // Close an Open Ticket Route
-Route::add('/close/ticket.*', function(){
+Route::add('/close/ticket/([0-9]*)', function(){
 	NavigateTicket::url_closeTicket();
 });
 
 Route::add('/assign/ticket', function(){
 	NavigateTicket::url_assignTicket();
-}, ['get','post']);
+}, 'post');
+
+Route::add('/transfer/ticket', function(){
+	NavigateTicket::url_assignTicket();
+}, 'post');
 
 Route::add('/create-ticket', function(){
 	$department = $_POST['department'];

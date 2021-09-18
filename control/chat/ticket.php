@@ -1,6 +1,6 @@
 <?php
 class Conversation{
-    function send($user, $ticket, $message){
+    public static function send($user, $ticket, $message){
         $message = str_replace('\"', '"', $message);
         $message = mysqli_real_escape_string(conn(), $message);
 
@@ -22,7 +22,7 @@ class Conversation{
                 TIMEDIFF(NOW(), c.time) AS timedifference, DATEDIFF(NOW(), c.time) AS datedifference, 
                 u.username, u.photo  
             FROM conversation c, user u 
-            WHERE u.id=c.user AND c.ticket='$ticket' ";
+            WHERE u.id=c.user AND c.ticket='$ticket' ORDER BY c.id DESC";
         $message = mysqli_query(conn(), $message);
         $message = mysqli_fetch_all($message, MYSQLI_ASSOC);
 

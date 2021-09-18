@@ -20,10 +20,11 @@ class Ticket{
 		}
     }
 
-    function specific_ticket($ticket){
+    public static function specific_ticket($ticket){
         $specific_ticket = "
             SELECT 
-                t.id, t.subject, t.content, t.urgency,
+                t.id, t.subject, t.content, t.urgency, t.department as dep_id,
+                (SELECT name FROM department WHERE id=t.department) AS department,
                 u.id AS userid, u.username, u.photo, 
                 b.`name` AS `branch`, 
                 o.`name` AS `organization`,
@@ -31,7 +32,7 @@ class Ticket{
             FROM `ticket` t, `user` u, `branch` b, `organization` o
             WHERE t.id='$ticket' AND u.`id`=t.`sender` AND b.`id`=t.`branch` AND o.`id`=t.`organization`";
         $specific_ticket = mysqli_query(conn(), $specific_ticket);
-        $specific_ticket = mysqli_fetch_all($specific_ticket, MYSQLI_ASSOC);
+        $specific_ticket = mysqli_fetch_assoc($specific_ticket);
         return $specific_ticket;
     }
 

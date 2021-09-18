@@ -48,7 +48,7 @@
 						<div class="col-sm-6 pl-sm-2 statistics-grid">
 							<div class="card card_border border-primary-top p-4">
 								<i class="lnr lnr-envelope"> </i>
-								<h3 class="text-blue number"><?=$total_ticket;?></h3>
+								<h3 class="text-warning number"><?=$total_ticket;?></h3>
 								<p class="stat-text">All Tickets</p>
 							</div>
 						</div>

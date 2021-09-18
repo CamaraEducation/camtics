@@ -30,12 +30,8 @@ class Department{
 		}
 	}
 
-	function update_department(){
-		//
-	}
-
 	//fetch all departments
-	function fetch_departments(){
+	public static function fetch_departments(){
 		$fetch_departments  = "
 			SELECT d.id, d.name, d.description, b.country AS `branch`,
 				(SELECT Count(id) FROM ticket WHERE  status = 'open'   AND `department` = d.id) AS `open`,
@@ -49,7 +45,7 @@ class Department{
 	}
 
 	//fetch relevant department for a client
-	function client_department($branch){
+	public static function client_department($branch){
 		$client_department = "SELECT id, name FROM department WHERE `branch`=0 OR `branch`='$branch'";
 		$client_department = mysqli_query(conn(), $client_department);
 

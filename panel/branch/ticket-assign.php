@@ -20,7 +20,7 @@
                         <option value="" hidden>Select user</option>
                         <?php
                             $department_user = new Staff;
-                            $department_user = $department_user -> department_staff(BRANCH, Department::my_department());
+                            $department_user = $department_user -> department_staff(BRANCH, $ticket['dep_id']);
                             foreach($department_user as $staff){ ?>
                                 <option value='<?=$staff['id']?>'><?=$staff['username']?></option><?php
                             }

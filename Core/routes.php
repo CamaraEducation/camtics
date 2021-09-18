@@ -86,8 +86,7 @@ class NavigateTicket extends Home{
 	public static function url_activateTicket(){
 		if(ROLE>0){
 			$ticket = substr(($_SERVER['REQUEST_URI']), 13);
-			$reopen_ticket = new UpdateTicket;
-			$reopen_ticket -> reopen($ticket);
+			UpdateTicket::activate($ticket);
 		}else{
 			Home::logout();
 		}
@@ -122,6 +121,15 @@ class NavigateTicket extends Home{
 			UpdateTicket::assign($_POST['user'],$_POST['ticket']);
 		}else{
 			Home::logout();
+		}
+	}
+
+	public static function url_transferTicket(){
+		switch (true){
+			case (ROLE>0 and ROLE<5): 
+				UpdateTicket::transfer($_POST['department'],$_POST['ticket']); break;
+			default : 
+				Home::logout();
 		}
 	}
 }

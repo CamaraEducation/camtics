@@ -32,7 +32,7 @@
 			return $branch_staff;
 		}
 
-		function department_staff($branch, $department){
+		public static function department_staff($branch, $department){
 			$department_staff = "SELECT * FROM USER WHERE role<5 AND branch='$branch' AND department='$department'";
 			$department_staff = mysqli_query(conn(), $department_staff);
 			$department_staff = mysqli_fetch_all($department_staff, MYSQLI_ASSOC);

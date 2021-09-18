@@ -165,9 +165,15 @@ label{
     color: var(--para-color)
 }
 
-/* devices with resolution less than 580px */
 @media (max-width: 580px){
     .search-box {
+        display: none;
+    }
+}
+
+/* devices with resolution less than 580px */
+@media (max-width: 1041px){
+    .user-box {
         display: none;
     }
 }

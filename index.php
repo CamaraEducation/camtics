@@ -180,12 +180,20 @@ Route::add('/logout', function(){
  *			DEPARTMENTS AND BRANCHES			*
  ************************************************/
 Route::add('/branch/setting', function(){
-	NavigateDepartment::url_listDepartment();
+	NavigateBranch::url_branchSetting();
 });
 
 Route::add('/branch/([0-9]*)/setting', function($id) {
-	echo $id.' is a great number!';
-  });
+	switch(ROLE){
+		case 1: NavigateBranch::url_branchSetting(); break;
+		default :
+			Home::url_dashboard();
+	}
+});
+
+Route::add('/create/branch', function(){
+	include(Branch.'/create.php');
+}, 'post');
 
 Route::add('/list/department', function(){
 	NavigateDepartment::url_listDepartment();
@@ -208,9 +216,6 @@ Route::add('/add/branch', function(){
 	include(_SUPER.'/branch-create.php');
 });
 
-Route::add('/create/branch', function(){
-	include(Branch.'/create.php');
-}, 'post');
 
 /************************************
  *		MAILS AND NOTIFICATION		*

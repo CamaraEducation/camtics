@@ -68,7 +68,7 @@
                         <li class="li" title="Reply"><a class="a" data-toggle="modal" data-target="#replyTicketModal" href="#">
                             <i class="fa fa-pencil my-float"></i>
                         </a></li>
-                        <li class="li" title="close the ticket"><a class="a" href="/close/ticket.<?=$ticket_id?>">
+                        <li class="li" title="close the ticket"><a class="a" href="/close/ticket/<?=$ticket_id?>">
                             <i class="fa fa-lock my-float"></i>
                         </a></li> <?php
                     }else{ ?>

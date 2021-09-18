@@ -17,7 +17,7 @@
 				<div class="modal-body">
 					<!-- message sent success -->
 					<div class="alert alert-success alert-dismissible" id="success" style="display:none;">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+						<a href="#" class="close" data-dismiss="alert" onclick="refreshChat()" aria-label="close">×</a>
 					</div>
 					<div id="editor"></div>					
 					<div class="input-group">
@@ -52,22 +52,9 @@
 		placeholder: 'write the message here ...',
 		modules: {
 			toolbar: [
-            [{ "size": ["small", false, "large", "huge"] }], // custom dropdown
-
             ["bold", "italic", "underline", "strike"],
-
-            [{ "color": [] }, { "background": [] }],
-
-            [{ "script": "sub" }, { "script": "super" }],
-
-            ["blockquote", "code-block"],
-
-            [{ "list": "ordered" }, { "list": "bullet" }, { "indent": "-1" }, { "indent": "+1" }],
-
-            [{ "direction": "rtl" }, { "align": [] }],
-
-            ["link", "image", "video", "formula"],
-
+            [{ "list": "ordered" }, { "list": "bullet" }],
+            ["link", "image", "video"],
             ["clean"]
         ]
 		}

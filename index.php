@@ -88,9 +88,8 @@ Route::add('/view/ticket/([0-9]*)', function(){
 	NavigateTicket::url_viewTicket();
 });
 
-Route::add('/reply/ticket/([0-9]*)', function(){
-	$reply_ticket = new Conversation;
-	$reply_ticket ->send(ID, $_POST['ticket'], $_POST['message']);
+Route::add('/reply/ticket', function(){
+	Conversation::send(ID, $_POST['ticket'], $_POST['message']);
 }, ['get','post']);
 
 // Reopen a closed Ticket Route

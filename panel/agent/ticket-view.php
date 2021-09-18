@@ -17,7 +17,7 @@
 	<div class="container-fluid content-top-gap">
 		<section class="bg-light">
             <div class='row glass lg-width'>
-                <div class="col-sm-1">
+                <div class="col-sm-1 user-box">
                     <center>
                         <img src="<?=$ticket['photo']?>" style="margin:auto;" class="rounded-circle" alt="">
                         <h6><?=$ticket['username']?></h6>

@@ -17,7 +17,7 @@
 				<div class="modal-body">
 					<!-- message sent success -->
 					<div class="alert alert-success alert-dismissible" id="success" style="display:none;">
-						<a href="#" class="close" data-dismiss="alert" onclick="refreshChat()" aria-label="close">×</a>
+						<a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
 					</div>
 					<div id="editor"></div>					
 					<div class="input-group">
@@ -70,7 +70,6 @@
 	        	var ticket = "<?=$ticket_id;?>";
 	        	var message = $('#message').val();
 	           if (message != "") {
-	               //alert('in here everything is right');
 	               $.ajax({
 	                   url: "/reply/ticket",
                        type: "POST",

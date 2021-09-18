@@ -38,8 +38,7 @@ class NavigateTicket extends Home{
 			case 2: include _BRANCH	.'/ticket-open.php'; break;
 			case 3: include _DEPT	.'/ticket-open.php'; break;
 			case 4: include _STAFF	.'/ticket-open.php'; break;
-			case 5:
-				break;
+			case 5: break;
 			default: Home::logout();
 		}
 	}
@@ -52,8 +51,7 @@ class NavigateTicket extends Home{
 			case 2: include _BRANCH	.'/ticket-pending.php'; break;
 			case 3: include _DEPT	.'/ticket-pending.php'; break;
 			case 4: include _STAFF	.'/ticket-pending.php'; break;
-			case 5:
-				break;
+			case 5: break;
 			default: Home::logout();
 		}
 	}
@@ -87,6 +85,7 @@ class NavigateTicket extends Home{
 		if(ROLE>0){
 			$ticket = substr(($_SERVER['REQUEST_URI']), 13);
 			UpdateTicket::activate($ticket);
+			header('Location: /pending/ticket');
 		}else{
 			Home::logout();
 		}
@@ -97,6 +96,7 @@ class NavigateTicket extends Home{
 			$ticket = substr(($_SERVER['REQUEST_URI']), 14);
 			$close_ticket = new UpdateTicket;
 			$close_ticket -> close($ticket);
+		 	header('Location: /closed/ticket');
 		}else{
 			Home::logout();
 		}

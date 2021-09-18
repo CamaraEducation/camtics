@@ -24,6 +24,14 @@
 			return $branch_staff;
 		}
 
+		public static function count_all($branch = ''){
+			$branch_staff = "SELECT COUNT(id) as total FROM user WHERE role<5 AND branch LIKE '$branch%'";
+			$branch_staff = mysqli_query(conn(), $branch_staff);
+			$branch_staff = mysqli_fetch_assoc($branch_staff);
+
+			return $branch_staff;
+		}
+
 		function department_staff($branch, $department){
 			$department_staff = "SELECT * FROM USER WHERE role<5 AND branch='$branch' AND department='$department'";
 			$department_staff = mysqli_query(conn(), $department_staff);

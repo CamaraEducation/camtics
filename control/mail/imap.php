@@ -23,8 +23,10 @@ class ImapClient{
 			$mail[$no]['ccaddress'] = $message->getHeaders()->get('ccaddress');
 			$from = $message->getHeaders()->get('sender');
 			$from = (array) $from['0'];
-			$mail[$no]['from'] = $from['personal'] .', '. $from['mailbox'] .'@'. $from['host'];
-			$mail[$no]['body'] = $message->getBodyHtml();
+			$mail[$no]['from_name'] = $from['personal'];
+			$mail[$no]['from_email'] = $from['mailbox'] .'@'. $from['host'];
+			$mail[$no]['text'] = $message->getBodyText();
+			$mail[$no]['html'] = $message->getBodyHtml();
 			$no++;
 		}
 

@@ -228,11 +228,15 @@ Route::add('/incoming/mails', function(){
 });
 
 //------------APIs and Webhooks----------------//
+Route::add('/search/user', function(){
+	User::search();
+}, ['get', 'post']);
+
 Route::add('/search/oranization', function(){
 	Organization::search();
 }, ['get', 'post']);
 
-Route::add('/api/chat/ticket.*', function(){
+Route::add('/api/chat/ticket/[0-9]*', function(){
 	include(_LAYOUT.'/chat-ticket.php');
 });
 

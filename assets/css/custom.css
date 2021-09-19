@@ -13,6 +13,14 @@ label{
     font-weight: bold;
 }
 
+.small-hr{
+    display: block;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
 .bg-light {
     background-color: #f8f9fa!important;
     padding: 10px 8px 10px 8px;

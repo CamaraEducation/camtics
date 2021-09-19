@@ -21,14 +21,14 @@ CREATE TABLE IF NOT EXISTS `branch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `code` int(3) DEFAULT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` varchar(16) NOT NULL DEFAULT '0',
   `email` varchar(100) NOT NULL,
   `pass` varchar(100) DEFAULT NULL,
   `imap` text,
-  `website` varchar(50) DEFAULT NULL,
-  `location` text,
   `country` text NOT NULL,
-  `smtp` int(11) DEFAULT NULL,
+  `smtp` varchar(50) DEFAULT '',
+  `sms_key` text,
+  `sms_secret` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -136,7 +136,6 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fname` varchar(30) DEFAULT '',
-  `mname` varchar(30) DEFAULT '',
   `lname` varchar(30) DEFAULT '',
   `username` varchar(30) NOT NULL,
   `phone` varchar(50) NOT NULL DEFAULT '',

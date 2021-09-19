@@ -23,10 +23,10 @@ class Branch{
 				"email"     => $row['email'],
 				"ePass"     => $row['pass'],
 				"imap"      => $row['imap'],
-				"website"   => $row['website'],
-				"location"  => $row['location'],
 				"country"   => $row['country'],
-				"smtp"		=> $row['smtp']
+				"smtp"		=> $row['smtp'],
+				"sms_key"	=> $row['sms_key'],
+				"sms_secret"=> $row['sms_secret']
 			);
 		}
 		return $rows;

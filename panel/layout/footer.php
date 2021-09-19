@@ -28,9 +28,32 @@
 	}
 </script>
 <!-- /move top -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+	$(document).ready(function(){
+				$('.search-box input[type="search"]').on("keyup input", function(){
+					/* Get input value on change */
+					var inputVal = $(this).val();
+					var resultDropdown = $(this).siblings(".result");
+					if(inputVal.length){
+						$.get("/search/user", {term: inputVal}).done(function(data){
+							// Display the returned data in browser
+							resultDropdown.html(data);
+						});
+					} else{
+						resultDropdown.empty();
+					}
+				});
+				
+				// Set search input value on click of result item
+				$(document).on("click", ".result p", function(){
+					$(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+					$(this).parent(".result").empty();
+				});
+			});
+</script>
 <script src="/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/assets/js/jquery-1.10.2.min.js"></script>
-<!-- //Different scripts of charts.  Ex.Barchart, Linechart -->
 <script src="/assets/js/jquery.nicescroll.js"></script>
 <script src="/assets/js/scripts.js"></script>
 <!-- close script -->

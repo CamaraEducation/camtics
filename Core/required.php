@@ -12,7 +12,7 @@
 	require_once User		.'/user.php';
 	require_once Mail		.'/smtp.php';
 	require_once Notifier	.'/notification.php';
-	require_once Organiztn	.'/Organization.php';
+	require_once Organiztn	.'/organization.php';
 	require_once Mail		.'/imap.php';
 
 ?>

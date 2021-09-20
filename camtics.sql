@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `conversation` (
   `user` int(11) DEFAULT NULL,
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -143,9 +143,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `photo` varchar(50) NOT NULL DEFAULT '/assets/img/avatar.png',
   `branch` int(11) DEFAULT NULL,
   `department` int(11) NOT NULL DEFAULT '0',
-  `organization` int(11) NOT NULL,
-  `pass` varchar(100) NOT NULL,
-  `hash` int(11) DEFAULT NULL,
+  `organization` int(11) NOT NULL DEFAULT '0',
+  `pass` varchar(50) DEFAULT '',
+  `hash` varchar(50) DEFAULT NULL,
   `nin` int(20) DEFAULT NULL,
   `role` int(1) NOT NULL DEFAULT '6',
   `status` int(1) NOT NULL DEFAULT '0',
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `phone` (`phone`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 

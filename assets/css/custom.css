@@ -13,6 +13,10 @@ label{
     font-weight: bold;
 }
 
+.width-m-3{
+    min-width: 300px;
+}
+
 .small-hr{
     display: block;
     margin-top: 0.2rem;
@@ -26,7 +30,7 @@ label{
     padding: 10px 8px 10px 8px;
     border-radius: 20px;
     min-height: 77vh;
-    /*overflow: scroll;*/
+    overflow-x: auto !important;
 }
 
 .text-center{

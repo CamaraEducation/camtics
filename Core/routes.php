@@ -143,6 +143,13 @@ class NavigateUser extends Home{
 		}        
 	}
 
+	public static function url_createUser(){
+		switch(ROLE){
+			case 2: include _BRANCH .'/user-create.php'; break;
+			default : Home::url_dashboard();
+		}
+	}
+
 	public static function url_account(){
 		if(ROLE>0 and ROLE<5){
 			include _PROFILE.'/account.php';

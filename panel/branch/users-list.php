@@ -32,13 +32,10 @@
 							<td class="bg-secondary text-center"><?=$staff['closed']?></td>
 							<td><?=$staff['total']?></td>
 							<td class="text-center">
-								<a href="/manage/department.<?=$department['id']?>" title="manage department">
-									<i class="fa fa-cog"></i> &nbsp;
+								<a href="/view/user/<?=$staff['id']?>" title="view user">
+									<i class="lnr lnr-eye text-blue"></i> &nbsp;
 								</a>
-								<a href="/view/department.<?=$department['id']?>" title="view department">
-									<i class="fa fa-eye text-blue"></i> &nbsp;
-								</a>
-								<a href="/delete/department.<?=$department['id']?>" title="Delete department">
+								<a href="/delete/user/<?=$staff['id']?>" title="Delete user">
 									<i class="fa fa-trash text-danger"></i> &nbsp;
 								</a>
 							</td>

@@ -35,7 +35,7 @@ function showChats(ticket) {
         document.getElementById("txtHint").innerHTML = this.responseText;
       }
     };
-    xmlhttp.open("GET","/api/chat/ticket."+ticket,true);
+    xmlhttp.open("GET","/api/chat/ticket/"+ticket,true);
     xmlhttp.send();
 }
 

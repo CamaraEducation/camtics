@@ -35,7 +35,7 @@
 							<td class="bg-secondary text-center"><?=$department['closed']?></td>
 							<td class="text-center">
 								<a href="/manage/department.<?=$department['id']?>" title="manage department">
-									<i class="fa fa-cog"></i> &nbsp;
+									<i class="lnr lnr-apartment"></i> &nbsp;
 								</a>
 								<a href="/view/department.<?=$department['id']?>" title="view department">
 									<i class="fa fa-eye text-blue"></i> &nbsp;

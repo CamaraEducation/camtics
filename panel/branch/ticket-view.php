@@ -99,6 +99,7 @@
 		
 		<!-- modals -->		
 		<?php
+			include(_LAYOUT.'/create-ticket.php'); 
 			include(_LAYOUT.'/reply-ticket.php');
 			include(_BRANCH.'/ticket-assign.php');
 			include(_BRANCH.'/ticket-transfer.php');

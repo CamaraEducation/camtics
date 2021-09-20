@@ -127,6 +127,14 @@ Route::add('/list/user', function(){
 	NavigateUser::url_listUser();
 });
 
+Route::add('/add/user', function(){
+	NavigateUser::url_createUser();
+});
+
+Route::add('/add/user/new', function(){
+	User::create();
+}, ['get','post']);
+
 Route::add('/profile', function(){
 	NavigateUser::url_account();
 });

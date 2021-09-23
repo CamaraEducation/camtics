@@ -8,6 +8,10 @@ class Home{
 		}
 	}
 
+	public static function test($id){
+		include 'test.php';
+	}
+
 	//Define the dashboard location for appropriate user
 	public static function url_dashboard(){
 		switch(ROLE){
@@ -146,6 +150,13 @@ class NavigateUser extends Home{
 	public static function url_createUser(){
 		switch(ROLE){
 			case 2: include _BRANCH .'/user-create.php'; break;
+			default : Home::url_dashboard();
+		}
+	}
+
+	public static function url_viewUser($id){
+		switch(true){
+			case (ROLE>0 and ROLE<5) : include _BRANCH .'/user-view.php'; break;
 			default : Home::url_dashboard();
 		}
 	}

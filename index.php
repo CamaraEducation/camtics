@@ -23,6 +23,7 @@ define('ROUTES',	'Core/routes.php');
 // Define global innerpathes
 define('_CONTROL',  'control');
 define('_VIEW',     'panel');
+define('upload', 	'uploads');
 
 // Define views & global layout
 define('_LAYOUT',   _VIEW.'/layout');
@@ -135,6 +136,10 @@ Route::add('/add/user/new', function(){
 	User::create();
 }, ['get','post']);
 
+Route::add('/view/user/([a-z]*)', function($id){
+	NavigateUser::url_viewUser($id);
+}, ['get','post']);
+
 Route::add('/profile', function(){
 	NavigateUser::url_account();
 });
@@ -142,13 +147,11 @@ Route::add('/profile', function(){
 /************************************************
  * EVERYTHING THAT HAS TO DO WITH AUTHORIZATION	*
  ************************************************/
-Route::add('/register', function()
-{
+Route::add('/register', function(){
 	include(Front.'/signup.php');
 });
 
-Route::add('/login', function()
-{
+Route::add('/login', function(){
 	include(Front.'/login.php');
 });
 
@@ -252,9 +255,8 @@ Route::add('/smpp', function(){
 	include('test.php');
 });
 
-Route::add('/test', function(){
-	echo '<pre>';
-	print_r(ImapClient::get_message());
+Route::add('/test/([0-9]*)', function($id){
+	Home::test($id);
 });
 
 // Add a 404 not found route

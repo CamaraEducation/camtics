@@ -1,6 +1,6 @@
 <?php
 class Profile{
-    public static function user_profile($id){
+    public static function user_profile($id = ID){
         $profile = "SELECT * FROM user WHERE id='$id'";
         $profile = mysqli_query(conn(), $profile);
         $profile = mysqli_fetch_assoc($profile);

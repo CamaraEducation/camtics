@@ -1,16 +1,21 @@
 <?php
 class User{
+    public static function fetch_user($id){
+        $fetch_user    = "SELECT * FROM user WHERE username='$id'";
+        $fetch_user    = mysqli_query(conn(), $fetch_user);
+        $fetch_user    = mysqli_fetch_assoc($fetch_user);
+        return $fetch_user;
+    }
+
     public static function list_user(){
         $users = "SELECT * FROM user WHERE role>4";
         if(mysqli_query(conn(), $users)){
             $users      = mysqli_query(conn(), $users);
             $fetch_user = mysqli_fetch_all($users, MYSQLI_ASSOC);
-
             foreach($fetch_user as $user){
                 $users = $user;
             }
-        }else{
-            $users = array(
+        }else{ $users = array(
                 'total'=>0,
                 'id'=>0
             );

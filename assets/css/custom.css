@@ -13,6 +13,13 @@ label{
     font-weight: bold;
 }
 
+fieldset {
+    min-width: 300px;
+    padding: 20px 10px;
+    margin: 0;
+    border: solid 1px var(--secondary);
+}
+
 .width-m-3{
     min-width: 300px;
 }
@@ -188,4 +195,8 @@ label{
     .user-box {
         display: none;
     }
+}
+
+::-webkit-scrollbar {
+    display: none;
 }

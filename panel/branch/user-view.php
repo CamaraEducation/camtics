@@ -1,59 +1,109 @@
-<?php include(_LAYOUT.'/header.php'); ?>
-<!-- //header-ends -->
+<?php 
+	include(_LAYOUT.'/header.php');
+	$user = User::fetch_user($id);
+?>
 <!-- main content start -->
 <div class="main-content">
 	<!-- content -->
 	<div class="container-fluid content-top-gap">
 		<section class="bg-light">
-		<table class="table">
-			<thead class="thead-light table-striped table-hover">
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">NAME</th>
-					<th scope="col">DESCRIPTION</th>
-					<th scope="col">AGENTS</th>
-					<th scope="col" class="bg-warning text-center">OPEN</th>
-					<th scope="col" class="bg-primary text-center">ACTIVE</th>
-					<th scope="col" class="bg-secondary text-center">CLOSED</th>
-					<th scope="col" class="text-center">ACTION</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-					$no = 1;
-					$departments = new Department;
-					$departments = $departments -> fetch_departments();
-				
-					foreach($departments as $department){ ?>
-						<tr>
-							<td><?=$no++?></td>
-							<td><?=$department['name']?></td>
-							<td><?=$department['description']?></td>
-							<td><?=rand(2,6)?></td>
-							<td class="bg-warning text-center"><?=$department['open']?></td>
-							<td class="bg-primary text-center"><?=$department['active']?></td>
-							<td class="bg-secondary text-center"><?=$department['closed']?></td>
-							<td class="text-center">
-								<a href="/manage/department.<?=$department['id']?>" title="manage department">
-									<i class="lnr lnr-apartment"></i> &nbsp;
-								</a>
-								<a href="/view/department.<?=$department['id']?>" title="view department">
-									<i class="fa fa-eye text-blue"></i> &nbsp;
-								</a>
-								<a href="/delete/department.<?=$department['id']?>" title="Delete department">
-									<i class="fa fa-trash text-danger"></i> &nbsp;
-								</a>
-							</td>
-						</tr>
-					<?php
-					}
-				?>				
-			</tbody>
-		</table>
+			<div class="row p-3">
+				<div class="col">
+					<fieldset>
+						<legend class="text-tertiary">Basic Information</legend>
+						<form>
+							<div class="row">
+								<div class="col width-m-3">
+									<label for="username">Username:</label>
+									<input class="form-control" type="text" id="mname" value="<?=$user['username']?>" disabled>
+								</div>							
+								<div class="col width-m-3">
+									<label for="org">Organization</label>
+									<input type="text" class="form-control" id="organization" value="<?=Organization::user_org($user['organization'])?>" disabled>
+								</div>
+							</div> <div class="space"></div>
+							<div class="row">
+								<div class="col width-m-3">
+									<label for="fname">First Name:</label>
+									<input class="form-control" type="text" name="fname" value="<?=$user['fname']?>" id="fname">
+								</div>
+								<div class="col width-m-3">
+									<label for="lname">Last Name:</label>
+									<input class="form-control" type="text" name="lname" value="<?=$user['lname']?>" id="lname">
+								</div>
+							</div> <div class="space"></div>
+							<div class="row">
+								<div class="col width-m-3">
+									<label for="phone">Phone:</label>
+									<input class="form-control" type="text" name="phone" value="<?=$user['phone']?>" id="lname">
+								</div>
+								<div class="col width-m-3">
+									<label for="email">Email</label>
+									<input class="form-control" type="text" name="email" value="<?=$user['email']?>" id="lname">
+								</div>
+							</div>
+							<div class="space"></div>
+							<div class="row">
+								<div class="col width-m-3">
+									<input class="form-control btn-primary" type="submit" value="save">
+								</div>
+							</div>
+						</form>
+					</fieldset>
+					<div class="space"></div>
+					<fieldset>
+						<form>
+							<div class="row">
+								<div class="col width-m-3">
+									<label for="phone">Profile Photo:</label>
+									<input class="form-control" type="file" name="image" id="image">
+								</div>
+								<div class="col width-m-3">
+									<label for="phone"></label>
+									<input class="form-control btn-primary" type="submit" value="change photo" name="image" id="image">
+								</div>
+							</div>
+						</form>
+					</fieldset>
+				</div>
+				<div class="space"></div>
+				<div class="col">
+					<fieldset>
+						<legend>Security Details</legend>
+						<form>
+							<div class="row">
+								<div class="col width-m-3 input-group">
+									<label for="phone">2FA Authenitication:</label>
+									<input type="radio" name="2fa" value="checked" id="2fa">
+								</div>
+							</div><div class="space"></div>
+							<div class="row">
+								<div class="col width-m-3">
+									<label for="phone">Current Password:</label>
+									<input class="form-control" type="text" name="phone" placeholder="current password" id="cpass">
+								</div>
+							</div><div class="space"></div>
+							<div class="row">
+								<div class="col width-m-3">
+									<label for="phone">New Password:</label>
+									<input class="form-control" type="text" name="phone" placeholder="new password" id="npass">
+								</div>
+								<div class="col width-m-3">
+									<label for="email">Confirm Password</label>
+									<input class="form-control" type="text" name="email" placeholder="confirm password" id="cnpass">
+								</div>
+							</div><div class="space"></div>
+							<div class="row">
+								<div class="col width-m-3">
+									<input class="form-control btn-primary" type="submit" value="save">
+								</div>
+							</div>
+						</form>
+					</fieldset>
+				</div>
+			</div>
+
 		</section>
-		<!-- modals -->		
-			<?php include (_LAYOUT.'/create-ticket.php'); ?>
-		<!-- //modals -->
 	</div>
 	<!-- //content -->
 </div>

@@ -140,6 +140,10 @@ Route::add('/view/user/([a-z]*)', function($id){
 	NavigateUser::url_viewUser($id);
 }, ['get','post']);
 
+Route::add('/edit/user/([a-z]*)/([a-z]*)', function($user, $action){
+	NavigateUser::url_editUser($user, $action);
+}, ['get', 'post']);
+
 Route::add('/profile', function(){
 	NavigateUser::url_account();
 });

@@ -168,6 +168,26 @@ class NavigateUser extends Home{
 			Home::logout();
 		}
 	}
+
+	public static function url_editUser($user, $action){
+		switch(true){
+			case ($user==USER) : break;
+			case ($user!=USER and ROLE<4) : 
+				switch($action){
+					case 'basic' :
+						UserProfile::edit_basic();
+					break;
+					case 'avatar' :
+						UserProfile::edit_avatar();
+					break;
+					case 'pass' :
+						UserProfile::edit_passcode();
+					break;
+				}	
+			break;
+			default : Home::url_dashboard();
+		}
+	}
 }
 
 class NavigateDepartment extends Home{

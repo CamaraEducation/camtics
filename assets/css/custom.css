@@ -18,6 +18,7 @@ fieldset {
     padding: 20px 10px;
     margin: 0;
     border: solid 1px var(--secondary);
+    border-radius: 10px;
 }
 
 .width-m-3{

@@ -69,4 +69,5 @@ class User{
 }
 
 include 'staff.php';
+include 'profile.php';
 ?>

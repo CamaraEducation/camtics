@@ -173,17 +173,11 @@ class NavigateUser extends Home{
 		switch(true){
 			case ($user==USER) : break;
 			case ($user!=USER and ROLE<4) : 
-				switch($action){
-					case 'basic' :
-						UserProfile::edit_basic();
-					break;
-					case 'avatar' :
-						UserProfile::edit_avatar();
-					break;
-					case 'pass' :
-						UserProfile::edit_passcode();
-					break;
-				}	
+				if($action == 'basic'){
+					UserProfile::edit_basic();
+				}else{
+					UserProfile::edit_passcode();					
+				}
 			break;
 			default : Home::url_dashboard();
 		}

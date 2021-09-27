@@ -23,7 +23,7 @@ define('ROUTES',	'Core/routes.php');
 // Define global innerpathes
 define('_CONTROL',  'control');
 define('_VIEW',     'panel');
-define('upload', 	'uploads');
+define('upload', 	'uploads/user/');
 
 // Define views & global layout
 define('_LAYOUT',   _VIEW.'/layout');
@@ -45,6 +45,7 @@ define('Mail',		 _CONTROL.'/mail');
 define('Notifier',	 _CONTROL.'/notification');
 define('Organiztn',	 _CONTROL.'/organization');
 define('Ticket',	 _CONTROL.'/ticket');
+define('Uploader',	 _CONTROL.'/upload');
 define('User',		 _CONTROL.'/user');
 
 // Define global innertPath for view
@@ -141,7 +142,12 @@ Route::add('/view/user/([a-z]*)', function($id){
 }, ['get','post']);
 
 Route::add('/edit/user/([a-z]*)/([a-z]*)', function($user, $action){
-	NavigateUser::url_editUser($user, $action);
+	if($action == 'avatar'){
+		UserProfile::edit_avatar($user);
+		Session::set_session(ID);
+	}else{
+		NavigateUser::url_editUser($user, $action);
+	}
 }, ['get', 'post']);
 
 Route::add('/profile', function(){

@@ -14,5 +14,6 @@
 	require_once Notifier	.'/notification.php';
 	require_once Organiztn	.'/organization.php';
 	require_once Mail		.'/imap.php';
+	require_once Uploader	.'/upload.php';
 
 ?>

@@ -15,7 +15,7 @@ class UserProfile{
         }
     }
 
-    public static function edit_avatar(){
+    public static function edit_passcode(){
         $cpass = md5(mysqli_real_escape_string(conn(), $_POST['cpass']));
         $npass = md5(mysqli_real_escape_string(conn(), $_POST['npass']));
         $uname = mysqli_real_escape_string(conn(), $_POST['uname']);
@@ -27,8 +27,11 @@ class UserProfile{
         }
     }
 
-    public static function edit_passcode(){
-
+    public static function edit_avatar($user){
+		$image = '/'.FileUploader::upload();
+        $update_avatar = "update user set photo = '$image' where username = '$user'";
+        mysqli_query(conn(), $update_avatar);
+        Home::url_dashboard();
     }
 }
 ?>

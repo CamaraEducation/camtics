@@ -6,7 +6,7 @@ class FileUploader{
         $_FILES["media"]['name'] = round(microtime(true)) . rand(1111, 99999) . '.' . $imageFileType;
         $target_file = $target_dir . basename($_FILES["media"]["name"]);
         if(isset($target_dir)) {
-            if($_FILES["media"]['type']=='image/'.$imageFileType or $_FILES["media"]['type']=='video/'.$imageFileType) {
+            if($_FILES["media"]['type']=='image/'.$imageFileType or $_FILES["media"]['type']=='video/'.$imageFileType or $_FILES["media"]['type']=='image/jpeg') {
                 $uploadOk = 1;
             } else {
                 $uploadOk = 0;

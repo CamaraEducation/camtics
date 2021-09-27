@@ -17,7 +17,7 @@ class FileUploader{
             echo "Wrong media format.";
         } else {
             if (move_uploaded_file($_FILES["media"]["tmp_name"], $target_file)) {
-                echo "The file ". htmlspecialchars( basename( $_FILES["media"]["name"])). " has been uploaded.";
+                return $target_file;
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }

@@ -52,18 +52,16 @@
 					</fieldset>
 					<div class="space"></div>
 					<fieldset>
-						<!--form method='post' action="#" -->
-							<div class="row">
-								<div class="col width-m-3">
-									<label for="phone">Profile Photo:</label>
-									<input class="form-control" type="file" name="media" id="media">
-								</div>
-								<div class="col width-m-3">
-									<label for="phone"></label>
-									<button class="form-control btn-primary" value="change photo" name="image" id="image">Submit</button>
-								</div>
+						<form action="/edit/user/<?=$user['username']?>/avatar" method="post" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col width-m-3">
+								<input type="file" class="form-control" name="media" id="fileToUpload">
 							</div>
-						<!--/form-->
+							<div class="col width-m-3">
+								<input type="submit" class="form-control btn-primary" value="Upload Image" name="submit">
+							</div>
+						</div>
+						</form>
 					</fieldset>
 				</div>
 				<div class="space"></div>
@@ -95,10 +93,10 @@
 							</div><div class="space"></div>
 							<div class="row">
 								<div class="col width-m-3">
-									<button class="form-control btn-primary" value="change photo" name="image" id="butpass">Submit</button>
+									<button class="form-control btn-primary" id="butpass">Submit</button>
 								</div>
 							</div>
-						<!--/form-->
+						<!--/form>
 					</fieldset>
 				</div>
 			</div>

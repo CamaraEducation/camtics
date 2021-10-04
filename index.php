@@ -144,7 +144,7 @@ Route::add('/view/user/([a-z]*)', function($id){
 Route::add('/edit/user/([a-z]*)/([a-z]*)', function($user, $action){
 	if($action == 'avatar'){
 		UserProfile::edit_avatar($user);
-		Session::set_session(ID);
+		Session::set_session(USER);
 	}else{
 		NavigateUser::url_editUser($user, $action);
 	}

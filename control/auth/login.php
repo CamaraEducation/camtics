@@ -8,7 +8,7 @@ class Login{
 
 		//If user loged create session and redirect to folder.
         if(!empty($loger['id'])){
-			include(Auth.'/session.php');
+			//include(Auth.'/session.php');
 			$loged	= new Session;
 			$loged	-> set_session($user);
 			echo "<script type=\"text/javascript\">

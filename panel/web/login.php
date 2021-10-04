@@ -14,6 +14,14 @@ $config = config();
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Login :: <?=$config['site']; ?></title>
+		<meta name="description" content="camara education ticketing and customer support system">
+		<meta name="keywords" content="camara, education">
+		<meta name="robots" content="index, follow">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="language" content="English">
+		<meta name="revisit-after" content="10 days">
+		<meta name="author" content="Abdulbasit Rubeiyya">
+		<link rel="icon" href="/assets/img/logo.png" type="image/x-icon">		
 		<link rel="stylesheet" href="/assets/css/style-freedom.css">
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 		<meta name="robots" content="noindex">

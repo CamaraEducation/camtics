@@ -19,10 +19,9 @@
 						<div class="col">
 							<div>
 								<label>Branch</label>
-								<select type="text" name="branch" class="form-control" title="select Branch" disabled required>
-									<?php 
-									$branch = Branch::fetch_branch(); ?>
-									<option selected value="<?=$branch['id']?>"><?=$branch['country']?></option>
+								<?php $branch = Branch::fetch_branch(); ?>
+								<select name="branch" class="form-control" title="select Branch"  required>
+									<option value="<?=$branch['id']?>"><?=$branch['country']?></option>
 								</select>
 							</div>
 						</div>

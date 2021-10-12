@@ -21,7 +21,7 @@ class Department{
 		return $department_count;
 	}
 
-	function create_department($name, $branch, $descript){
+	public static function create_department($name, $branch, $descript){
 		$create_Department = "INSERT INTO department VALUES(DEFAULT, '$name', '$branch', '$descript')";
 		if(mysqli_query(conn(), $create_Department)){
 			header('Location: /list/department');

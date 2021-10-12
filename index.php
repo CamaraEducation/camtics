@@ -223,7 +223,7 @@ Route::add('/branch/([0-9]*)/setting', function($id) {
 });
 
 Route::add('/create/branch', function(){
-	include(Branch.'/create.php');
+	Department::create_department($_POST['name'], $_POST['branch'], $_POST['description']);
 }, 'post');
 
 Route::add('/list/department', function(){

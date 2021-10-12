@@ -1,5 +1,10 @@
 <?php 
 	$config = config();
+	switch(true){
+		case (ROLE > 3); $display = 'display:none'; break;
+		default : 
+			$display = '';
+	}
 ?>
 <!doctype html>
 <html lang="en">
@@ -98,7 +103,7 @@
 			<!-- notification menu start -->
 			<div class="menu-right">
 				<div class="navbar user-panel-top">
-					<div class="search-box">
+					<div class="search-box" style="<?=$display ?>">
 						<form action="" method="post">
 						<input class="search-input" placeholder="Search Here..." type="search" id="search">
 							<div class="result glass"></div>

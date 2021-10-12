@@ -171,7 +171,13 @@ class NavigateUser extends Home{
 
 	public static function url_editUser($user, $action){
 		switch(true){
-			case ($user==USER) : break;
+			case ($user==USER) :
+				if($action == 'basic'){
+					UserProfile::edit_basic();
+				}else{
+					UserProfile::edit_passcode();					
+				} 
+			break;
 			case ($user!=USER and ROLE<4) : 
 				if($action == 'basic'){
 					UserProfile::edit_basic();

@@ -128,9 +128,9 @@
 	            	   success: function (dataResult) {
 	        	           var dataResult = JSON.parse(dataResult);
 	                       if (dataResult.statusCode == 200) {
-								$(".form-control").empty();
+								//$(".form-control").empty();
                                 $("#success").show();
-	                            $('#success').html('User successfully assigned!');
+	                            $('#success').html('User successfully created !');
 	                            setTimeout(function() {
 	                                $( "#success" ).hide();
 	                            }, 2000);

@@ -25,6 +25,7 @@ class Organization{
         $sql  = mysqli_query(conn(), $sql);
         $sql  = mysqli_fetch_assoc($sql);
         $org  = $sql['id'];
+        if($org < 1){ $org = 0; }
         return $org;
     }
 

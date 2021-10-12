@@ -178,8 +178,15 @@ Route::add('/authorize', function() {
 				$password		= $_POST['pass'];
 				$branch			= $_POST['branch'];	
 				$organization 	= $_POST['organization'];
-				$organization	= Organization::find_org_id($organization);			
-				$create_user->register_user($username, $email, $phone, $password, $branch, $organization);
+				$organization	= Organization::find_org_id($organization);	
+				if($organization == 0){ ?>
+					<script type="text/javascript">
+						alert("ERROR: The organization chosen could not be found.");
+						window.location.pathname = '\\'
+					</script><?php
+				}else{
+					$create_user->register_user($username, $email, $phone, $password, $branch, $organization);
+				}
 			break;
 
 			case 'login': include(Auth.'/login.php');

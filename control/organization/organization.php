@@ -23,9 +23,12 @@ class Organization{
         $name = mysqli_real_escape_string(conn(), $name);
         $sql  = "SELECT id FROM organization WHERE name LIKE '%$name%'";
         $sql  = mysqli_query(conn(), $sql);
-        $sql  = mysqli_fetch_assoc($sql);
-        $org  = $sql['id'];
-        if($org < 1){ $org = 0; }
+        if(mysqli_num_rows($sql)>0){
+            $sql  = mysqli_fetch_assoc($sql);
+            $org  = $sql['id'];
+        }else{
+            $org = 0;
+        }
         return $org;
     }
 

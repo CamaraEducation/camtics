@@ -1,7 +1,7 @@
 <?php
 class Login{
     function loger($user, $pass){
-		$user	= strtolower(mysqli_real_escape_string(conn(), $user));
+		$user	= mysqli_real_escape_string(conn(), $user);
 		$pass	= mysqli_real_escape_string(conn(), $pass);
 
         $login  = "SELECT id FROM user WHERE username='$user' AND pass='$pass'";
@@ -22,8 +22,6 @@ class Login{
 				window.location.pathname = "/login";
 			</script> <?php
 		}
-    }
-
-	
+    }	
 }
 ?>

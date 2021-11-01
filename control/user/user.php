@@ -48,7 +48,7 @@ class User{
     }
 
     public static function create(){
-        $user  = mysqli_real_escape_string(conn(), $_POST['username']);
+        $user  = strtolower(mysqli_real_escape_string(conn(), $_POST['username']));
         $fname = mysqli_real_escape_string(conn(), $_POST['fname']);
         $lname = mysqli_real_escape_string(conn(), $_POST['lname']);
         $phone = mysqli_real_escape_string(conn(), $_POST['phone']);
@@ -56,7 +56,8 @@ class User{
         $department = mysqli_real_escape_string(conn(), $_POST['department']);
         $role  = mysqli_real_escape_string(conn(), $_POST['role']);
         $branch = mysqli_real_escape_string(conn(), $_POST['branch']);
-        $pass  = md5(rand(12345678, 87654321));
+        //$pass  = md5(rand(12345678, 87654321));
+        $pass   = md5(873636);
         $create_user = "
             INSERT INTO user (username, fname, lname, phone, email, department, role, branch, pass) 
             VALUES('$user', '$fname', '$lname', '$phone', '$email', '$department', '$role', '$branch', '$pass')";

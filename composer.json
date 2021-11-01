@@ -1,6 +1,8 @@
 {
     "require": {
         "php-imap/php-imap": "^4.1",
-        "ddeboer/imap": "^1.12"
+        "ddeboer/imap": "^1.12",
+        "snipworks/php-smtp": "^2.0",
+        "vlucas/phpdotenv": "^5.3"
     }
 }

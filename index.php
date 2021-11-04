@@ -13,6 +13,9 @@ use PhpImap\Imap;
 include 'Core/Route.php';
 include 'vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createMutable(__DIR__);
+$dotenv->load();
+
 // Define global & core basepaths
 define('BASEPATH',  '/');
 define('CONFIG',    'Core/conf.php');
@@ -165,6 +168,10 @@ Route::add('/login', function(){
 	include(Front.'/login.php');
 });
 
+Route::add('/reset', function(){
+	include(Front.'/reset.php');
+});
+
 
 // Get and Post route example
 Route::add('/authorize', function() {
@@ -195,8 +202,10 @@ Route::add('/authorize', function() {
 				$loger = new Login;
 				$loger -> loger($username, $password);
 			break;
-			case 'reset':
-				//reset set
+			case 'reset': include(Auth.'/login.php');
+				$user = mysqli_real_escape_string(conn(), $_POST['user']);
+				Login::reset($user);
+			break;
 			default:
 				echo 'method used is not allowed';
 		}
@@ -253,6 +262,16 @@ Route::add('/add/branch', function(){
  ************************************/
 Route::add('/incoming/mails', function(){
 	NavigateMail::url_incomingMails();
+});
+
+Route::add('/mail', function(){
+	$to = ['mail'=>'abdulbasitsultan4@gmail.com', 'name'=>'Abdulbasit Rubeiyya'];
+	SendMail::init(
+		$to['mail'],
+		'Hello'.$to['name'],
+		'<center><h1>Hello from Camara</h1></center>
+		<p>Hello '.$to['name'].' this is our weekly mail</p>'
+	);
 });
 
 //------------APIs and Webhooks----------------//

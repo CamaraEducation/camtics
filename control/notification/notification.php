@@ -16,10 +16,8 @@ class Notification{
 		}
 
 		if($rows>=1){
-			SendMail::send(
-				$config['email'],
+			SendMail::init(
 				$agent['email'],
-				$config['email'],
 				'NEW REPLY ON TICKET',
 				'Hello '.$agent['username'].'<br>
 				You have got a new reply on one of your tickets, please reply as soon as possible'
@@ -28,15 +26,12 @@ class Notification{
     }
 
     public static function new_ticket($department){
-		$config = config();
 		$agent = "SELECT username, phone, email  FROM user WHERE `department`='$department' AND role=3";
 		$agent = mysqli_query(conn(), $agent);
 		$agent = mysqli_fetch_assoc($agent);
 
-		SendMail::send(
-			$config['email'],
+		SendMail::init(
 			$agent['email'],
-			$config['email'],
 			'NEW TICKET OPENED',
 			'Hello '.$agent['username'].'<br>
 			a new ticket has been oppened in your department'
@@ -49,10 +44,8 @@ class Notification{
 		$user = mysqli_query(conn(), $user);
 		$user = mysqli_fetch_assoc($user);
 
-		SendMail::send(
-			$config['email'],
+		SendMail::init(
 			$user['email'],
-			$config['email'],
 			'TICKET '.$status,
 			'Hello '.$user['username'].'<br>
 			your ticket has been '.$status

@@ -3,6 +3,7 @@
         "php-imap/php-imap": "^4.1",
         "ddeboer/imap": "^1.12",
         "snipworks/php-smtp": "^2.0",
-        "vlucas/phpdotenv": "^5.3"
+        "vlucas/phpdotenv": "^5.3",
+        "filp/whoops": "^2.14"
     }
 }

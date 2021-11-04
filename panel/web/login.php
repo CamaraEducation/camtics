@@ -56,10 +56,11 @@ $config = config();
 								<label>Password</label>
 								<input type="password" name="pass" placeholder="password" required />
 							</div>
-							<label class="container">Keep Me Logged In
-						<input type="checkbox" name="concrete">
-						<span class="checkmark"></span>
-					</label>
+							<!--label class="container">Keep Me Logged In
+								<input type="checkbox" name="concrete">
+								<span class="checkmark"></span>
+							</label-->
+							<label for="hint" class='text-bold'><a href="/reset"><b>Forgot your Password?</b></a></label>
 							<button class="btn">Login</button>
 						</form>
 					</div>

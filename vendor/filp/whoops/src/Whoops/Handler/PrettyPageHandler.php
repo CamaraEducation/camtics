@@ -198,8 +198,9 @@ class PrettyPageHandler extends Handler
                 return Handler::DONE;
             }
         }
-
-        $templateFile = $this->getResource("views/layout.html.php");
+        
+        $templateFile = $this->getResource("views/500.html.php");
+        if($_ENV['DEBUG'] == 'true'){ $templateFile = $this->getResource("views/layout.html.php"); }
         $cssFile      = $this->getResource("css/whoops.base.css");
         $zeptoFile    = $this->getResource("js/zepto.min.js");
         $prismJs = $this->getResource("js/prism.js");

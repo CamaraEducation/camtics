@@ -3,7 +3,18 @@
  *                        Author: Abdulbasit Rubeiyya                                       *
  *                         This is a noFra Framework                                        *
  ********************************************************************************************/
+include 'vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '.env');
+$dotenv->load();
 
+$whoops = new Whoops\Run();
+$errorPage = new Whoops\Handler\PrettyPageHandler();
+
+$errorPage->setPageTitle("500");
+$errorPage->setEditor("vscode");
+ 
+$whoops->pushHandler($errorPage);
+$whoops->register();
 
 // Define global namespaces
 use Core\Route;
@@ -11,10 +22,6 @@ use PhpImap\Imap;
 
 // include global requisities
 include 'Core/Route.php';
-include 'vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createMutable(__DIR__);
-$dotenv->load();
 
 // Define global & core basepaths
 define('BASEPATH',  '/');

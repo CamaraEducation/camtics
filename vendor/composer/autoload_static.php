@@ -13,6 +13,10 @@ class ComposerStaticInit91d2ea16b90581397114d271b15ce41b
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Whoops\\' => 7,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -22,6 +26,7 @@ class ComposerStaticInit91d2ea16b90581397114d271b15ce41b
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'PhpOption\\' => 10,
             'PhpImap\\' => 8,
         ),
@@ -37,6 +42,10 @@ class ComposerStaticInit91d2ea16b90581397114d271b15ce41b
     );
 
     public static $prefixDirsPsr4 = array (
+        'Whoops\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -52,6 +61,10 @@ class ComposerStaticInit91d2ea16b90581397114d271b15ce41b
         'Snipworks\\Smtp\\' => 
         array (
             0 => __DIR__ . '/..' . '/snipworks/php-smtp/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'PhpOption\\' => 
         array (
